@@ -18,6 +18,18 @@ public class HomeController : Controller
         return View();
     }
 
+    public IActionResult Posts(string topicName)
+    {
+        ViewBag.Searched = topicName;
+        return View();
+    }
+
+    public IActionResult PostDetails(string postName)
+    {
+        ViewBag.postName = postName;
+        return View();
+    }
+
     public IActionResult Privacy()
     {
         return View();
