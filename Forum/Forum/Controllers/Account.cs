@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Forum.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers;
 
@@ -10,8 +11,9 @@ public class Account : Controller
         return View();
     }
 
-    public IActionResult Login()
+    public IActionResult Login(string returnUrl = "")
     {
-        return View();
+        var model = new LoginViewModel { ReturnUrl = returnUrl }; 
+        return View(model);
     }
 }

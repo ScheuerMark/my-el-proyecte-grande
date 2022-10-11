@@ -9,30 +9,30 @@
     <div class="card-header">
         <div class="col-md-6"><h2>Login</h2></div>
     </div>
-    <div class="card-body text-center">
+    <div class="card-body text-lg-end">
 
         <form method = "post" asp-controller = "Account" asp-action = "Login" 
               asp-route-returnurl = "@Model.ReturnUrl"> 
             <div asp-validation-summary = "ModelOnly"></div> 
         
-            <div class="col-md-6"> 
+            <div class="col-md-6 justify-content-lg-evenly"> 
                 <label asp-for = "Email"></label> 
                 <input asp-for = "Email" /> 
                 <span asp-validation-for = "Email"></span> 
             </div> 
       
-            <div class="col-md-6"> 
+            <div class="col-md-6 justify-content-lg-evenly"> 
                 <label asp-for = "Password"></label> 
                 <input asp-for = "Password" />
                 <span asp-validation-for = "Password"></span> 
             </div> 
     
-            <div class="col-md-3"> 
-                <label asp-for = "RememberMe"></label> 
+            <div class="col-md-10 text-center"> 
+                <label asp-for = "RememberMe">Remember Me</label> 
                 <input asp-for = "RememberMe" /> 
                 <span asp-validation-for = "RememberMe"></span> 
             </div> 
-            <div class="col-md-3">
+            <div class="col-md-10 text-center">
                 <input type = "submit" value = "Login" />
             </div>
         </form>     

@@ -9,36 +9,36 @@
     <div class="card-header">
         <h2>Register</h2>
     </div>
-    <div class="card-body">
+    <div class="card-body text-lg-end">
 
         <form class="flex-grow-0 " method="post" asp-controller="Account" asp-action="Register">
             <div asp-validation-summary="ModelOnly"></div>
 
-            <div class="col-md-6 justify-content-around">
+            <div class="col-md-6 ">
                 <label asp-for="Username"></label>
                 <input asp-for="Username"/>
                 <span asp-validation-for="Username"></span>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 justify-content-lg-evenly">
                 <label asp-for="Email"></label>
                 <input asp-for="Email"/>
                 <span asp-validation-for="Email"></span>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 justify-content-lg-evenly">
                 <label asp-for="Password"></label>
                 <input asp-for="Password"/>
                 <span asp-validation-for="Password"></span>
             </div>
 
-            <div class="col-md-6">
-                <label asp-for="ConfirmPassword"></label>
+            <div class="col-md-6 justify-content-lg-evenly">
+                <label asp-for="ConfirmPassword">Confirm Password</label>
                 <input asp-for="ConfirmPassword"/>
                 <span asp-validation-for="ConfirmPassword"></span>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 text-body">
                 <input type="submit" value="Register"/>
             </div>
 
