@@ -9,21 +9,7 @@
 			@{
 				for (int i = 1; i < 7; i++)
 				{
-					<div class="card">
-						<div class="card-header">
-							<h5 class="d-inline">Topic @i</h5>
-							<span class="float-end post-count fst-italic">1232 <i class='far fa-comment-alt' style='font-size: 24px'></i></span>
-						</div>
-						<div class="card-body row">
-							<div class="col-9">
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et iaculis nisl, vel vulputate mauris. Duis dapibus odio augue, vitae molestie lacus lacinia at.Maecenas et iaculis nisl, vel vulputate mauris.</p>
-							</div>
-							<div class="col-3 d-flex flex-column">
-								<a class="fst-italic mt-auto ms-auto">view posts</a>
-							</div>
-						</div>
-					</div>
-					<br/>
+					<partial name="_TopicCardPartial" model="i"/>
 				}
 			}
 		</div>
@@ -32,21 +18,7 @@
 			@{
 				for (int i = 1; i < 4; i++)
 				{
-					<div class="card">
-						<div class="card-header">
-							<h5 class="d-inline">Post @i</h5>
-							<span class="float-end post-count fst-italic">32 <i class='far fa-comment-dots' style='font-size:24px'></i></span>
-						</div>
-						<div class="card-body row">
-							<div class="col-9">
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et iaculis nisl, vel vulputate mauris. Duis dapibus odio augue, vitae molestie lacus lacinia at.Maecenas et iaculis nisl, vel vulputate mauris.</p>
-							</div>
-							<div class="col-3 d-flex flex-column">
-								<a class="fst-italic mt-auto ms-auto">view comments</a>
-							</div>
-						</div>
-					</div>
-					<br/>
+					<partial name="_PostCardPartial" model="i"/>
 				}
 			}
 			</div>
