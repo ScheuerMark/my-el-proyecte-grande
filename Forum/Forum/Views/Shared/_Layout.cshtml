@@ -25,11 +25,11 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Topics</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <li><button class="dropdown-item" type="button">Raising kids</button></li>
-                            <li><button class="dropdown-item" type="button">Nurseries</button></li>
-                            <li><button class="dropdown-item" type="button">Schools</button></li>
-                            <li><button class="dropdown-item" type="button">Free time</button></li>
-                            <li><button class="dropdown-item" type="button">Parents only</button></li>
+                            @for (int i = 1; i<7; i++)
+                            {
+                                <li><a class="dropdown-item" role="button"asp-controller="Home" asp-action="Posts" asp-route-topicName=@($"Topic {i}")>Topic @i</a></li>
+                            }
+                            
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
