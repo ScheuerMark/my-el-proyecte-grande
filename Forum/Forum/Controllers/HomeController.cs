@@ -1,16 +1,21 @@
 ﻿using System.Diagnostics;
+using Forum.Daos.Implementations;
 using Microsoft.AspNetCore.Mvc;
 using Forum.Models;
+using Forum.Services;
 
 namespace Forum.Controllers;
 
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    
+    public PostService PostService { get; set; }
 
     public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
+        PostService = new PostService(PostDaoMemory.GetInstance(), TopicDaoMemory.GetInstance());
     }
 
     public IActionResult Index()
