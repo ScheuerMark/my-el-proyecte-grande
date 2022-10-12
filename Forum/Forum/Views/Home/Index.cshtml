@@ -2,7 +2,28 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div >
+	<div class="row">
+		<div class="col-xl-6 col-lg-12 column1">
+			<h1>Topics</h1>
+			@{
+				for (int i = 1; i < 7; i++)
+				{
+					<partial name="_TopicCardPartial" model="i"/>
+				}
+			}
+		</div>
+		<div class="col-xl-6 d-xl-block d-none">
+			<h1>Recent posts</h1>
+			@{
+				for (int i = 1; i < 4; i++)
+				{
+					<partial name="_PostCardPartial" model="i"/>
+				}
+			}
+			</div>
+	</div>
+		
+
+
 </div>
