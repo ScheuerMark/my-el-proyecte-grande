@@ -4,15 +4,12 @@ namespace Forum.Services;
 
 public class PostService
 {
-    public class ProductService
-    {
-        private readonly PostDaoMemory postDao;
-        private readonly TopicDaoMemory topicDaoMemory;
+    private readonly PostDaoMemory postDao;
+    private readonly TopicDaoMemory topicDao;
 
-        public ProductService(PostDaoMemory postDao, TopicDaoMemory topicDaoMemory)
-        {
-            this.postDao = postDao;
-            this.topicDaoMemory = topicDaoMemory;
-        }
+    public PostService(PostDaoMemory postDao, TopicDaoMemory topicDao)
+    {
+        this.postDao = postDao;
+        this.topicDao = topicDao;
     }
 }
