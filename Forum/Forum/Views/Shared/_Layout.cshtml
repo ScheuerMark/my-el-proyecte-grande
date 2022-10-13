@@ -25,9 +25,9 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Topics</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            @for (int i = 1; i<7; i++)
+                            @foreach(var topic in ViewBag.topics)
                             {
-                                <li><a class="dropdown-item" role="button"asp-controller="Home" asp-action="Posts" asp-route-topicName=@($"Topic {i}")>Topic @i</a></li>
+                                <li><a class="dropdown-item" role="button" asp-controller="Home" asp-action="Posts" asp-route-topicName=@topic.Title>@topic.Title</a></li>
                             }
                             
                         </ul>
