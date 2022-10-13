@@ -30,8 +30,10 @@ public class HomeController : Controller
     public IActionResult Posts(string topicName)
     {
         var topics = PostService.GetAllTopics();
+        var postOfTopic = PostService.GetPostsByTopicTitle(topicName);
         ViewBag.topics = topics;
         ViewBag.Searched = topicName;
+        ViewBag.posts = postOfTopic;
         return View();
     }
 

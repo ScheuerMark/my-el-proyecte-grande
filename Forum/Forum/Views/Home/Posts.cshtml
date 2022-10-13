@@ -7,9 +7,9 @@
 		<h1 class="text-center">@ViewBag.Searched</h1>
 		<div class="col-12">
 			@{
-				for (int i = 1; i < 14; i++)
+				foreach (var post in ViewBag.posts)
 				{
-					<partial name="_PostCardPartial" model="i"/>
+					<partial name="_PostCardPartial" model="post"/>
 				}
 			}
 		</div>
