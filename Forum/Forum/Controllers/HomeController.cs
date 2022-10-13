@@ -21,7 +21,9 @@ public class HomeController : Controller
     public IActionResult Index()
     {
         var topics = PostService.GetAllTopics();
+        var posts = PostService.GetAllPosts();
         ViewBag.topics = topics;
+        ViewBag.posts = posts;
         return View();
     }
 

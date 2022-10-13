@@ -1,13 +1,14 @@
-﻿<div class="card">
+﻿@model Post
+<div class="card">
 	<div class="card-header">
-		<h5 class="w-75 d-inline-flex"><a class=" w-100 text-black text-decoration-none"  asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-postName=@($"Post {@Model}")>Post @Model</a></h5>
+		<h5 class="w-75 d-inline-flex"><a class=" w-100 text-black text-decoration-none"  asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-postName=@Model.Title>@Model.Title</a></h5>
 		<span class="float-end post-count fst-italic">32 <i class='far fa-comment-dots' style='font-size:24px'></i>
-			<button class="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target=@($"#post{@Model}") aria-expanded="false" aria-controls=@($"#post{@Model}")>
+			<button class="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target=@Model aria-expanded="false" aria-controls=@Model>
 				<i class='text-collapsed fas fa-angle-down' style='font-size:24px'></i>
 				<i class='text-expanded fas fa-angle-up' style='font-size:24px'></i>
 			</button></span>
 	</div>
-	<div class="collapse" id=@($"post{@Model}")>
+	<div class="collapse" id=@Model>
 	<div class="card-body row" >
 		<div class="col-9">
 			<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et iaculis nisl, vel vulputate mauris. Duis dapibus odio augue, vitae molestie lacus lacinia at.Maecenas et iaculis nisl, vel vulputate mauris.</p>

@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model Topic
+
 <div >
 	<div class="row">
 		<div class="col-xl-6 col-lg-12 column1">
@@ -17,9 +17,9 @@
 		<div class="col-xl-6 d-xl-block d-none">
 			<h1>Recent posts</h1>
 			@{
-				for (int i = 1; i < 4; i++)
+				foreach (var post in ViewBag.posts)
 				{
-					<partial name="_PostCardPartial" model="i"/>
+					<partial name="_PostCardPartial" model="post"/>
 				}
 			}
 			</div>
