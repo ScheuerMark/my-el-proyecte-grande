@@ -20,17 +20,23 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        var topics = PostService.GetAllTopics();
+        ViewBag.topics = topics;
         return View();
     }
 
     public IActionResult Posts(string topicName)
     {
+        var topics = PostService.GetAllTopics();
+        ViewBag.topics = topics;
         ViewBag.Searched = topicName;
         return View();
     }
 
     public IActionResult PostDetails(string postName)
     {
+        var topics = PostService.GetAllTopics();
+        ViewBag.topics = topics;
         ViewBag.postName = postName;
         return View();
     }
