@@ -3,12 +3,12 @@
 	<div class="card-header">
 		<h5 class="w-75 d-inline-flex"><a class=" w-100 text-black text-decoration-none"  asp-area="" asp-controller="Home" asp-action="PostDetails" asp-route-postName="@Model.Title">@Model.Title</a></h5>
 		<span class="float-end post-count fst-italic">@Model.NumberOfComments <i class='far fa-comment-dots' style='font-size:24px'></i>
-			<button class="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target="@Model.Title" aria-expanded="false" aria-controls="@Model.Title">
+			<button class="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target="#@Model.Title.Replace(" ","")" aria-expanded="false" aria-controls="@Model.Title.Replace(" ","")">
 				<i class='text-collapsed fas fa-angle-down' style='font-size:24px'></i>
 				<i class='text-expanded fas fa-angle-up' style='font-size:24px'></i>
 			</button></span>
 	</div>
-	<div class="collapse" id="@Model.Title">
+	<div class="collapse" id="@Model.Title.Replace(" ","")">
 	<div class="card-body row" >
 		<div class="col-9">
 			<p class="card-text">@Model.Message</p>
