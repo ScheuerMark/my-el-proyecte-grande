@@ -87,13 +87,13 @@ void SetupInMemoryDatabases()
     rainy.Comments.Add(stayHome);
     rainy.Comments.Add(visitCaves);
 
-    Topic playArround = new Topic()
+    Topic playAround = new Topic()
     {
-        Title = "Play arround",
+        Title = "Play around",
         Description = "This topic is about toys, games and everything which makes for the kids fun.",
         Posts = new HashSet<Post>()
     };
-    topicStore.Add(playArround);
+    topicStore.Add(playAround);
 
     Topic eatingHabits = new Topic()
     {
