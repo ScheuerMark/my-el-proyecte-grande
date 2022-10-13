@@ -47,8 +47,8 @@ void SetupInMemoryDatabases()
     topicStore.Add(accident);
     Post battery = new Post()
     {
-        Title = "Battery in through",
-        Message = "My son took a AAA battery into his mouth and now it got stuck in his through. What can I do?",
+        Title = "Battery in throat",
+        Message = "My son took a AAA battery into his mouth and now it got stuck in his throat. What can I do?",
         Comments = new HashSet<Comment>(),
         Followers = new HashSet<User>()
     };
