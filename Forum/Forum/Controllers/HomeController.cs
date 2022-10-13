@@ -20,28 +20,24 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        var topics = PostService.GetAllTopics();
-        var posts = PostService.GetAllPosts();
-        ViewBag.topics = topics;
-        ViewBag.posts = posts;
+        ViewBag.topics = PostService.GetAllTopics();
+        ViewBag.posts = PostService.GetAllPosts();
         return View();
     }
 
     public IActionResult Posts(string topicName)
     {
-        var topics = PostService.GetAllTopics();
-        var postOfTopic = PostService.GetPostsByTopicTitle(topicName);
-        ViewBag.topics = topics;
+        ViewBag.topics = PostService.GetAllTopics();
         ViewBag.Searched = topicName;
-        ViewBag.posts = postOfTopic;
+        ViewBag.posts = PostService.GetPostsByTopicTitle(topicName);
         return View();
     }
 
     public IActionResult PostDetails(string postName)
     {
-        var topics = PostService.GetAllTopics();
-        ViewBag.topics = topics;
-        ViewBag.postName = postName;
+        ViewBag.post = PostService.GetPostByPostTitle(postName);
+        ViewBag.comments = PostService.GetCommentsByPostTitle(postName);
+        ViewBag.topics = PostService.GetAllTopics();
         return View();
     }
 

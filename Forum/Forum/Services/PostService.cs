@@ -41,4 +41,15 @@ public class PostService
         var topics = topicDao.GetAll();
         return topics.Where(x => x.Title == title).SelectMany(x => x.Posts);
     }
+    
+    public Post GetPostByPostTitle(string title)
+    {
+        var posts = postDao.GetAll();
+        return posts.Where(x => x.Title == title).FirstOrDefault();
+    }
+    
+    public IEnumerable<Comment> GetCommentsByPostTitle(string title)
+    {
+        return GetPostByPostTitle(title).Comments;
+    }
 }
