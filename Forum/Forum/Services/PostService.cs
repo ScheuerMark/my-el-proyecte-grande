@@ -35,4 +35,10 @@ public class PostService
         var posts = postDao.GetAll();
         return posts.OrderBy(x => x.NumberOfComments).First();
     }
+    
+    public IEnumerable<HashSet<Post>> GetPostsByTopicTitle(string title)
+    {
+        var topics = topicDao.GetAll();
+        return topics.Where(x => x.Title == title).Select(x => x.Posts);
+    }
 }
