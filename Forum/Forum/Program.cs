@@ -28,9 +28,10 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
+SetupInMemoryDatabases();
+
 app.Run();
 
-SetupInMemoryDatabases();
 
 void SetupInMemoryDatabases()
 {
@@ -47,7 +48,9 @@ void SetupInMemoryDatabases()
     Post battery = new Post()
     {
         Title = "Battery in through",
-        Message = "My son took a AAA battery into his mouth and now it got stuck in his through. What can I do?"
+        Message = "My son took a AAA battery into his mouth and now it got stuck in his through. What can I do?",
+        Comments = new HashSet<Comment>(),
+        Followers = new HashSet<User>()
     };
     postStore.Add(battery);
     accident.Posts.Add(battery);
@@ -67,7 +70,9 @@ void SetupInMemoryDatabases()
     Post rainy = new Post()
     {
         Title = "Rainy weather",
-        Message = "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?"
+        Message = "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
+        Comments = new HashSet<Comment>(),
+        Followers = new HashSet<User>()
     };
     postStore.Add(rainy);
     wandering.Posts.Add(rainy);
