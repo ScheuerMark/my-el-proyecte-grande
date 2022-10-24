@@ -1,32 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import {NavMenu} from './components/NavMenu';
 
 
 function App() {
 
 
   let d;
-  fetch('api/Test')
+  fetch('api/Home/Posts/Accident')
   .then((response) => response.json())
   .then((data) => console.log(data));
 
 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {d}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <NavMenu></NavMenu>
     </div>
   );
 }
