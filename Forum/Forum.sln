@@ -1,6 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forum", "Forum\Forum.csproj", "{A79BC9C8-A9AC-40EF-B546-F0DA9D7A650F}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum", "Forum\Forum.csproj", "{A79BC9C8-A9AC-40EF-B546-F0DA9D7A650F}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Forum-Frontend", "Forum-Frontend\Forum-Frontend.esproj", "{80D45961-7F13-4A45-971E-5AB1953F7867}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,5 +17,17 @@ Global
 		{A79BC9C8-A9AC-40EF-B546-F0DA9D7A650F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A79BC9C8-A9AC-40EF-B546-F0DA9D7A650F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A79BC9C8-A9AC-40EF-B546-F0DA9D7A650F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7CA6CA0-09B4-4DCB-8ACF-37529CC8B124}
 	EndGlobalSection
 EndGlobal
