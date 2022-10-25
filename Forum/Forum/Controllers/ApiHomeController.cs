@@ -25,6 +25,25 @@ namespace Forum.Controllers
         {
             return PostService.GetPostsByTopicTitle(topicName).ToList();
         }
+        
+        [HttpGet("Topics/")]
+        public List<Topic> Topics()
+        {
+            return PostService.GetAllTopics().ToList();
+        }
+        
+        [HttpGet("Posts/Date/Asc")]
+        public List<Post> PostsDateAsc()
+        {
+            return PostService.GetAllPostAscByDate().ToList();
+        }
+
+        [HttpGet("Comments/{postId}")]
+
+        public List<Comment> Comments(int postId)
+        {
+            return PostService.GetCommentsByPostId(postId).ToList();
+        }
 
         //Return Topics
 

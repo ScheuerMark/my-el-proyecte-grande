@@ -4,6 +4,10 @@ namespace Forum.Models;
 
 public class Post
 {
+    public int Id { get; set; }
+    
+    public DateTime DateTime => DateTime.Now;
+    
     public string Title { get; set; }
     
     public string Message { get; set; }
