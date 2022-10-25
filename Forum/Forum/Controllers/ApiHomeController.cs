@@ -53,7 +53,7 @@ namespace Forum.Controllers
         [HttpGet("PostDetails/{id}")]
         public Post GetPostByPostId(int id)
         {
-            return PostService.GetPostById(id);
+            return PostService.GetPostByPostId(id);
         }
 
         //Add Post (Post)
