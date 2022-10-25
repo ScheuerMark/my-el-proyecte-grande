@@ -48,8 +48,29 @@ public class PostService
         return posts.Where(x => x.Title == title).FirstOrDefault();
     }
     
+    public Post GetPostById(int id)
+    {
+        var posts = postDao.GetAll();
+        return posts.Where(x => x.Id == id).FirstOrDefault();
+    }
     public IEnumerable<Comment> GetCommentsByPostTitle(string title)
     {
         return GetPostByPostTitle(title).Comments;
+    }
+
+    public void AddPost(string title, Post post)
+    {
+        var posts = postDao.GetAll().ToList();
+        post.Id = posts.Count;
+        var topicToAdd = topicDao.GetTopic(title);
+        topicToAdd.Posts.Add(post);
+        postDao.Add(post);   
+    }
+
+    public void AddComment(int id, Comment comment)
+    {
+        var post = GetPostById(id);
+        comment.Id = post.Comments.Count;
+        post.Comments.Add(comment);
     }
 }
