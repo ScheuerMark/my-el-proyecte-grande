@@ -35,4 +35,9 @@ public class TopicDaoMemory : ITopicDao
     {
         return topics;
     }
+
+    public Topic GetTopic(string title)
+    {
+        return topics.Where(topic => topic.Title == title).FirstOrDefault();
+    }
 }

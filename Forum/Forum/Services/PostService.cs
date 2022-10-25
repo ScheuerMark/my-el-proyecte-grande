@@ -67,4 +67,20 @@ public class PostService
     {
         return GetPostByPostId(id).Comments;
     }
+
+    public void AddPost(string title, Post post)
+    {
+        var posts = postDao.GetAll().ToList();
+        post.Id = posts.Count;
+        var topicToAdd = topicDao.GetTopic(title);
+        topicToAdd.Posts.Add(post);
+        postDao.Add(post);   
+    }
+
+    public void AddComment(int id, Comment comment)
+    {
+        var post = GetPostByPostId(id);
+        comment.Id = post.Comments.Count;
+        post.Comments.Add(comment);
+    }
 }

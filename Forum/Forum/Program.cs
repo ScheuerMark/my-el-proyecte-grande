@@ -57,6 +57,7 @@ void SetupInMemoryDatabases()
     accident.Posts.Add(battery);
     Comment battery1 = new Comment()
     {
+        Id = 0,
         Message = "It is better to go to the hospital"
     };
     battery.Comments.Add(battery1);
