@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class NavMenu extends Component {
     render() {
@@ -14,7 +15,12 @@ export class NavMenu extends Component {
                     <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <Link class="nav-link text-dark" to="/">Home</Link>                               
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link text-dark" to="/Topic">Test</Link>                               
+                            </li>
+                            <li class="nav-item">
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Topics</a>
