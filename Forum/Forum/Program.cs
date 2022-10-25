@@ -47,7 +47,7 @@ void SetupInMemoryDatabases()
     topicStore.Add(accident);
     Post battery = new Post()
     {
-        Id = 0,
+        Id = 1,
         Title = "Battery in throat",
         Message = "My son took a AAA battery into his mouth and now it got stuck in his throat. What can I do?",
         Comments = new HashSet<Comment>(),
@@ -71,7 +71,7 @@ void SetupInMemoryDatabases()
     topicStore.Add(wandering);
     Post rainy = new Post()
     {
-        Id = 1,
+        Id = 2,
         Title = "Rainy weather",
         Message = "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
         Comments = new HashSet<Comment>(),
