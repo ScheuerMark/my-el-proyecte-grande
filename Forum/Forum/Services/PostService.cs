@@ -19,6 +19,11 @@ public class PostService
         return postDao.GetAll();
     }
 
+    public IEnumerable<Post> GetAllPostAscByDate()
+    {
+        return GetAllPosts().OrderBy(x => x.DateTime);
+    }
+
     public IEnumerable<Topic> GetAllTopics()
     {
         return topicDao.GetAll();
@@ -48,8 +53,18 @@ public class PostService
         return posts.Where(x => x.Title == title).FirstOrDefault();
     }
     
+    public Post GetPostByPostId(int id)
+    {
+        return postDao.GetAll().Where(x => x.Id == id).FirstOrDefault();
+    }
+    
     public IEnumerable<Comment> GetCommentsByPostTitle(string title)
     {
         return GetPostByPostTitle(title).Comments;
+    }
+    
+    public IEnumerable<Comment> GetCommentsByPostId(int id)
+    {
+        return GetPostByPostId(id).Comments;
     }
 }
