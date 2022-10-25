@@ -9,10 +9,6 @@ import Topic from './components/Topic';
 
 
 function App() {
-  let d;
-  fetch('api/Home/Posts/Accident')
-  .then((response) => response.json())
-  .then((data) => console.log(data));
   return (
     <div className="App">   
     <BrowserRouter>

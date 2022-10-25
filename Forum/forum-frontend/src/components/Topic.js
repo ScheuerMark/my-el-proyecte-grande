@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
 
 export class Topic extends Component {
-    render() {
+    render({data}) {
       return (
-        <div class="card">
-            <div class="card-header">
-                <h5 class="w-75 d-inline-flex"><a class=" w-100 text-black text-decoration-none">Valami </a></h5>
-                <span class="float-end post-count fst-italic">Hello</span>
+        <div className="card">
+            <div className="card-header">
+                <h5 className="w-75 d-inline-flex"><a className=" w-100 text-black text-decoration-none">{this.props.data.title}</a></h5>
+                <span className="float-end post-count fst-italic">{data.numberOfPosts}</span>
             </div>
-            <div class="card-body row">
-                <div class="col-9">
-                    <p class="card-text">asdasd </p>
+            <div className="card-body row">
+                <div className="col-9">
+                    <p className="card-text">{this.props.data.description}</p>
                 </div>
-                <div class="col-3 d-flex flex-column">
-                    <a class="fst-italic mt-auto ms-auto text-black">asd</a>
+                <div className="col-3 d-flex flex-column">
+                    <a className="fst-italic mt-auto ms-auto text-black">view posts</a>
                 </div>
             </div>
         </div>
