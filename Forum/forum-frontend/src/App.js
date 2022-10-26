@@ -6,6 +6,7 @@ import AppRoutes from './AppRoutes';
 import Layout from './components/Layout';
 import Home from './components/Home';
 import Topic from './components/Topic';
+import PostDetails from './components/PostDetails';
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>} />
-          <Route path='/Topic' element={<Topic/>} /> {/*For test*/}
+          <Route path='/PostDetail/:id' element={<PostDetails/>} />
         </Route>
       </Routes>
     </BrowserRouter>
