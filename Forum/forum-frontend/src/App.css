@@ -3,10 +3,8 @@
   pointer-events: none;
 }
 .App{
+  background-color: rgba(63, 74, 59, 0.2);
   height: 100vh;
-  background-image: url("./bg.svg");
-  background-size: cover;
-  /* background by SVGBackgrounds.com */
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
