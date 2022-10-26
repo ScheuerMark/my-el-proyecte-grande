@@ -18,7 +18,7 @@ export class NavMenu extends Component {
                                 <Link className="nav-link text-dark" to="/">Home</Link>                               
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-dark" to="/Topic">Test</Link>                               
+                                <Link className="nav-link text-dark" to="/PostDetail/1">Test</Link>                               
                             </li>
                             <li className="nav-item">
                             </li>
