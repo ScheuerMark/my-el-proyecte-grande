@@ -15,7 +15,7 @@ export class Topic extends Component {
       return (
         <div className="card">
             <div className="card-header">
-                <h5 className="w-75 d-inline-flex"><a className=" w-100 text-black text-decoration-none">{this.props.data.title}</a></h5>
+                <h5 className="w-75 d-inline-flex"><Link className=" w-100 text-black text-decoration-none">{this.props.data.title}</Link></h5>
                 <span className="float-end post-count fst-italic">{this.props.data.numberOfPosts} {this.state.commentIcon}</span>
             </div>
             <div className="card-body row">
