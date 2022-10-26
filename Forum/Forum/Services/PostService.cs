@@ -23,6 +23,11 @@ public class PostService
     {
         return GetAllPosts().OrderBy(x => x.DateTime);
     }
+    
+    public IEnumerable<Post> GetAllPostDescByDate()
+    {
+        return GetAllPosts().OrderByDescending(x => x.DateTime);
+    }
 
     public IEnumerable<Topic> GetAllTopics()
     {
