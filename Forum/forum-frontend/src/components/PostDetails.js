@@ -10,6 +10,7 @@ class PostDetails extends Component {
             post: "",
         }
         this.renderComments = this.renderComments.bind(this);
+        this.renderPost = this.renderPost.bind(this);
     } 
 
     componentDidMount(){
@@ -30,11 +31,16 @@ class PostDetails extends Component {
         return comments;
     }
 
+    renderPost(){
+        if(this.state.post)
+        return <Post key={this.state.post.id} data={this.state.post}/>;
+    }
+
     render() {
         return (
           <div class="row">
             <div class="col-xl-10 col-lg-12">
-                <Post key={this.state.post.id} data={this.state.post}/>
+                {this.renderPost()}
                 <br/>
             </div> 
             <div class="col-xl-9 col-lg-11">
@@ -49,6 +55,9 @@ class PostDetails extends Component {
 class Post extends Component{
     constructor(props) { 
         super(props); 
+        this.state = {
+            date: new Date(this.props.data.dateTime).toLocaleString(),
+        }
     } 
 
     render() {
@@ -56,9 +65,9 @@ class Post extends Component{
                 <div class="card">
                     <div class="card-header">
                         <h5 class="d-inline-flex">{this.props.data.title}</h5>
-                        <span class="float-end  fst-italic">{this.props.data.dateTime}</span>
+                        <span class="float-end  fst-italic">{this.state.date}</span>
                         <br/>
-                        <span class="fst-italic">By: Sanyi</span>                     
+                        <span class="fst-italic">Username</span>                     
                     </div>
                     <div class="card-body row">
                         <div class="col-xl-9 col-lg-12">
