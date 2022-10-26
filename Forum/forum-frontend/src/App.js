@@ -8,6 +8,7 @@ import Topic from './components/Topic';
 import PostDetails from './components/PostDetails';
 import { Login } from './components/Login';
 import Register from './components/Register';
+import TopicDetails from './components/TopicDetails';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>} />
           <Route path='/PostDetail/:id' element={<PostDetails/>} />
+          <Route path='/Posts/:title' element={<TopicDetails/>} />
           <Route path='/Login' element={<Login/>} />
           <Route path='/Register' element={<Register/>} />
         </Route>
