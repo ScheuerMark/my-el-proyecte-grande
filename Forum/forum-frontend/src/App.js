@@ -7,7 +7,6 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Topic from './components/Topic';
 import PostDetails from './components/PostDetails';
-import "react-datetime/css/react-datetime.css";
 
 
 function App() {
