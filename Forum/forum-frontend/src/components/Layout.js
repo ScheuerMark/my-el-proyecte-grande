@@ -2,6 +2,7 @@ import { data } from 'jquery';
 import React, { Component } from 'react';
 import { Outlet, Link } from "react-router-dom";
 import { NavMenu } from './NavMenu';
+import './Layout.css';
 
 export class Layout extends Component {
 
@@ -9,7 +10,7 @@ export class Layout extends Component {
     return (
       <div>
          <NavMenu/> 
-         <div className='container'>
+         <div className='container mainContainer'>
             <Outlet />   
         </div>   
       </div>

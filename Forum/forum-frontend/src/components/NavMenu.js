@@ -5,7 +5,7 @@ export class NavMenu extends Component {
     render() {
       return (
         <header>
-            <nav className="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <nav className="navbar px-md-5 navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div className="container-fluid">
                     <a className="navbar-brand" asp-controller="Home" asp-action="Index">Forum</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -34,14 +34,21 @@ export class NavMenu extends Component {
                                     <li><button className="dropdown-item" type="button">List of Adventure parks</button></li>
                                 </ul>
                             </li>
-                            <li>
+                            <li className="nav-item ms-md-auto">
+                                <Link className="nav-link text-dark" to="/Login">Login</Link>                               
+                            </li>
+                            <li className="nav-item me-5">
+                                <Link className="nav-link text-dark" to="/Register">Register</Link>                               
+                            </li>
+                            <li className="nav-item me-5">
+                            <form className="d-flex">
+                            <input className="form-control me-6" type="search" placeholder="Search" aria-label="Search"></input>
+                            <button className="btn btn-outline-success" type="submit">Search</button>
+                    </form>                               
                             </li>
                         </ul>                      
                     </div>
-                    <form className="d-flex">
-                            <input className="form-control me-6" type="search" placeholder="Search" aria-label="Search"></input>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
-                            </form>
+
                 </div>
             </nav>
         </header>
