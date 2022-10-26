@@ -58,7 +58,9 @@ void SetupInMemoryDatabases()
     Comment battery1 = new Comment()
     {
         Id = 0,
-        Message = "It is better to go to the hospital"
+        Message = "It is better to go to the hospital",
+        Like = 3,
+        DisLike = 0
     };
     battery.Comments.Add(battery1);
 
@@ -81,11 +83,17 @@ void SetupInMemoryDatabases()
     wandering.Posts.Add(rainy);
     Comment stayHome = new Comment()
     {
-        Message = "It seems quite bad. Maybe it is time to stay home."
+        Id = 1,
+        Message = "It seems quite bad. Maybe it is time to stay home.",
+        Like = 0,
+        DisLike = 0
     };
     Comment visitCaves = new Comment()
     {
-        Message = "Well, visiting some caves is always a good idea even if it is reining inside the cave you will not recognize it."
+        Id = 2,
+        Message = "Well, visiting some caves is always a good idea even if it is reining inside the cave you will not recognize it.",
+        Like = 0,
+        DisLike = 0
     };
     rainy.Comments.Add(stayHome);
     rainy.Comments.Add(visitCaves);
