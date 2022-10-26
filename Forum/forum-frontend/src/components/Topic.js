@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,7 +23,7 @@ export class Topic extends Component {
                     <p className="card-text">{this.props.data.description}</p>
                 </div>
                 <div className="col-3 d-flex flex-column">
-                    <a className="fst-italic mt-auto ms-auto text-black">view posts</a>
+                    <Link className="fst-italic mt-auto ms-auto text-black" to={`/Posts/${this.props.data.title}`}>view posts</Link>
                 </div>
             </div>
         </div>
