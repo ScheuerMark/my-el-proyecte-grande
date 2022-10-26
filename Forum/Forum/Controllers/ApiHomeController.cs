@@ -32,6 +32,12 @@ namespace Forum.Controllers
             return PostService.GetAllTopics().ToList();
         }
         
+        [HttpGet("Topics/Titles")]
+        public List<string> TopicsTitles()
+        {
+            return PostService.GetAllTopicsTitles().ToList();
+        }
+        
         [HttpGet("Posts/Date/Asc")]
         public List<Post> PostsDateAsc()
         {
