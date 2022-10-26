@@ -45,24 +45,18 @@ namespace Forum.Controllers
             return PostService.GetCommentsByPostId(postId).ToList();
         }
 
-        //Return Topics
-
-        //Return All Posts (date ordered)
-
-        //Return Comments for a Post(id)
         [HttpGet("PostDetails/{id}")]
         public Post GetPostByPostId(int id)
         {
             return PostService.GetPostByPostId(id);
         }
 
-        //Add Post (Post)
         [HttpPost("Posts/{topicName}")]
         public void AddPost(string topicName, Post post)
         {
             PostService.AddPost(topicName, post);
         }
-        //Add Comment (Post)
+
         [HttpPost("PostDetails/{id}")]
         public void AddCommentToPost(int id, Comment comment)
         {
