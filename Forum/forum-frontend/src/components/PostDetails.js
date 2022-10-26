@@ -22,7 +22,6 @@ class PostDetails extends Component {
     }
 
     renderComments(){
-        console.log(this.state.post);
         let comments = [];
         if(this.state.post.comments)
         for (let index = 0; index < this.state.post.comments.length; index++) {   
