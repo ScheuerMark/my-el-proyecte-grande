@@ -2,7 +2,12 @@
   height: 40vmin;
   pointer-events: none;
 }
-
+.App{
+  height: 100vh;
+  background-image: url("./bg.svg");
+  background-size: cover;
+  /* background by SVGBackgrounds.com */
+}
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
