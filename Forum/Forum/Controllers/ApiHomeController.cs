@@ -37,6 +37,12 @@ namespace Forum.Controllers
         {
             return PostService.GetAllPostAscByDate().ToList();
         }
+        
+        [HttpGet("Posts/Date/Desc")]
+        public List<Post> PostsDateDesc()
+        {
+            return PostService.GetAllPostAscByDate().ToList();
+        }
 
         [HttpGet("Comments/{postId}")]
 

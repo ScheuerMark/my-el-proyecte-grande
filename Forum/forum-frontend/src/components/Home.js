@@ -1,6 +1,7 @@
 import { data } from 'jquery';
 import React, { Component } from 'react';
 import './Home.css';
+import { Post } from './Post';
 import Topic from './Topic';
 
 
@@ -10,7 +11,8 @@ export class Home extends Component {
     constructor(props) { 
         super(props); 
         this.state = {
-            topics: []
+            topics: [],
+            recentPosts: []
         }; 
     } 
 
@@ -20,14 +22,28 @@ export class Home extends Component {
         .then(data => {
             this.setState({ topics: data });
         });
+        fetch('api/Home/Posts/Date/Desc')
+        .then((response) => response.json())
+        .then(data => {
+            this.setState({ recentPosts: data });
+        });
     }
 
     renderTopics(){
         let topics = [];
         for (let index = 0; index < this.state.topics.length; index++) {   
-            topics.push(<Topic key={index} data={this.state.topics[index]} />);
+            topics.push(<Topic key={this.state.topics[index].title} data={this.state.topics[index]} />);
         }
         return topics;
+    }
+
+    renderRecentPosts(){
+        let recentPosts = [];
+        for (let index = 0; index < this.state.recentPosts.length; index++) {   
+            recentPosts.push(<Post key={this.state.recentPosts[index].id} valami={this.state.recentPosts[index].id} data={this.state.recentPosts[index]} />);
+            console.log(this.state.recentPosts[index]);
+        }
+        return recentPosts;
     }
 
     render() {
@@ -40,7 +56,8 @@ export class Home extends Component {
             </div>
             <div className="col-xl-6 d-xl-block d-none">
                 <h1>Recent posts</h1>
-                </div>
+                {this.renderRecentPosts()}
+            </div>
         </div>		
     </div>
       );
