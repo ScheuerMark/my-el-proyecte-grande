@@ -6,13 +6,8 @@ import Layout from './components/Layout';
 import Home from './components/Home';
 import Topic from './components/Topic';
 import PostDetails from './components/PostDetails';
-<<<<<<< HEAD
 import { Login } from './components/Login';
 import Register from './components/Register';
-import "react-datetime/css/react-datetime.css";
-=======
->>>>>>> development
-
 
 function App() {
   return (
