@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
-import {PostForm} from "./PostForm";
+import {PostForm} from "../PostForm";
 import Post from '../Shared/Post';
 
 
