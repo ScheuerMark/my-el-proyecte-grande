@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import question from '../question.jpg'
+import question from '../../question.jpg'
 
 export class Register extends Component {
 
