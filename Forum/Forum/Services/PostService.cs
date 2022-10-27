@@ -33,6 +33,11 @@ public class PostService
     {
         return topicDao.GetAll();
     }
+    
+    public IEnumerable<string> GetAllTopicsTitles()
+    {
+        return GetAllTopics().Select(x => x.Title);
+    }
 
     public Post GetPostWithMostComments()
     {
