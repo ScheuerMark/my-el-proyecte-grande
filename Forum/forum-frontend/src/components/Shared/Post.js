@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp, faCommentAlt, faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faCommentDots } from '@fortawesome/free-solid-svg-icons';
 import './Post.css'
 
 export class Post extends Component {

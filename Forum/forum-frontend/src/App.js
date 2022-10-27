@@ -1,14 +1,8 @@
 import './App.css';
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import Layout from './components/Layout';
-import Home from './components/Home';
-import Topic from './components/Topic';
-import PostDetails from './components/PostDetails';
-import { Login } from './components/Login';
-import Register from './components/Register';
-import TopicDetails from './components/TopicDetails';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
@@ -16,11 +10,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout/>}>
-          <Route index element={<Home/>} />
-          <Route path='/PostDetail/:id' element={<PostDetails/>} />
-          <Route path='/Posts/:title' element={<TopicDetails/>} />
-          <Route path='/Login' element={<Login/>} />
-          <Route path='/Register' element={<Register/>} />
+          {AppRoutes.map((route, index) => {
+            const { element, ...rest } = route;
+            return <Route key={index} {...rest} element={element} />;
+          })}
         </Route>
       </Routes>
     </BrowserRouter>

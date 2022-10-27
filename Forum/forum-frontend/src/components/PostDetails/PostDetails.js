@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
-import { Comment } from './Comment';
+import { Comment } from '../Comment';
 
 
 class PostDetails extends Component {
