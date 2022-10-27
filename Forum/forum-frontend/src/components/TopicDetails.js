@@ -1,30 +1,35 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
 import { Post } from './Post';
+import {PostForm} from "./PostForm";
 
 
 class TopicDetails extends Component {
     constructor(props) { 
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            postViews: []
         }
+        
+        this.updatePosts = this.updatePosts.bind(this)
     } 
 
     componentDidMount(){
-        fetch(`/api/Home/Posts/${this.props.params.title}`)
-        .then((response) => response.json())
-        .then(data => {
-            this.setState({ posts: data });
-        });
+        this.fetchPosts();
     }
 
-    renderPosts(){
-        let posts = [];
-        for (let index = 0; index < this.state.posts.length; index++) {   
-            posts.push(<Post key={this.state.posts[index].id} data={this.state.posts[index]} />);
-        }
-        return posts;
+       
+    fetchPosts(){
+        fetch(`/api/Home/Posts/${this.props.params.title}`)
+            .then((response) => response.json())
+            .then(data => {
+                this.setState({ posts: data });
+            });
+    }
+    
+    updatePosts(data){
+        this.setState({ posts: data });
     }
 
     render() {
@@ -34,10 +39,11 @@ class TopicDetails extends Component {
 	                <div className="row">
 		                <h1 className="text-center">{this.props.params.title}</h1>
 		                <div className="col-12">
-			                {this.renderPosts()}
+                            {this.state.posts.map((element, index) => <Post key={index} data={element}/> )}
 		                </div>
 	                </div>
-                </div>      
+                    <PostForm title={this.props.params.title} update={this.updatePosts}/>
+                </div>
             </main>    
         );
       }

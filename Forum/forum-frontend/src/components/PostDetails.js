@@ -3,6 +3,7 @@ import {  useParams } from "react-router-dom";
 import { Comment } from './Comment';
 
 
+
 class PostDetails extends Component {
     constructor(props) { 
         super(props); 
@@ -37,15 +38,16 @@ class PostDetails extends Component {
 
     render() {
         return (
-          <div class="row">
-            <div class="col-xl-10 col-lg-12">
+          <div className="row">
+            <div className="col-xl-10 col-lg-12">
                 {this.renderPost()}
                 <br/>
             </div> 
-            <div class="col-xl-9 col-lg-11">
+            <div className="col-xl-9 col-lg-11">
 			    {this.renderComments()}
 		    </div>
           </div>
+            
         );
       }
 }
@@ -61,20 +63,21 @@ class Post extends Component{
 
     render() {
         return (                           
-                <div class="card">
-                    <div class="card-header">
-                        <h5 class="d-inline-flex">{this.props.data.title}</h5>
-                        <span class="float-end  fst-italic">{this.state.date}</span>
+                <div className="card">
+                    <div className="card-header">
+                        <h5 className="d-inline-flex">{this.props.data.title}</h5>
+                        <span className="float-end  fst-italic">{this.state.date}</span>
                         <br/>
-                        <span class="fst-italic">Username</span>                     
+                        <span className="fst-italic">Username</span>                     
                     </div>
-                    <div class="card-body row">
-                        <div class="col-xl-9 col-lg-12">
-                            <p class="card-text">{this.props.data.message}</p>
+                    <div className="card-body row">
+                        <div className="col-xl-9 col-lg-12">
+                            <p className="card-text">{this.props.data.message}</p>
                         </div>
-                        <div class="col-12 d-flex flex-column">
-                            <button class="btn-sm btn-outline-dark mt-auto ms-auto" type="button">Comment</button>
+                        <div className="col-12 d-flex flex-column">
+                            <button className="btn-sm btn-outline-dark mt-auto ms-auto" type="button">Comment</button>
                         </div>
+                        
                     </div>
                 </div>                         
         );
