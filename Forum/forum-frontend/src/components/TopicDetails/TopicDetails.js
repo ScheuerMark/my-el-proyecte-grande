@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
-import { Post } from './Post';
 import {PostForm} from "./PostForm";
+import Post from '../Shared/Post';
 
 
 class TopicDetails extends Component {
@@ -9,7 +9,6 @@ class TopicDetails extends Component {
         super(props);
         this.state = {
             posts: [],
-            postViews: []
         }
         
         this.updatePosts = this.updatePosts.bind(this)

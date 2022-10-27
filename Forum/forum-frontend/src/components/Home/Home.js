@@ -1,8 +1,7 @@
-import { data } from 'jquery';
 import React, { Component } from 'react';
 import './Home.css';
-import { Post } from './Post';
-import Topic from './Topic';
+import { Post } from '../Shared/Post';
+import Topic from '../Shared/Topic';
 
 
 

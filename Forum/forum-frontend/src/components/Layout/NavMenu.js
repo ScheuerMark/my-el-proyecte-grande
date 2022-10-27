@@ -12,7 +12,7 @@ export class NavMenu extends Component {
     }
 
     componentDidMount() {
-        fetch('api/Home/Topics/Titles')
+        fetch('/api/Home/Topics/Titles')
         .then((response) => response.json())
         .then(data => {
             this.setState({ topicsTitles: data });
