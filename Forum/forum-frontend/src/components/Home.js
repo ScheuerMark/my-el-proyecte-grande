@@ -1,4 +1,3 @@
-import { data } from 'jquery';
 import React, { Component } from 'react';
 import './Home.css';
 import { Post } from './Post';
