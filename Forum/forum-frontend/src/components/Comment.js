@@ -12,7 +12,23 @@ export class Comment extends Component {
             dislike : <FontAwesomeIcon icon={faThumbsDown} />,
             date: new Date(this.props.data.dateTime).toLocaleString(),
         }; 
+        this.likeComment=this.likeComment.bind(this);
+        this.disLikeComment=this.disLikeComment.bind(this);
       } 
+    likeComment(){
+    fetch(`/api/Home/Like/${this.props.data.id}`, {
+        method: 'PUT',
+    });
+    this.props.data.like++;
+    }
+
+
+    disLikeComment(){
+        fetch(`/api/Home/DisLike/${this.props.data.id}`, {
+            method: 'PUT',
+        });
+        this.props.data.disLike++;
+    }
 
   render() {
     return (
@@ -27,8 +43,8 @@ export class Comment extends Component {
             </div>
             <div class="col-12 d-flex flex-column">
                 <span class="fst-italic mt-auto ms-auto">
-                    <Link class="align-middle text-decoration-none text-black me-3">{this.state.like} 12</Link>
-                    <Link class="align-middle text-decoration-none text-black">{this.state.dislike} 0 </Link>
+                    <Link onClick={this.likeComment} class="align-middle text-decoration-none text-black me-3">{this.state.like} {this.props.data.like}</Link>
+                    <Link onClick={this.disLikeComment} class="align-middle text-decoration-none text-black">{this.state.dislike} {this.props.data.disLike} </Link>
                 </span>
             </div>
         </div>

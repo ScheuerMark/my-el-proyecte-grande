@@ -93,4 +93,22 @@ public class PostService
         comment.Id = post.Comments.Count;
         post.Comments.Add(comment);
     }
+
+    public IEnumerable<Comment> GetAllComment()
+    {
+        return postDao.GetAll().SelectMany(x => x.Comments);
+    }
+    public Comment GetComment(int id)
+    {
+        return GetAllComment().Where(x => x.Id == id).FirstOrDefault();
+    }
+    public void LikeComment(int id)
+    {
+        GetComment(id).Like++;
+    }
+
+    public void DisLikeComment(int id)
+    {
+        GetComment(id).DisLike++;
+    }
 }

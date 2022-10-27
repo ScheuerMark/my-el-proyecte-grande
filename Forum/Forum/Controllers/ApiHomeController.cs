@@ -75,5 +75,17 @@ namespace Forum.Controllers
             PostService.AddComment(id, comment);
         }
 
+        [HttpPut("Like/{commentId}")]
+        public void LikeComment(int commentId)
+        {
+            PostService.LikeComment(commentId);
+        }
+
+        [HttpPut("DisLike/{commentId}")]
+        public void DisLikeComment(int commentId)
+        {
+            PostService.DisLikeComment(commentId);
+        }
+
     }
 }
