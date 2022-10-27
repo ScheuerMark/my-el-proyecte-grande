@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
-import { Post } from './Post';
+import { Post } from './Shared/Post';
 
 
 class TopicDetails extends Component {

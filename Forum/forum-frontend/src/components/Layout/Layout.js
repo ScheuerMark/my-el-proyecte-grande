@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Outlet } from "react-router-dom";
-import { NavMenu } from './NavMenu';
+import { NavMenu } from '../NavMenu';
 import './Layout.css';
 
 export class Layout extends Component {

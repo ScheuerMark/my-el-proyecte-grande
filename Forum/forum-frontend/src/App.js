@@ -2,7 +2,7 @@ import './App.css';
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import Layout from './components/Layout';
+import Layout from './components/Layout/Layout';
 
 function App() {
   return (
