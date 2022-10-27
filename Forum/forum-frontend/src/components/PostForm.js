@@ -1,4 +1,6 @@
 ﻿import React, { Component } from 'react';
+import { fetchPosts } from './ApiRequest';
+import { postPost } from './ApiRequest';
 
 export class PostForm extends Component{
     constructor(props) {
@@ -21,23 +23,8 @@ export class PostForm extends Component{
     
     handleSubmit(event){
         event.preventDefault();
-        let formData = {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: new Headers({
-                'Content-Type': 'application/json; charset=UTF-8'
-            })
-        }
-        let url = `/api/Home/Posts/${this.props.title}`
-        fetch(url, formData)
-            .then((response) => response.ok)
-        
-        fetch(`/api/Home/Posts/${this.props.title}`)
-            .then((response) => response.json())
-            .then(data => {
-                this.props.update(data);
-            });
-        
+        postPost(this.state, this.props.title);
+        fetchPosts(this.props.title).then(data => this.props.update(data)); 
     }
     
     render(){

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
 import {PostForm} from "../PostForm";
 import Post from '../Shared/Post';
+import { fetchPosts } from '../ApiRequest';
 
 
 class TopicDetails extends Component {
@@ -15,16 +16,7 @@ class TopicDetails extends Component {
     } 
 
     componentDidMount(){
-        this.fetchPosts();
-    }
-
-       
-    fetchPosts(){
-        fetch(`/api/Home/Posts/${this.props.params.title}`)
-            .then((response) => response.json())
-            .then(data => {
-                this.setState({ posts: data });
-            });
+        fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
     }
     
     updatePosts(data){

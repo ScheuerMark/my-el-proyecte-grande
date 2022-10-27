@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { getTopicTitles } from '../ApiRequest';
 
 
 export class NavMenu extends Component {
@@ -12,23 +13,9 @@ export class NavMenu extends Component {
     }
 
     componentDidMount() {
-        fetch('/api/Home/Topics/Titles')
-        .then((response) => response.json())
-        .then(data => {
+        getTopicTitles().then(data => {
             this.setState({ topicsTitles: data });
-        });
-    }
-
-    renderTopics(){
-        let topicsTitles = [];
-        this.state.topicsTitles.forEach(title => {
-            topicsTitles.push(
-                <li key={title}>
-                    <Link className="dropdown-item" role="button" to={`/Posts/${title}`}>{title}</Link>
-                </li>
-            )
         })
-        return topicsTitles;
     }
 
     render() {
@@ -36,7 +23,7 @@ export class NavMenu extends Component {
         <header>
             <nav className="navbar px-md-5 navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
                 <div className="container-fluid">
-                    <a className="navbar-brand" asp-controller="Home" asp-action="Index">Forum</a>
+                    <Link className="navbar-brand" to="/">Forum</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -44,26 +31,17 @@ export class NavMenu extends Component {
                     <div className="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                         <ul className="navbar-nav flex-grow-1">
                             <li className="nav-item">
-                                <Link className="nav-link text-dark" to="/">Home</Link>                               
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link text-dark" to="/PostDetail/1">Test</Link>                               
-                            </li>
-                            <li className="nav-item">
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Topics</a>
                                 <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    {this.renderTopics()}
-                                </ul>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a className="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Some useful stuff</a>
-                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li><button className="dropdown-item" type="button">Medical providers</button></li>
-                                    <li><button className="dropdown-item" type="button">List of nurseries</button></li>
-                                    <li><button className="dropdown-item" type="button">List of schools</button></li>
-                                    <li><button className="dropdown-item" type="button">List of Adventure parks</button></li>
+                                    {this.state.topicsTitles.map((title, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <Link className="dropdown-item" role="button" to={`/Posts/${title}`}>{title}</Link>
+                                            </li>
+                                        )
+                                    })}
                                 </ul>
                             </li>
                             <li className="nav-item ms-md-auto">
