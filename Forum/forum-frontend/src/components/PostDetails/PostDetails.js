@@ -1,50 +1,39 @@
 import React, { Component } from 'react';
 import {  useParams } from "react-router-dom";
 import { Comment } from './Comment';
-
-
+import { getComments } from '../ApiRequest';
+import { CommentForm } from '../CommentForm';
 
 class PostDetails extends Component {
     constructor(props) { 
         super(props); 
         this.state = {
-            post: "",
+            post: {
+                comments: []
+            },
         }
-        this.renderComments = this.renderComments.bind(this);
-        this.renderPost = this.renderPost.bind(this);
+        this.updateComments = this.updateComments.bind(this);
     } 
 
     componentDidMount(){
-        fetch(`/api/Home/PostDetails/${this.props.params.id}`)
-        .then((response) => response.json())
-        .then(data => {
+        getComments(this.props.params.id).then(data => {
             this.setState({ post: data });
         });
     }
 
-    renderComments(){
-        let comments = [];
-        if(this.state.post.comments)
-        for (let index = 0; index < this.state.post.comments.length; index++) {   
-            comments.push(<Comment key={this.state.post.comments[index].id} data={this.state.post.comments[index]} />);
-        }
-        return comments;
-    }
-
-    renderPost(){
-        if(this.state.post)
-        return <Post key={this.state.post.id} data={this.state.post}/>;
+    updateComments(data){
+        this.setState({ post: data });
     }
 
     render() {
         return (
           <div className="row">
             <div className="col-xl-10 col-lg-12">
-                {this.renderPost()}
+                <Post key={this.state.post.id} data={this.state.post} update={this.updateComments}/>
                 <br/>
             </div> 
             <div className="col-xl-9 col-lg-11">
-			    {this.renderComments()}
+                {this.state.post.comments.map((element, index) => <Comment key={index} data={element}/> )}
 		    </div>
           </div>
             
@@ -75,7 +64,7 @@ class Post extends Component{
                             <p className="card-text">{this.props.data.message}</p>
                         </div>
                         <div className="col-12 d-flex flex-column">
-                            <button className="btn-sm btn-outline-dark mt-auto ms-auto" type="button">Comment</button>
+                            <CommentForm update={this.props.update} id={this.props.data.id}></CommentForm>
                         </div>
                         
                     </div>
