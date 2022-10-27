@@ -32,6 +32,12 @@ namespace Forum.Controllers
             return PostService.GetAllTopics().ToList();
         }
         
+        [HttpGet("Topics/Titles")]
+        public List<string> TopicsTitles()
+        {
+            return PostService.GetAllTopicsTitles().ToList();
+        }
+        
         [HttpGet("Posts/Date/Asc")]
         public List<Post> PostsDateAsc()
         {
@@ -67,6 +73,18 @@ namespace Forum.Controllers
         public void AddCommentToPost(int id, Comment comment)
         {
             PostService.AddComment(id, comment);
+        }
+
+        [HttpPut("Like/{commentId}")]
+        public void LikeComment(int commentId)
+        {
+            PostService.LikeComment(commentId);
+        }
+
+        [HttpPut("DisLike/{commentId}")]
+        public void DisLikeComment(int commentId)
+        {
+            PostService.DisLikeComment(commentId);
         }
 
     }

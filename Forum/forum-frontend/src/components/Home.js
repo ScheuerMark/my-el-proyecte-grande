@@ -40,8 +40,7 @@ export class Home extends Component {
     renderRecentPosts(){
         let recentPosts = [];
         for (let index = 0; index < this.state.recentPosts.length; index++) {   
-            recentPosts.push(<Post key={this.state.recentPosts[index].id} valami={this.state.recentPosts[index].id} data={this.state.recentPosts[index]} />);
-            console.log(this.state.recentPosts[index]);
+            recentPosts.push(<Post key={this.state.recentPosts[index].id} data={this.state.recentPosts[index]} />);
         }
         return recentPosts;
     }

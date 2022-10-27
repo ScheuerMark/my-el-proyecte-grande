@@ -1,7 +1,36 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+
 export class NavMenu extends Component {
+
+    constructor(props) { 
+        super(props); 
+        this.state = {
+            topicsTitles: []
+        }; 
+    }
+
+    componentDidMount() {
+        fetch('api/Home/Topics/Titles')
+        .then((response) => response.json())
+        .then(data => {
+            this.setState({ topicsTitles: data });
+        });
+    }
+
+    renderTopics(){
+        let topicsTitles = [];
+        this.state.topicsTitles.forEach(title => {
+            topicsTitles.push(
+                <li key={title}>
+                    <Link className="dropdown-item" role="button" to={`/Posts/${title}`}>{title}</Link>
+                </li>
+            )
+        })
+        return topicsTitles;
+    }
+
     render() {
       return (
         <header>
@@ -24,6 +53,9 @@ export class NavMenu extends Component {
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Topics</a>
+                                <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    {this.renderTopics()}
+                                </ul>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button">Some useful stuff</a>
