@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {  useParams } from "react-router-dom";
 import {PostForm} from "../PostForm";
 import Post from '../Shared/Post';
@@ -10,6 +10,7 @@ class TopicDetails extends Component {
         super(props);
         this.state = {
             posts: [],
+            title: ""
         }
         
         this.updatePosts = this.updatePosts.bind(this)
@@ -17,6 +18,14 @@ class TopicDetails extends Component {
 
     componentDidMount(){
         fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
+        this.state.title=this.props.params.title;
+    }
+
+    componentDidUpdate(){
+        if(this.state.title!=this.props.params.title){
+            fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
+            this.state.title=this.props.params.title;
+        }
     }
     
     updatePosts(data){
@@ -43,5 +52,4 @@ class TopicDetails extends Component {
 export default (props) => (
     <TopicDetails
         {...props}
-        params={useParams()}
-/>)
+        params={useParams()}/>)

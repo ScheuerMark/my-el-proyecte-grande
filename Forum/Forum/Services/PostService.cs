@@ -81,7 +81,7 @@ public class PostService
     public void AddPost(string title, Post post)
     {
         var posts = postDao.GetAll().ToList();
-        post.Id = posts.Count;
+        post.Id = posts.Count+1;
         var topicToAdd = topicDao.GetTopic(title);
         topicToAdd.Posts.Add(post);
         postDao.Add(post);   
@@ -90,7 +90,7 @@ public class PostService
     public void AddComment(int id, Comment comment)
     {
         var post = GetPostByPostId(id);
-        comment.Id = post.Comments.Count;
+        comment.Id = post.Comments.Count+1;
         post.Comments.Add(comment);
     }
 

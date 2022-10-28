@@ -23,13 +23,13 @@ export class PostForm extends Component{
     
     handleSubmit(event){
         event.preventDefault();
-        postPost(this.state, this.props.title);
-        fetchPosts(this.props.title).then(data => this.props.update(data)); 
+        postPost(this.state, this.props.title).then(x=> {
+        fetchPosts(this.props.title).then(data => this.props.update(data))}); 
     }
     
     render(){
         return (
-            <div>
+            <div className="mt-3">
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add new post
             </button>
@@ -47,10 +47,10 @@ export class PostForm extends Component{
                     <div className="modal-body">
                         
                             <label>Title:</label>
-                            <input type="text" name={"title"} value={this.state.title} onChange={this.handleChange}/>
+                            <input type="text" className="form-control" name={"title"} value={this.state.title} onChange={this.handleChange}/>
                             <br/>
                             <label>Message:</label>
-                            <textarea name="message" id="postMessage" cols="30" rows="10" value={this.state.message}
+                            <textarea className="form-control" name="message" id="postMessage" cols="30" rows="10" value={this.state.message}
                                       onChange={this.handleChange}></textarea>
                      
                         

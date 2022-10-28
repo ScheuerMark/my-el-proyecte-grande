@@ -23,17 +23,18 @@ export class CommentForm extends Component{
     
     handleSubmit(event){
         event.preventDefault();
-        postComment(this.state, this.props.id);
-        getComments(this.props.id).then(data => this.props.update(data)); 
+        postComment(this.state, this.props.id).then(x=>{
+        getComments(this.props.id).then(data => this.props.update(data))}); 
     }
     
     render(){
         return (
             <div>
+                <div className="text-end">
             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                 Add new comment
             </button>
-
+            </div>
 
         <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
              aria-hidden="true">
@@ -46,7 +47,7 @@ export class CommentForm extends Component{
                     <form onSubmit={this.handleSubmit}>
                     <div className="modal-body">
                         <label>Message:</label>
-                        <textarea name="message" id="postMessage" cols="30" rows="10" value={this.state.message}
+                        <textarea className="form-control" name="message" id="postMessage" cols="30" rows="10" value={this.state.message}
                             onChange={this.handleChange}></textarea>
                     </div>
                     <div className="modal-footer">
