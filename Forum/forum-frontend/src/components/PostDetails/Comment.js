@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 
 export function Comment(props) {
 
-    const like = useState(<FontAwesomeIcon icon={faThumbsUp} />);
-    const dislike = useState(<FontAwesomeIcon icon={faThumbsDown} />);
-    const date = useState(new Date(props.data.dateTime).toLocaleString());
+    const like = <FontAwesomeIcon icon={faThumbsUp} />;
+    const dislike = <FontAwesomeIcon icon={faThumbsDown} />;
+    const date = new Date(props.data.dateTime).toLocaleString();
 
 
     function likeComment(){
-    fetch(`/api/Home/Like/${props.data.id}`, {
-        method: 'PUT',
+        fetch(`/api/Home/Like/${props.data.id}`, {
+            method: 'PUT',
         });
         props.data.like++;
     }
