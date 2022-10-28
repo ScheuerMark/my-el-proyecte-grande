@@ -10,7 +10,6 @@ class TopicDetails extends Component {
         super(props);
         this.state = {
             posts: [],
-            title: ""
         }
         
         this.updatePosts = this.updatePosts.bind(this)
@@ -18,13 +17,11 @@ class TopicDetails extends Component {
 
     componentDidMount(){
         fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
-        this.state.title=this.props.params.title;
     }
 
-    componentDidUpdate(){
-        if(this.state.title!=this.props.params.title){
+    componentDidUpdate(prevProps){
+        if(prevProps.params.title!=this.props.params.title){
             fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
-            this.state.title=this.props.params.title;
         }
     }
     
@@ -50,6 +47,4 @@ class TopicDetails extends Component {
 }
 
 export default (props) => (
-    <TopicDetails
-        {...props}
-        params={useParams()}/>)
+    <TopicDetails {...props} params={useParams()}/>)
