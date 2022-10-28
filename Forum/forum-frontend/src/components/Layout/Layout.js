@@ -3,9 +3,7 @@ import { Outlet } from "react-router-dom";
 import { NavMenu } from './NavMenu';
 import './Layout.css';
 
-export class Layout extends Component {
-
-  render() {
+export function Layout () {
     return (
       <div>
          <NavMenu/> 
@@ -14,7 +12,4 @@ export class Layout extends Component {
         </div>   
       </div>
     );
-  }
 }
-
-export default Layout;
