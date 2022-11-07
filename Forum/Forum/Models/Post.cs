@@ -1,12 +1,14 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml;
 
 namespace Forum.Models;
 
 public class Post
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
-    public DateTime DateTime => DateTime.Now;
+    public DateTime DateTime { get; set; }
     
     public string Title { get; set; }
     

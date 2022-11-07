@@ -1,4 +1,6 @@
-﻿using Forum.Daos.Implementations;
+﻿using System.Net;
+using Forum.Daos.Implementations;
+using Forum.Data;
 using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Http;
@@ -12,79 +14,87 @@ namespace Forum.Controllers
     {
         private readonly ILogger<ApiHomeController> _logger;
 
-        public PostService PostService { get; set; }
+        public SqlService SqlService { get; set; }
 
-        public ApiHomeController(ILogger<ApiHomeController> logger)
+        public ApiHomeController(ILogger<ApiHomeController> logger, ForumContext context)
         {
             _logger = logger;
-            PostService = new PostService(PostDaoMemory.GetInstance(), TopicDaoMemory.GetInstance());
+            SqlService = new SqlService(context);
         }
 
         [HttpGet("Posts/{topicName}")]
         public List<Post> Posts(string topicName)
         {
-            return PostService.GetPostsByTopicTitle(topicName).ToList();
+            return SqlService.GetPostsByTopicTitle(topicName).Result;
         }
         
         [HttpGet("Topics/")]
         public List<Topic> Topics()
         {
-            return PostService.GetAllTopics().ToList();
+            return SqlService.GetAllTopics().Result;
         }
         
         [HttpGet("Topics/Titles")]
         public List<string> TopicsTitles()
         {
-            return PostService.GetAllTopicsTitles().ToList();
+            return SqlService.GetAllTopicsTitles().Result;
         }
         
         [HttpGet("Posts/Date/Asc")]
         public List<Post> PostsDateAsc()
         {
-            return PostService.GetAllPostAscByDate().ToList();
+            return SqlService.GetAllPostAscByDate().Result;
         }
         
         [HttpGet("Posts/Date/Desc")]
         public List<Post> PostsDateDesc()
         {
-            return PostService.GetAllPostAscByDate().ToList();
+            return SqlService.GetAllPostAscByDate().Result;
         }
 
         [HttpGet("Comments/{postId}")]
 
         public List<Comment> Comments(int postId)
         {
-            return PostService.GetCommentsByPostId(postId).ToList();
+            return SqlService.GetCommentsByPostId(postId).Result;
         }
 
         [HttpGet("PostDetails/{id}")]
         public Post GetPostByPostId(int id)
         {
-            return PostService.GetPostByPostId(id);
+            return SqlService.GetPostByPostId(id).Result;
         }
 
         [HttpPost("Posts/{topicName}")]
-        public void AddPost(string topicName, Post post)
+        public async Task<ActionResult> AddPost(string topicName, Post post)
         {
-            PostService.AddPost(topicName, post);
+            await SqlService.AddPost(topicName, post);
+
+            return StatusCode(200);
         }
 
         [HttpPost("PostDetails/{id}")]
-        public void AddCommentToPost(int id, Comment comment)
+        public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {
-            PostService.AddComment(id, comment);
+            await SqlService.AddComment(id, comment);
+
+            return StatusCode(200);
         }
 
         [HttpPut("Like/{commentId}")]
-        public void LikeComment(int commentId)
+        public async Task<ActionResult> LikeComment(int commentId)
         {
-            PostService.LikeComment(commentId);
+            await SqlService.LikeComment(commentId);
+
+            return StatusCode(200);
         }
 
         [HttpPut("DisLike/{commentId}")]
-        public void DisLikeComment(int commentId)
+        public async Task<ActionResult> DisLikeComment(int commentId)
         {
-            PostService.DisLikeComment(commentId);
+            await SqlService.DisLikeComment(commentId);
+
+            return StatusCode(200);
         }
 
     }
