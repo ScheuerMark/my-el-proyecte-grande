@@ -1,3 +1,4 @@
+import { event } from 'jquery';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getTopicTitles } from '../ApiRequest';
@@ -8,14 +9,21 @@ export class NavMenu extends Component {
     constructor(props) { 
         super(props); 
         this.state = {
-            topicsTitles: []
+            topicsTitles: [],
+            search:"",
         }; 
+
+        this.handelChange = this.handelChange.bind(this)
     }
 
     componentDidMount() {
         getTopicTitles().then(data => {
             this.setState({ topicsTitles: data });
         })
+    }
+
+    handelChange(e){
+        search= e.target.value;
     }
 
     render() {
@@ -52,8 +60,8 @@ export class NavMenu extends Component {
                             </li>
                             <li className="nav-item me-5">
                             <form className="d-flex">
-                            <input className="form-control me-6" type="search" placeholder="Search" aria-label="Search"></input>
-                            <button className="btn btn-outline-success" type="submit">Search</button>
+                            <input className="form-control me-6" value={this.state.search} onChange={this.handelChange} type="search" placeholder="Search" aria-label="Search"></input>
+                            <Link to={`/Search/${this.state.search}`}><button className="btn btn-outline-success" >Search</button></Link>
                     </form>                               
                             </li>
                         </ul>                      

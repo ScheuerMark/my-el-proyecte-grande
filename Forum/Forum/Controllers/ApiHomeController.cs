@@ -97,5 +97,12 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
+        [HttpGet("Search/{searchPhrase}")]
+
+        public List<Post> Comments([FromRoute] string searchPhrase)
+        {
+            return SqlService.GetPostsBySearchPhrase(searchPhrase).Result;
+        }
+
     }
 }

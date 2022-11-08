@@ -38,3 +38,8 @@ export function getComments(postId){
     return fetch(`/api/Home/PostDetails/${postId}`)
     .then((response) => response.json());
 }
+
+export function getSearched(searchPhrase){
+    return fetch(`/api/Home/Search/${searchPhrase}`)
+    .then((response) => response.json());
+}
