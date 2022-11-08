@@ -38,8 +38,8 @@ return (
         </div>
         <div className="col-12 d-flex flex-column">
             <span className="fst-italic mt-auto ms-auto">
-                <Link onClick={likeComment} class="align-middle text-decoration-none text-black me-3">{like} {props.data.like}</Link>
-                <Link onClick={disLikeComment} class="align-middle text-decoration-none text-black">{dislike} {props.data.disLike} </Link>
+                <Link onClick={likeComment} className="align-middle text-decoration-none text-black me-3">{like} {props.data.like}</Link>
+                <Link onClick={disLikeComment} className="align-middle text-decoration-none text-black">{dislike} {props.data.disLike} </Link>
             </span>
         </div>
     </div>

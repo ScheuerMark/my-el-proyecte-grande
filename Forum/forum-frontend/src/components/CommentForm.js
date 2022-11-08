@@ -1,5 +1,5 @@
 ﻿import React, { useReducer } from 'react';
-import {postComment, getComments, fetchPosts} from './ApiRequest';
+import {postComment, getComments} from './ApiRequest';
 
 
 
@@ -30,11 +30,7 @@ export function CommentForm(props) {
 
     return (
         <div>
-            <div className="text-end">
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Add new comment
-                </button>
-            </div>
+            
 
             <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">

@@ -36,6 +36,7 @@ export function PostDetails (props) {
 
 function Post (props){
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
+    const [isOpen, setIsOpen] = useState(false);
     return (                           
             <div className="card">
                 <div className="card-header">
@@ -49,6 +50,11 @@ function Post (props){
                         <p className="card-text">{props.data.message}</p>
                     </div>
                     <div className="col-12 d-flex flex-column">
+                        <div className="text-end">
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Add new comment
+                            </button>
+                        </div>
                         <CommentForm update={props.update} id={props.data.id}></CommentForm>
                     </div>                    
                 </div>
