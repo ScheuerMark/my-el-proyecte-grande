@@ -20,7 +20,7 @@ class TopicDetails extends Component {
     }
 
     componentDidUpdate(prevProps){
-        if(prevProps.params.title!=this.props.params.title){
+        if(prevProps.params.title!==this.props.params.title){
             fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
         }
     }

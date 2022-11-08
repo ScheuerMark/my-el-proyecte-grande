@@ -27,17 +27,17 @@ export function Comment(props) {
     }
 
 return (
-    <div class="card">
-        <div class="card-header">
-            <h5 class="d-inline">Username</h5>
-            <span class="float-end  fst-italic">{date}</span>
+    <div className="card">
+        <div className="card-header">
+            <h5 className="d-inline">Username</h5>
+            <span className="float-end  fst-italic">{date}</span>
         </div>
-    <div class="card-body row" >
-        <div class="col-12">
-            <p class="card-text">{props.data.message}</p>
+    <div className="card-body row" >
+        <div className="col-12">
+            <p className="card-text">{props.data.message}</p>
         </div>
-        <div class="col-12 d-flex flex-column">
-            <span class="fst-italic mt-auto ms-auto">
+        <div className="col-12 d-flex flex-column">
+            <span className="fst-italic mt-auto ms-auto">
                 <Link onClick={likeComment} class="align-middle text-decoration-none text-black me-3">{like} {props.data.like}</Link>
                 <Link onClick={disLikeComment} class="align-middle text-decoration-none text-black">{dislike} {props.data.disLike} </Link>
             </span>
