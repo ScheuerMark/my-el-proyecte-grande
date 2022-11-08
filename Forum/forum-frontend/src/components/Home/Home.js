@@ -1,21 +1,18 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import { Post } from '../Shared/Post';
 import Topic from '../Shared/Topic';
+import { getTopics, getPostByDateDesc } from '../ApiRequest';
 
 function Home() {
     let [topics, setTopics] = useState([]);
     let [posts, setPosts] = useState([]);
 
     useEffect(()=>{
-        fetch('api/Home/Topics')
-        .then((response) => response.json())
-        .then(data => {
+        getTopics().then(data => {
             setTopics(data);
         })
-        fetch('api/Home/Posts/Date/Desc')
-        .then((response) => response.json())
-        .then(data => {
+        getPostByDateDesc().then(data => {
             setPosts(data);
         });
     }, [])

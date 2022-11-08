@@ -36,5 +36,15 @@ export function postComment(body, postId){
 
 export function getComments(postId){
     return fetch(`/api/Home/PostDetails/${postId}`)
-    .then((response) => response.json());
+        .then((response) => response.json());
+}
+
+export function getTopics(){
+    return fetch('api/Home/Topics')
+        .then((response) => response.json());
+}
+
+export function getPostByDateDesc(){
+    return fetch('api/Home/Posts/Date/Desc')
+        .then((response) => response.json());
 }
