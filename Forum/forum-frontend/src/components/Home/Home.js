@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import { Post } from '../Shared/Post';
+import Post from '../Shared/Post';
 import Topic from '../Shared/Topic';
 import { getTopics, getPostByDateDesc } from '../ApiRequest';
 
@@ -26,7 +26,7 @@ function Home() {
                 </div>
                 <div className="col-xl-6 d-xl-block d-none">
                     <h1>Recent posts</h1>
-                    {posts.map((post, index) => <Post key={index} data={post} />)}
+                    {posts.map((post, index) => <Post key={index} post={post} />)}
                 </div>
             </div>		
         </div>

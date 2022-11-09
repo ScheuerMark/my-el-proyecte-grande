@@ -36,7 +36,7 @@ class TopicDetails extends Component {
 	                <div className="row">
 		                <h1 className="text-center">{this.props.params.title}</h1>
 		                <div className="col-12">
-                            {this.state.posts.map((element, index) => <Post key={index} data={element}/> )}
+                            {this.state.posts.map((element, index) => <Post key={index} post={element}/> )}
 		                </div>
 	                </div>
                     <PostForm title={this.props.params.title} update={this.updatePosts}/>
