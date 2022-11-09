@@ -39,6 +39,9 @@ class TopicDetails extends Component {
                             {this.state.posts.map((element, index) => <Post key={index} data={element}/> )}
 		                </div>
 	                </div>
+                    <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">
+                        Add new post
+                    </button>
                     <PostForm title={this.props.params.title} update={this.updatePosts}/>
                 </div>
             </main>    
