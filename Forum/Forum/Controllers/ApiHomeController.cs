@@ -97,5 +97,21 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
+        [HttpPut("PostDetails/{id}")]
+        public async Task<ActionResult> UpdatePost(int id, Post post)
+        {
+            await SqlService.UpdatePost(id, post);
+
+            return StatusCode(200);
+        }
+        
+        [HttpPut("Comments/{id}")]
+        public async Task<ActionResult> UpdateComment(int commentId, Comment comment)
+        {
+            await SqlService.UpdateComment(commentId, comment);
+
+            return StatusCode(200);
+        }
+
     }
 }

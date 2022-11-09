@@ -1,6 +1,6 @@
 ﻿import React, {useReducer, useState} from 'react';
 
-import {fetchPosts, updateComment, updatePost} from "./ApiRequest";
+import {fetchPosts, getComments, getPostById, updateComment, updatePost} from "./ApiRequest";
 
 const formReducer = (state, event) => {
     return{
@@ -19,9 +19,9 @@ export function EditModalPost(props) {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(post.title);
+        console.log(props.id);
         updatePost(post, props.id).then(x=> {
-            fetchPosts(props.title).then(data => props.update(data))});
+            getPostById(props.id).then(data => props.update(data))});
     };
 
     const handleChange = event => {
@@ -75,7 +75,7 @@ export function EditModalComment(props) {
     const handleSubmit = (e) =>{
         e.preventDefault();
         updateComment(comment, props.id).then(x=> {
-            fetchPosts(props.title).then(data => props.update(data))});
+            getComments(props.id).then(data => props.update(data))});
     };
 
     const handleChange = event => {

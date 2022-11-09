@@ -58,7 +58,7 @@ function Post (props){
                                     data-bs-target="#editPostModal">
                                 <FontAwesomeIcon icon={faEdit}/>
                             </button>
-                            <EditModalPost title={props.data.title} message={props.data.message} id={props.data.id} />
+                            <EditModalPost update={props.update} title={props.data.title} message={props.data.message} id={props.data.id} />
                             <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
                                 Add new comment
                             </button>

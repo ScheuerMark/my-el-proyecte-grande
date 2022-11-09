@@ -101,5 +101,20 @@ namespace Forum.Services
         {
             return _context.Comments.Where(x=>x.Id.Equals(commentId)).FirstOrDefaultAsync();
         }
+
+        public async Task UpdatePost(int id, Post post)
+        {
+            var postToUpdate = await GetPostByPostId(id);
+            postToUpdate.Title = post.Title;
+            postToUpdate.Message = post.Message;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateComment(int id, Comment comment)
+        {
+            var commentToUpdate = GetCommentById(id).Result;
+            commentToUpdate.Message = comment.Message;
+            await _context.SaveChangesAsync();
+        }
     }
 }
