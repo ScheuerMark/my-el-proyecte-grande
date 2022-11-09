@@ -12,7 +12,7 @@ export function PostDetailsView(post, setPost=null, searchPhrase=null){
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} data={element}/> )}
+            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element}/> )}
         </div>
         </div>
         

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { getSearched } from "../ApiRequest";
-import { Comment } from '../PostDetails/Comment';
 import { PostDetailsView } from '../PostDetails/PostDetailsView';
 
-export function Search(props)
+export function Search()
 {
     const [posts,setPosts] = useState(
         [
@@ -34,3 +33,4 @@ export function Search(props)
         </div>
     )
 }
+
