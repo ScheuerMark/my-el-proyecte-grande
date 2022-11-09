@@ -1,8 +1,11 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {  useParams } from "react-router-dom";
 import { Comment } from './Comment';
 import { getComments } from '../ApiRequest';
 import { CommentForm } from '../CommentForm';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import {EditModalPost} from "../EditModals";
 
 export function PostDetails (props) {
     const [post, setPost] = useState(
@@ -36,7 +39,7 @@ export function PostDetails (props) {
 
 function Post (props){
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
-    const [isOpen, setIsOpen] = useState(false);
+    
     return (                           
             <div className="card">
                 <div className="card-header">
@@ -51,7 +54,12 @@ function Post (props){
                     </div>
                     <div className="col-12 d-flex flex-column">
                         <div className="text-end">
-                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#editPostModal">
+                                <FontAwesomeIcon icon={faEdit}/>
+                            </button>
+                            <EditModalPost title={props.data.title} message={props.data.message} id={props.data.id} />
+                            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
                                 Add new comment
                             </button>
                         </div>
