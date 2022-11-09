@@ -130,8 +130,16 @@ namespace Forum.Services
 
         public async Task UpdateComment(int id, Comment comment)
         {
-            var commentToUpdate = GetCommentById(id).Result;
+            var commentToUpdate = await GetCommentById(id);
             commentToUpdate.Message = comment.Message;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateTopic(int id, Topic topic)
+        {
+            var topicToUpdate = await _context.Topics.Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
+            topicToUpdate.Title = topic.Title;
+            topicToUpdate.Description = topic.Description;
             await _context.SaveChangesAsync();
         }
     }

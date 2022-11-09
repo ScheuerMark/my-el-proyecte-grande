@@ -63,8 +63,7 @@ export function updatePost(body, postId){
         })
     }
     let url = `/api/Home/PostDetails/${postId}`
-    console.log(formData);
-    console.log(url)
+    
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -78,6 +77,8 @@ export function updateComment(body, commentId){
         })
     }
     let url = `/api/Home/Comments/${commentId}`
+    console.log(formData);
+    console.log(url)
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -85,4 +86,18 @@ export function updateComment(body, commentId){
 export function getPostById(postId){
     return fetch(`/api/Home/PostDetails/${postId}`)
         .then((response) => response.json());
+}
+
+export function updateTopic(body, topicId){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Home/Topics/${topicId}`
+
+    return fetch(url, formData)
+        .then((response) => response.ok);
 }

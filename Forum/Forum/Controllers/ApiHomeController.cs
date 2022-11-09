@@ -112,9 +112,17 @@ namespace Forum.Controllers
         }
         
         [HttpPut("Comments/{id}")]
-        public async Task<ActionResult> UpdateComment(int commentId, Comment comment)
+        public async Task<ActionResult> UpdateComment(int id, Comment comment)
         {
-            await SqlService.UpdateComment(commentId, comment);
+            await SqlService.UpdateComment(id, comment);
+
+            return StatusCode(200);
+        }
+
+        [HttpPut("Topics/{id}")]
+        public async Task<ActionResult> UpdateTopic(int id, Topic topic)
+        {
+            await SqlService.UpdateTopic(id, topic);
 
             return StatusCode(200);
         }
