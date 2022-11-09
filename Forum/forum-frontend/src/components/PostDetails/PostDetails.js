@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {  useParams } from "react-router-dom";
 import { Comment } from './Comment';
 import { getComments } from '../ApiRequest';
@@ -26,7 +26,7 @@ export function PostDetails (props) {
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment key={index} data={element}/> )}
+            {post.comments.map((comment, index) => <Comment key={index} comment={comment}/> )}
         </div>
         </div>
         
