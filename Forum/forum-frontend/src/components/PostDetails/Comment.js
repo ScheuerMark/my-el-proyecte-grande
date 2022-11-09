@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faEdit,faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Highlight from 'react-highlight-words';
+import {EditModalComment} from "../EditModals";
 
 
 export function Comment({comment,searchPhrase}) {
 
     const like = <FontAwesomeIcon icon={faThumbsUp} />;
     const dislike = <FontAwesomeIcon icon={faThumbsDown} />;
+    const edit = <FontAwesomeIcon icon={faEdit}/>;
     const date = new Date(comment.dateTime).toLocaleString();
 
 
@@ -43,11 +45,15 @@ return (
         </div>
         <div className="col-12 d-flex flex-column">
             <span className="fst-italic mt-auto ms-auto">
-                <Link onClick={likeComment} class="align-middle text-decoration-none text-black me-3">{like} {comment.like}</Link>
-                <Link onClick={disLikeComment} class="align-middle text-decoration-none text-black">{dislike} {comment.disLike} </Link>
+                <Link onClick={likeComment} className="align-middle text-decoration-none text-black me-3">{like} {comment.like}</Link>
+                <Link onClick={disLikeComment} className="align-middle text-decoration-none text-black">{dislike} {comment.disLike} </Link>
+                <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#editCommentModal">{edit}</button>
+                
             </span>
         </div>
     </div>
+        <EditModalComment id={comment.id} message={comment.message} update={comment.update}/>
     </div>
 );
   

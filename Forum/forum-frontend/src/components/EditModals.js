@@ -1,6 +1,6 @@
 ﻿import React, {useReducer, useState} from 'react';
 
-import {fetchPosts, getComments, getPostById, updateComment, updatePost} from "./ApiRequest";
+import {fetchPosts, getComments, getPostById, getTopics, updateComment, updatePost, updateTopic} from "./ApiRequest";
 
 const formReducer = (state, event) => {
     return{
@@ -32,8 +32,7 @@ export function EditModalPost(props) {
     }
         return (
             <>              
-
-                
+               
                 <div className="modal fade" id="editPostModal" tabIndex="-1" aria-labelledby="editPostModalLabel" aria-hidden="true">
                     <div className="modal-dialog">
                         <div className="modal-content">
@@ -65,13 +64,12 @@ export function EditModalPost(props) {
     }
 
 export function EditModalComment(props) {
-    const [comment, setComment] = useState({
+    const [comment, setComment] = useReducer(formReducer, {
         "id": props.id,
         "message": props.message
     });
-
-
-
+    
+   
     const handleSubmit = (e) =>{
         e.preventDefault();
         updateComment(comment, props.id).then(x=> {
@@ -87,7 +85,6 @@ export function EditModalComment(props) {
     return (
         <>
 
-
             <div className="modal fade" id="editCommentModal" tabIndex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
@@ -100,7 +97,7 @@ export function EditModalComment(props) {
                                                            
                                 <label>Message:</label>
                                 <textarea className="form-control" name="message" id="commentMessage" cols="30" rows="10"
-                                          value={comment.message} onChange={handleChange}></textarea>
+                                          defaultValue={comment.message} value={setComment.message} onChange={handleChange}></textarea>
                             
                         </div>
                         <div className="modal-footer">
@@ -108,6 +105,60 @@ export function EditModalComment(props) {
                             <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                         </div>
                     </form>
+                    </div>
+                </div>
+            </div>
+        </>
+    );
+}
+
+export function EditModalTopic(props) {
+    const [topic, setTopic] = useReducer(formReducer, {
+        "id": props.id,
+        "title": props.title,
+        "description": props.description
+    });
+
+
+    const handleSubmit = (e) =>{
+        e.preventDefault();
+        updateTopic(topic, props.id).then(x=> {
+            getTopics().then(data => props.update(data))});
+    };
+
+    const handleChange = event => {
+        setTopic({
+            name: event.target.name,
+            value: event.target.value,
+        });
+    }
+    return (
+        <>
+
+            <div className="modal fade" id="editTopicModal" tabIndex="-1" aria-labelledby="editTopicModalLabel" aria-hidden="true">
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h1 className="modal-title fs-5" id="editTopicModalLabel">Edit topic</h1>
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="modal-body">
+                                <label>Title:</label>
+                                <input type={"text"} className="form-control" name="title" id={"topicTitle"}  defaultValue={topic.title}
+                                       value={setTopic.title} onChange={handleChange}/>
+                                <br/>
+
+                                <label>Description:</label>
+                                <textarea className="form-control" name="description" id="topicDescription" cols="30" rows="10"
+                                          defaultValue={topic.description} value={setTopic.description} onChange={handleChange}></textarea>
+
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
