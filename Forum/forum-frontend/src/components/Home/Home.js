@@ -22,7 +22,7 @@ function Home() {
             <div className="row">
                 <div className="col-xl-6 col-lg-12 column1">
                     <h1>Topics</h1>
-                    {topics.map((topic, index) => <Topic key={index} data={topic} />)}
+                    {topics.map((topic, index) => <Topic key={index} topic={topic} />)}
                 </div>
                 <div className="col-xl-6 d-xl-block d-none">
                     <h1>Recent posts</h1>
