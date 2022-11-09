@@ -6,11 +6,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  height: 100vh;
+  min-height: 100vh;
+  
   background-image: url("./bg.svg");
   background-size: cover;
   /* background by SVGBackgrounds.com */
 }
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

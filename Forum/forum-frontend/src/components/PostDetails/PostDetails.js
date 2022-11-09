@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {  useParams } from "react-router-dom";
-import { Comment } from './Comment';
 import { getComments } from '../ApiRequest';
+import { PostDetailsView } from './PostDetailsView';
 import { CommentForm } from '../CommentForm';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
@@ -23,16 +23,7 @@ export function PostDetails (props) {
     },[])
 
     return (
-        <div className="row">
-        <div className="col-xl-10 col-lg-12">
-            <Post key={post.id} data={post} update={setPost}/>
-            <br/>
-        </div> 
-        <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment key={index} data={element}/> )}
-        </div>
-        </div>
-        
+        PostDetailsView(post,setPost)       
     );
 }
 

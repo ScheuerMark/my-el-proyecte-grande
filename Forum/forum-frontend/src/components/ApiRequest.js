@@ -39,6 +39,21 @@ export function getComments(postId){
     .then((response) => response.json());
 }
 
+export function getSearched(searchPhrase){
+    return fetch(`/api/Home/Search/${searchPhrase}`)
+    .then((response) => response.json());
+}
+
+export function getTopics(){
+    return fetch('api/Home/Topics')
+        .then((response) => response.json());
+}
+
+export function getPostByDateDesc(){
+    return fetch('api/Home/Posts/Date/Desc')
+        .then((response) => response.json());
+}
+
 export function updatePost(body, postId){
     let formData = {
         method: 'PUT',

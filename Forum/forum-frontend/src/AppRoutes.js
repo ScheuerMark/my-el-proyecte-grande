@@ -3,6 +3,7 @@ import { PostDetails } from "./components/PostDetails/PostDetails";
 import TopicDetails from "./components/TopicDetails/TopicDetails";
 import Register from "./components/Signing/Register";
 import Login from "./components/Signing/Login";
+import { Search } from "./components/Layout/Search";
 
 const AppRoutes = [
   {
@@ -24,6 +25,10 @@ const AppRoutes = [
   {
     path: '/Login',
     element: <Login />
+  },
+  {
+    path: '/Search/:searchPhrase',
+    element: <Search />
   },
   
 ];

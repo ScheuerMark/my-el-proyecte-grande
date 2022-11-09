@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Forum.Daos.Implementations;
 using Forum.Data;
 using Forum.Models;
 using Forum.Services;
@@ -95,6 +94,13 @@ namespace Forum.Controllers
             await SqlService.DisLikeComment(commentId);
 
             return StatusCode(200);
+        }
+
+        [HttpGet("Search/{searchPhrase}")]
+
+        public List<Post> Comments([FromRoute] string searchPhrase)
+        {
+            return SqlService.GetPostsBySearchPhrase(searchPhrase).Result;
         }
 
         [HttpPut("PostDetails/{id}")]
