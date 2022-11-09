@@ -1,17 +1,34 @@
+import { event } from 'jquery';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { getTopicTitles } from '../ApiRequest';
 
 
 export const NavMenu = () => {
     let [topicsTitles, setTopicsTitles] = useState([]);
+    let [searchPhrase, setsearchPhrase] = useState("");
+    const navigate = useNavigate();
 
     useEffect(()=>{
         getTopicTitles().then(data => {
             setTopicsTitles(data);
         })
-    }, [])
+    }, []);
 
+
+    function handelChange(e){
+        if(e.key=="Enter")
+            navigateSearch(e.target.value);
+        setsearchPhrase(e.target.value);
+        //navigateSearch(e.target.value);
+    }
+
+    function navigateSearch(Phrase){
+        if(Phrase != "")
+            navigate(`/Search/${Phrase}`);
+        else
+            navigate(`/`);
+    }
     return (
         <header>
                 <nav className="navbar px-md-5 navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -43,11 +60,9 @@ export const NavMenu = () => {
                                 <li className="nav-item me-5">
                                     <Link className="nav-link text-dark" to="/Register">Register</Link>                               
                                 </li>
-                                <li className="nav-item me-5">
-                                    <form className="d-flex">
-                                        <input className="form-control me-6" type="search" placeholder="Search" aria-label="Search"></input>
-                                        <button className="btn btn-outline-success" type="submit">Search</button>
-                                    </form>                               
+                                <li className="nav-item me-5 d-flex">
+                                    <input className="form-control me-6" onKeyDown={handelChange} minLength="1" value={searchPhrase} onChange={handelChange} type="search" placeholder="Search" aria-label="Search"></input>
+                                    <button onClick={() => navigateSearch(searchPhrase)} className="btn btn-outline-success" >Search</button>                            
                                 </li>
                             </ul>                      
                         </div>

@@ -101,5 +101,23 @@ namespace Forum.Services
         {
             return _context.Comments.Where(x=>x.Id.Equals(commentId)).FirstOrDefaultAsync();
         }
+
+        public Task<List<Post>> GetPostsBySearchPhrase(string searchPhrase)
+        {
+            searchPhrase = searchPhrase.Trim();
+            return _context.Posts.Include(x => x.Comments)
+                .Where(post => post.Message.Contains(searchPhrase)
+                    || post.Comments.Any(comment => comment.Message.Contains(searchPhrase)))
+                .Select(x => new Post(){
+                    Id = x.Id,
+                    DateTime = x.DateTime,
+                    Title = x.Title,
+                    Message = x.Message,
+                    Comments = x.Comments.Where(comment => comment.Message.Contains(searchPhrase)).ToHashSet(),
+                    Followers = x.Followers,
+                    Solution = x.Solution,
+                })
+                .ToListAsync();
+        }
     }
 }
