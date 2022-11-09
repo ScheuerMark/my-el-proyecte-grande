@@ -2,6 +2,7 @@ import React, { Component, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import Highlight from 'react-highlight-words';
 
 
 export function Comment(props) {
@@ -34,7 +35,11 @@ return (
         </div>
     <div class="card-body row" >
         <div class="col-12">
-            <p class="card-text">{props.data.message}</p>
+            <p class="card-text">
+            <Highlight searchWords={[props.searchPhrase]}
+            textToHighlight={`${props.data.message}`}>                       
+            </Highlight>
+            </p>
         </div>
         <div class="col-12 d-flex flex-column">
             <span class="fst-italic mt-auto ms-auto">

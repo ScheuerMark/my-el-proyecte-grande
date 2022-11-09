@@ -1,6 +1,6 @@
 import { event } from 'jquery';
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getTopicTitles } from '../ApiRequest';
 
 
@@ -23,7 +23,8 @@ export class NavMenu extends Component {
     }
 
     handelChange(e){
-        search= e.target.value;
+        this.setState({search: e.target.value});
+        //useNavigate(`/Search/${this.state.search}`);
     }
 
     render() {

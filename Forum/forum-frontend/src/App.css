@@ -4,7 +4,8 @@
 }
 .App{
   background-color: rgba(63, 74, 59, 0.2);
-  height: 100vh;
+  min-height: 100vh;
+
 }
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
