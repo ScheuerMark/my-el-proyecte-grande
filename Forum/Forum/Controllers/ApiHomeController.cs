@@ -102,6 +102,12 @@ namespace Forum.Controllers
         {
             return SqlService.GetPostsBySearchPhrase(searchPhrase).Result;
         }
+        
+        [HttpDelete("Delete/{commentId}")]
+        public async Task DeleteCommentById(int commentId)
+        {
+            await SqlService.DeleteCommentById(commentId);
+        }
 
         [HttpPut("PostDetails/{id}")]
         public async Task<ActionResult> UpdatePost(int id, Post post)

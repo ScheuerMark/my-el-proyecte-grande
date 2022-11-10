@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit,faThumbsDown, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faThumbsDown, faThumbsUp, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import Highlight from 'react-highlight-words';
 import {EditModalComment} from "../EditModals";
 import {getCommentById} from "../ApiRequest";
 
+import { getPostByPostId, deleteComment, getComments } from '../ApiRequest';
 
-export function Comment({comment,searchPhrase,postId}) {
+    
+export function Comment({comment,searchPhrase, post, setPost}) {
     const [commentState, setCommentState] = useState(comment);
+    const trash = <FontAwesomeIcon icon={faTrash} />;
     const like = <FontAwesomeIcon icon={faThumbsUp} />;
     const dislike = <FontAwesomeIcon icon={faThumbsDown} />;
     const edit = <FontAwesomeIcon icon={faEdit}/>;
     const date = new Date(comment.dateTime).toLocaleString();
-
 
     function likeComment(){
         fetch(`/api/Home/Like/${commentState.id}`, {
@@ -30,11 +32,22 @@ export function Comment({comment,searchPhrase,postId}) {
             getCommentById(commentState.id).then(data => setCommentState(data))});
     }
 
+    function deleteComment(){
+        fetch(`/api/Home/Delete/${comment.id}`, {
+            method: 'DELETE'
+        }).then((response) => response.ok).then(x => getComments(post.id).then(data => {
+            setPost(data);
+        }))
+    }
+
 return (
     <div className="card">
         <div className="card-header">
             <h5 className="d-inline">Username</h5>
-            <span className="float-end  fst-italic">{date}</span>
+            <span className="float-end  fst-italic">
+            <Link onClick={deleteComment} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
+                {date}
+            </span>
         </div>
     <div className="card-body row" >
         <div className="col-12">

@@ -142,5 +142,15 @@ namespace Forum.Services
             topicToUpdate.Description = topic.Description;
             await _context.SaveChangesAsync();
         }
+        
+        public async Task DeleteCommentById(int id)
+        {
+            var commentToDelete = await GetCommentById(id);
+            if (commentToDelete != null)
+            {
+                _context.Comments.Remove(commentToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

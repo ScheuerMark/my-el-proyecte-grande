@@ -7,7 +7,7 @@ import {EditModalPost} from "../EditModals";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
-export function PostDetailsView(post, setPost=null, searchPhrase=null){
+export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
         <div className="row">
         <div className="col-xl-10 col-lg-12">
@@ -15,7 +15,7 @@ export function PostDetailsView(post, setPost=null, searchPhrase=null){
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} /> )}
+            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} />)}
         </div>
         </div>
         
