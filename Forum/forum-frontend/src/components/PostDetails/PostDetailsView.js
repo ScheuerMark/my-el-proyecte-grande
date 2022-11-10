@@ -2,10 +2,16 @@ import React, { Component, useEffect, useState } from 'react';
 import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
+<<<<<<< HEAD
+import { Link, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+=======
 import { Link } from 'react-router-dom';
 import {EditModalPost} from "../EditModals";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
+>>>>>>> development
 
 export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
@@ -22,9 +28,11 @@ export function PostDetailsView({post, setPost, searchPhrase=null}){
 }
 
 function Post (props){
+    const trash = <FontAwesomeIcon icon={faTrash} />;
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
     let button;
-    if(props.update !== null){
+    const navigate = useNavigate();
+    if(props.update != null){
         button=(<div className="col-12 d-flex flex-column">
             <div className="text-end">
                 <button type="button" className="btn btn-primary" data-bs-toggle="modal"
@@ -51,11 +59,23 @@ function Post (props){
         </div>)
     }
 
+    function deletePost(post, setPost){
+        fetch(`/api/Home/DeletePost/${post.id}`, {
+            method: 'DELETE'
+        }).then((response) => response.ok).then(x => setPost({
+            id:"",
+            comments:[],
+        })).then(x => navigate("/"));
+    }
+
     return (                           
             <div className="card">
                 <div className="card-header">
                     <h5 className="d-inline-flex">{props.data.title}</h5>
-                    <span className="float-end  fst-italic">{date}</span>
+                    <span className="float-end  fst-italic">
+                        <Link onClick={()=>deletePost(props.data, props.update)} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
+                        {date}
+                    </span>
                     <br/>
                     <span className="fst-italic">Username</span>                     
                 </div>

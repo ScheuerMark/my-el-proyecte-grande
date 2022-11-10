@@ -152,7 +152,23 @@ namespace Forum.Services
                 await _context.SaveChangesAsync();
             }
         }
-        
+
+        public async Task DeletePostById(int id)
+        {
+            var postToDelete = await GetPostByPostId(id);
+            if (postToDelete != null)
+            {
+                var commentsToDelete = await GetCommentsByPostId(id);
+                foreach (var comment in commentsToDelete)
+                {
+                    _context.Comments.Remove(comment);
+                }
+
+                _context.Posts.Remove(postToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         public Task<Topic?> GetTopicById(int topicId)
         {
             return _context.Topics.Where(x=>x.Id.Equals(topicId)).FirstOrDefaultAsync();

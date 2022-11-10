@@ -33,7 +33,7 @@ export function Comment({comment,searchPhrase, post, setPost}) {
     }
 
     function deleteComment(){
-        fetch(`/api/Home/Delete/${comment.id}`, {
+        fetch(`/api/Home/DeleteComment/${comment.id}`, {
             method: 'DELETE'
         }).then((response) => response.ok).then(x => getComments(post.id).then(data => {
             setPost(data);
