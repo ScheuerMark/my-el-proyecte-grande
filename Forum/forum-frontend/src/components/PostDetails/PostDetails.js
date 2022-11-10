@@ -19,8 +19,6 @@ export function PostDetails (props) {
     },[])
 
     return (
-        PostDetailsView(post,setPost)       
+        <PostDetailsView post={post} setPost={setPost}/>      
     );
 }
-
-
