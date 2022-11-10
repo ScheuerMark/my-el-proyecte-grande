@@ -3,10 +3,36 @@
   pointer-events: none;
 }
 .App{
-  background-color: rgba(63, 74, 59, 0.2);
   min-height: 100vh;
-
 }
+#light.App{
+  background-color: rgba(63, 74, 59, 0.2);
+}
+
+#dark.App{
+  background-color: rgba(30, 30, 30, 0.6);
+}
+
+#dark .navbar, #dark .dropdown-menu,#dark .modal-content{
+  background-color: #212529 !important;
+}
+
+#dark .navbar-brand, #dark .nav-link, #dark .dropdown-item, #dark .text-black,
+#dark h1,#dark .card-text,#dark .post-count,#dark h5,#dark span,#dark label,
+#dark .form-control
+{
+  color: #e9ecef !important;
+}
+
+#dark .dropdown-item:hover{
+  background-color: #495057 !important;
+}
+
+#dark .card, #dark .form-control {
+  background-color: #495057 !important;
+}
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -24,6 +50,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+
 
 .App-link {
   color: #61dafb;

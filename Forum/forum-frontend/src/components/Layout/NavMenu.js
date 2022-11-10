@@ -1,13 +1,19 @@
 import { event } from 'jquery';
 import { Link, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getTopicTitles } from '../ApiRequest';
+import { ThemeContext } from '../../App';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSun } from '@fortawesome/free-solid-svg-icons';
+import { faMoon } from '@fortawesome/free-solid-svg-icons';
 
 
 export const NavMenu = () => {
     let [topicsTitles, setTopicsTitles] = useState([]);
     let [searchPhrase, setsearchPhrase] = useState("");
     const navigate = useNavigate();
+
+    const context = useContext(ThemeContext);
 
     useEffect(()=>{
         getTopicTitles().then(data => {
@@ -16,12 +22,15 @@ export const NavMenu = () => {
     }, []);
 
 
+
     function handelChange(e){
         if(e.key=="Enter")
             navigateSearch(e.target.value);
         setsearchPhrase(e.target.value);
         //navigateSearch(e.target.value);
     }
+
+    
 
     function navigateSearch(Phrase){
         if(Phrase != "")
@@ -54,6 +63,9 @@ export const NavMenu = () => {
                                         })}
                                     </ul>
                                 </li>
+                                <li className="nav-item  ms-md-5">
+                                    <a onClick={context.toggleTheme} className="btn btn-outline-secondary">{context.icon}</a>                              
+                                </li>
                                 <li className="nav-item ms-md-auto">
                                     <Link className="nav-link text-dark" to="/Login">Login</Link>                               
                                 </li>
@@ -61,7 +73,7 @@ export const NavMenu = () => {
                                     <Link className="nav-link text-dark" to="/Register">Register</Link>                               
                                 </li>
                                 <li className="nav-item me-5 d-flex">
-                                    <input className="form-control me-6" onKeyDown={handelChange} minLength="1" value={searchPhrase} onChange={handelChange} type="search" placeholder="Search" aria-label="Search"></input>
+                                    <input className="form-control me-3" onKeyDown={handelChange} minLength="1" value={searchPhrase} onChange={handelChange} type="search" placeholder="Search" aria-label="Search"></input>
                                     <button onClick={() => navigateSearch(searchPhrase)} className="btn btn-outline-success" >Search</button>                            
                                 </li>
                             </ul>                      
