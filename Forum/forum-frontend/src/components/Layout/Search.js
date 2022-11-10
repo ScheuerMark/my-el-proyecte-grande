@@ -26,7 +26,7 @@ export function Search()
             <h1 className='text-center'>Search Result</h1>
             {posts.map((element, index) =>(
                 <div key={index} className='mb-5 p-1 bg-secondary rounded bg-gradient' style={{"--bs-bg-opacity": ".5"}}>
-                    {PostDetailsView(element, null, params.searchPhrase)}
+                    <PostDetailsView post={element} setPost={null} searchPhrase={params.searchPhrase}/>
                 </div>
             )
             )}
