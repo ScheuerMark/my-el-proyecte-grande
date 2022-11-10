@@ -126,6 +126,13 @@ namespace Forum.Controllers
 
             return StatusCode(200);
         }
+        
+        [HttpGet("Comment/{commentId}")]
+
+        public Comment? CommentById(int commentId)
+        {
+            return SqlService.GetCommentById(commentId).Result;
+        }
 
     }
 }

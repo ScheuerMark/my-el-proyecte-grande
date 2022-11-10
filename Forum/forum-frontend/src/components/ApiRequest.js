@@ -77,8 +77,6 @@ export function updateComment(body, commentId){
         })
     }
     let url = `/api/Home/Comments/${commentId}`
-    console.log(formData);
-    console.log(url)
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -100,4 +98,9 @@ export function updateTopic(body, topicId){
 
     return fetch(url, formData)
         .then((response) => response.ok);
+}
+
+export function getCommentById(commentId){
+    return fetch(`/api/Home/Comment/${commentId}`)
+        .then((response) => response.json());
 }

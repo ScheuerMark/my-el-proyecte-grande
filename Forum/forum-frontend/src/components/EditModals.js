@@ -1,6 +1,15 @@
 ﻿import React, {useReducer, useState} from 'react';
 
-import {fetchPosts, getComments, getPostById, getTopics, updateComment, updatePost, updateTopic} from "./ApiRequest";
+import {
+    fetchPosts,
+    getCommentById,
+    getComments,
+    getPostById,
+    getTopics,
+    updateComment,
+    updatePost,
+    updateTopic
+} from "./ApiRequest";
 
 const formReducer = (state, event) => {
     return{
@@ -15,11 +24,8 @@ export function EditModalPost(props) {
         "message": props.message
     });
 
-
-
     const handleSubmit = (e) =>{
         e.preventDefault();
-        console.log(props.id);
         updatePost(post, props.id).then(x=> {
             getPostById(props.id).then(data => props.update(data))});
     };
@@ -64,17 +70,19 @@ export function EditModalPost(props) {
     }
 
 export function EditModalComment(props) {
+    
     const [comment, setComment] = useReducer(formReducer, {
-        "id": props.id,
-        "message": props.message
+        "id": props.comment.id,
+        "message": props.comment.message
     });
+    
     
    
     const handleSubmit = (e) =>{
         e.preventDefault();
-        updateComment(comment, props.id).then(x=> {
-            getComments(props.id).then(data => props.update(data))});
-    };
+        updateComment(comment, comment.id).then(x=> {
+            getCommentById(comment.id).then(data => props.update(data))});
+       };
 
     const handleChange = event => {
         setComment({
@@ -85,7 +93,7 @@ export function EditModalComment(props) {
     return (
         <>
 
-            <div className="modal fade" id="editCommentModal" tabIndex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+            <div className="modal fade" id={`editCommentModal${comment.id}`} tabIndex="-1" aria-labelledby="editCommentModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
