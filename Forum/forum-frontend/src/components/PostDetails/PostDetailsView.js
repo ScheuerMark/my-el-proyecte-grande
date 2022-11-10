@@ -2,16 +2,13 @@ import React, { Component, useEffect, useState } from 'react';
 import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
-<<<<<<< HEAD
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-=======
-import { Link } from 'react-router-dom';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import {EditModalPost} from "../EditModals";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
->>>>>>> development
+
+
+
 
 export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
