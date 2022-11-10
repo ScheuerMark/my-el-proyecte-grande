@@ -3,6 +3,8 @@ import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
@@ -20,6 +22,7 @@ export function PostDetailsView({post, setPost, searchPhrase=null}){
 }
 
 function Post (props){
+    const trash = <FontAwesomeIcon icon={faTrash} />;
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
     let button;
     if(props.update != null){
@@ -38,11 +41,23 @@ function Post (props){
         </div>)
     }
 
+    function deletePost(post, setPost){
+        fetch(`/api/Home/DeletePost/${post.id}`, {
+            method: 'DELETE'
+        }).then((response) => response.ok).then(x => setPost({
+            id:"",
+            comments:[],
+        }))
+    }
+
     return (                           
             <div className="card">
                 <div className="card-header">
                     <h5 className="d-inline-flex">{props.data.title}</h5>
-                    <span className="float-end  fst-italic">{date}</span>
+                    <span className="float-end  fst-italic">
+                        <Link onClick={()=>deletePost(props.data, props.update)} class="align-middle text-decoration-none text-black me-3" to="/">{trash}</Link>
+                        {date}
+                    </span>
                     <br/>
                     <span className="fst-italic">Username</span>                     
                 </div>
