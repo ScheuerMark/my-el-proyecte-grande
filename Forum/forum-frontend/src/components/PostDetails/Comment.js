@@ -45,6 +45,8 @@ return (
         <div className="card-header">
             <h5 className="d-inline">Username</h5>
             <span className="float-end  fst-italic">
+                <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"
+                        data-bs-target={`#editCommentModal${commentState.id}`}>{edit}</button>
             <Link onClick={deleteComment} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
                 {date}
             </span>
@@ -61,8 +63,7 @@ return (
             <span className="fst-italic mt-auto ms-auto">
                 <Link onClick={likeComment} className="align-middle text-decoration-none text-black me-3">{like} {commentState.like}</Link>
                 <Link onClick={disLikeComment} className="align-middle text-decoration-none text-black">{dislike} {commentState.disLike} </Link>
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target={`#editCommentModal${commentState.id}`}>{edit}</button>
+                
                 
             </span>
         </div>

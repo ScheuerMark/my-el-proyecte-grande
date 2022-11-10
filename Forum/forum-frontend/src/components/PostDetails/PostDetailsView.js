@@ -32,10 +32,7 @@ function Post (props){
     if(props.update != null){
         button=(<div className="col-12 d-flex flex-column">
             <div className="text-end">
-                <button type="button" className="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#editPostModal">
-                    <FontAwesomeIcon icon={faEdit}/>
-                </button>
+                
                 
                 <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
                     Add new comment
@@ -70,6 +67,10 @@ function Post (props){
                 <div className="card-header">
                     <h5 className="d-inline-flex">{props.data.title}</h5>
                     <span className="float-end  fst-italic">
+                        <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"
+                                data-bs-target="#editPostModal">
+                    <FontAwesomeIcon icon={faEdit}/>
+                </button>
                         <Link onClick={()=>deletePost(props.data, props.update)} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
                         {date}
                     </span>
