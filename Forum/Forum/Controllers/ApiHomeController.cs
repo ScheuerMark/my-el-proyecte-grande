@@ -115,5 +115,42 @@ namespace Forum.Controllers
             await SqlService.DeletePostById(postId);
         }
 
+        [HttpPut("PostDetails/{id}")]
+        public async Task<ActionResult> UpdatePost(int id, Post post)
+        {
+            await SqlService.UpdatePost(id, post);
+
+            return StatusCode(200);
+        }
+        
+        [HttpPut("Comments/{id}")]
+        public async Task<ActionResult> UpdateComment(int id, Comment comment)
+        {
+            await SqlService.UpdateComment(id, comment);
+
+            return StatusCode(200);
+        }
+
+        [HttpPut("Topics/{id}")]
+        public async Task<ActionResult> UpdateTopic(int id, Topic topic)
+        {
+            await SqlService.UpdateTopic(id, topic);
+
+            return StatusCode(200);
+        }
+        
+        [HttpGet("Comment/{commentId}")]
+
+        public Comment? CommentById(int commentId)
+        {
+            return SqlService.GetCommentById(commentId).Result;
+        }
+
+        [HttpGet("Topics/{topicId}")]
+        public Topic? TopicById(int topicId)
+        {
+            return SqlService.GetTopicById(topicId).Result;
+        }
+
     }
 }

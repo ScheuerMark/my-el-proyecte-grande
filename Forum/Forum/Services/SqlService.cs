@@ -119,6 +119,29 @@ namespace Forum.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task UpdatePost(int id, Post post)
+        {
+            var postToUpdate = await GetPostByPostId(id);
+            postToUpdate.Title = post.Title;
+            postToUpdate.Message = post.Message;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateComment(int id, Comment comment)
+        {
+            var commentToUpdate = await GetCommentById(id);
+            commentToUpdate.Message = comment.Message;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task UpdateTopic(int id, Topic topic)
+        {
+            var topicToUpdate = await _context.Topics.Where(t => t.Id.Equals(id)).FirstOrDefaultAsync();
+            topicToUpdate.Title = topic.Title;
+            topicToUpdate.Description = topic.Description;
+            await _context.SaveChangesAsync();
+        }
         
         public async Task DeleteCommentById(int id)
         {
@@ -129,7 +152,7 @@ namespace Forum.Services
                 await _context.SaveChangesAsync();
             }
         }
-        
+
         public async Task DeletePostById(int id)
         {
             var postToDelete = await GetPostByPostId(id);
@@ -140,9 +163,15 @@ namespace Forum.Services
                 {
                     _context.Comments.Remove(comment);
                 }
+
                 _context.Posts.Remove(postToDelete);
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public Task<Topic?> GetTopicById(int topicId)
+        {
+            return _context.Topics.Where(x=>x.Id.Equals(topicId)).FirstOrDefaultAsync();
         }
     }
 }

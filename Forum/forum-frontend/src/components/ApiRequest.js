@@ -53,3 +53,59 @@ export function getPostByDateDesc(){
     return fetch('api/Home/Posts/Date/Desc')
         .then((response) => response.json());
 }
+
+export function updatePost(body, postId){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Home/PostDetails/${postId}`
+    
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
+
+export function updateComment(body, commentId){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Home/Comments/${commentId}`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
+
+export function getPostById(postId){
+    return fetch(`/api/Home/PostDetails/${postId}`)
+        .then((response) => response.json());
+}
+
+export function updateTopic(body, topicId){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Home/Topics/${topicId}`
+
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
+
+export function getCommentById(commentId){
+    return fetch(`/api/Home/Comment/${commentId}`)
+        .then((response) => response.json());
+}
+
+export function getTopicById(topicId) {
+    return fetch(`/api/Home/Topics/${topicId}`)
+        .then((response) => response.json());
+}
