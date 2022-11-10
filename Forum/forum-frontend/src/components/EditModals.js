@@ -4,7 +4,7 @@ import {
     fetchPosts,
     getCommentById,
     getComments,
-    getPostById,
+    getPostById, getTopicById,
     getTopics,
     updateComment,
     updatePost,
@@ -131,7 +131,7 @@ export function EditModalTopic(props) {
     const handleSubmit = (e) =>{
         e.preventDefault();
         updateTopic(topic, props.id).then(x=> {
-            getTopics().then(data => props.update(data))});
+            getTopicById(props.id).then(data => props.update(data))});
     };
 
     const handleChange = event => {
@@ -143,7 +143,7 @@ export function EditModalTopic(props) {
     return (
         <>
 
-            <div className="modal fade" id="editTopicModal" tabIndex="-1" aria-labelledby="editTopicModalLabel" aria-hidden="true">
+            <div className="modal fade" id={`editTopicModal${topic.id}`} tabIndex="-1" aria-labelledby="editTopicModalLabel" aria-hidden="true">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">

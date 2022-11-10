@@ -152,5 +152,10 @@ namespace Forum.Services
                 await _context.SaveChangesAsync();
             }
         }
+        
+        public Task<Topic?> GetTopicById(int topicId)
+        {
+            return _context.Topics.Where(x=>x.Id.Equals(topicId)).FirstOrDefaultAsync();
+        }
     }
 }

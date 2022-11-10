@@ -140,5 +140,11 @@ namespace Forum.Controllers
             return SqlService.GetCommentById(commentId).Result;
         }
 
+        [HttpGet("Topics/{topicId}")]
+        public Topic? TopicById(int topicId)
+        {
+            return SqlService.GetTopicById(topicId).Result;
+        }
+
     }
 }

@@ -104,3 +104,8 @@ export function getCommentById(commentId){
     return fetch(`/api/Home/Comment/${commentId}`)
         .then((response) => response.json());
 }
+
+export function getTopicById(topicId) {
+    return fetch(`/api/Home/Topics/${topicId}`)
+        .then((response) => response.json());
+}
