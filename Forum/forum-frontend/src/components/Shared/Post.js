@@ -26,7 +26,7 @@ const Post = ({post}) => {
               <p className="card-text">{post.message}</p>
             </div>
             <div className="col-3 d-flex flex-column">
-              <Link className="fst-italic mt-auto ms-auto" to={`/PostDetail/${post.id}`}>view comments</Link>
+              <Link className="fst-italic mt-auto text-black ms-auto" to={`/PostDetail/${post.id}`}>view comments</Link>
             </div>
           </div>
       </div>

@@ -3,6 +3,9 @@ import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
 import { Link } from 'react-router-dom';
+import {EditModalPost} from "../EditModals";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
@@ -12,18 +15,28 @@ export function PostDetailsView({post, setPost, searchPhrase=null}){
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} post={post} setPost={setPost}/> )}
+            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} />)}
         </div>
-        </div>
-        
+        </div>   
     );
 }
 
 function Post (props){
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
     let button;
-    if(props.update != null){
+    if(props.update !== null){
         button=(<div className="col-12 d-flex flex-column">
+            <div className="text-end">
+                <button type="button" className="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#editPostModal">
+                    <FontAwesomeIcon icon={faEdit}/>
+                </button>
+                
+                <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentModal">
+                    Add new comment
+                </button>
+            </div>
+            <EditModalPost update={props.update} title={props.data.title} message={props.data.message} id={props.data.id} />
         <CommentForm update={props.update} id={props.data.id}></CommentForm>
         </div>)
     }else{
