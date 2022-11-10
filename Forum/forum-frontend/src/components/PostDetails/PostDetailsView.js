@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react';
 import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
@@ -25,6 +25,7 @@ function Post (props){
     const trash = <FontAwesomeIcon icon={faTrash} />;
     const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
     let button;
+    const navigate = useNavigate();
     if(props.update != null){
         button=(<div className="col-12 d-flex flex-column">
         <CommentForm update={props.update} id={props.data.id}></CommentForm>
@@ -47,7 +48,7 @@ function Post (props){
         }).then((response) => response.ok).then(x => setPost({
             id:"",
             comments:[],
-        }))
+        })).then(x => navigate("/"));
     }
 
     return (                           
@@ -55,7 +56,7 @@ function Post (props){
                 <div className="card-header">
                     <h5 className="d-inline-flex">{props.data.title}</h5>
                     <span className="float-end  fst-italic">
-                        <Link onClick={()=>deletePost(props.data, props.update)} class="align-middle text-decoration-none text-black me-3" to="/">{trash}</Link>
+                        <Link onClick={()=>deletePost(props.data, props.update)} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
                         {date}
                     </span>
                     <br/>
