@@ -119,5 +119,15 @@ namespace Forum.Services
                 })
                 .ToListAsync();
         }
+        
+        public async Task DeleteCommentById(int id)
+        {
+            var commentToDelete = await GetCommentById(id);
+            if (commentToDelete != null)
+            {
+                _context.Comments.Remove(commentToDelete);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }

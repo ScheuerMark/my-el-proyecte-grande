@@ -4,7 +4,7 @@ import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';
 import { Link } from 'react-router-dom';
 
-export function PostDetailsView(post, setPost=null, searchPhrase=null){
+export function PostDetailsView({post, setPost, searchPhrase=null}){
     return (
         <div className="row">
         <div className="col-xl-10 col-lg-12">
@@ -12,7 +12,7 @@ export function PostDetailsView(post, setPost=null, searchPhrase=null){
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element}/> )}
+            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} post={post} setPost={setPost}/> )}
         </div>
         </div>   
     );
