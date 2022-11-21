@@ -15,10 +15,10 @@ namespace Forum.Controllers
 
         public SqlService SqlService { get; set; }
 
-        public ApiHomeController(ILogger<ApiHomeController> logger, ForumContext context)
+        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService)
         {
             _logger = logger;
-            SqlService = new SqlService(context);
+            SqlService = sqlService;
         }
 
         [HttpGet("Posts/{topicName}")]
