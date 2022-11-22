@@ -33,4 +33,11 @@ public class ApiAccountController : ControllerBase
         }
         return StatusCode(401, "Login Failed: Invalid Email or password");
     }
+    
+    [HttpGet("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+        return StatusCode(200);
+    }
 }
