@@ -122,3 +122,8 @@ export function postLogin(body){
     return fetch(url, formData)
         .then((response) => response.ok);
 }
+
+export function getLoggedInUser() {
+        return fetch(`/api/Account/LoggedIn`)
+        .then((response) =>response.json())       
+}

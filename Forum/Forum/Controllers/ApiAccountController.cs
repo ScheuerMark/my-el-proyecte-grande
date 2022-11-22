@@ -2,6 +2,10 @@ using Forum.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Forum.Controllers;
 
@@ -17,6 +21,14 @@ public class ApiAccountController : ControllerBase
     {
         _userManager = userMgr;
         signInManager = signinMgr;
+    }
+
+    [HttpGet("LoggedIn")]
+    [Authorize] 
+    public async Task<CurrentUser> LoggedInUser()
+    {
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+        return new CurrentUser(){ UserName = user.UserName};
     }
 
     [HttpPost("Login")]
