@@ -16,7 +16,7 @@ public class Post
 
     public HashSet<Comment> Comments { get; set; } = new HashSet<Comment>();
 
-    public HashSet<User> Followers { get; set; } = new HashSet<User>();
+    public HashSet<AppUser> Followers { get; set; } = new HashSet<AppUser>();
     
     public Comment? Solution { get; set; }
 

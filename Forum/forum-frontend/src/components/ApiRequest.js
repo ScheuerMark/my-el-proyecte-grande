@@ -109,3 +109,16 @@ export function getTopicById(topicId) {
     return fetch(`/api/Home/Topics/${topicId}`)
         .then((response) => response.json());
 }
+
+export function postLogin(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Account/Login`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
