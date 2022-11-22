@@ -99,6 +99,7 @@ namespace Forum.Data
                 context.Comments.Add(comment);
             }
 
+            
             context.SaveChanges();
 
             foreach (var post in posts)
