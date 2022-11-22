@@ -10,7 +10,7 @@ namespace Forum.Data
 
             context.Database.EnsureCreated();
 
-            if (context.Posts.Any() || context.Topics.Any() || context.Users.Any() || context.Comments.Any())
+            if (context.Posts.Any() || context.Topics.Any() || context.Comments.Any())
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace Forum.Data
                     Message =
                         "My son took a AAA battery into his mouth and now it got stuck in his throat. What can I do?",
                     Comments = new HashSet<Comment>(),
-                    Followers = new HashSet<User>()
+                    Followers = new HashSet<AppUser>()
                 },
                 new Post()
                 {
@@ -60,7 +60,7 @@ namespace Forum.Data
                     Message =
                         "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
                     Comments = new HashSet<Comment>(),
-                    Followers = new HashSet<User>()
+                    Followers = new HashSet<AppUser>()
                 },
             };
 
@@ -98,8 +98,6 @@ namespace Forum.Data
             {
                 context.Comments.Add(comment);
             }
-
-            context.Users = new InternalDbSet<User>(context,null);
 
             context.SaveChanges();
 

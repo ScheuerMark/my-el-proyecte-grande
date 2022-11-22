@@ -13,7 +13,11 @@ export function Login() {
     postLogin({
       email: email.current.value,
       password: password.current.value
-    }).then(x => console.log(x));
+    }).then(x => {
+      if (x === true){
+        navigate("/");
+      }
+    });
 
   }
 

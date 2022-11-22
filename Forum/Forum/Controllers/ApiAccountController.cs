@@ -21,7 +21,6 @@ public class ApiAccountController : ControllerBase
 
     [HttpPost("Login")]
     [AllowAnonymous]
-    [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(Login login)
     {
         AppUser appUser = await _userManager.FindByEmailAsync(login.Email);
