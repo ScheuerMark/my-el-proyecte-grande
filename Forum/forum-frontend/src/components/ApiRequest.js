@@ -122,3 +122,16 @@ export function postLogin(body){
     return fetch(url, formData)
         .then((response) => response.ok);
 }
+
+export function postRegister(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Admin/Registration`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}

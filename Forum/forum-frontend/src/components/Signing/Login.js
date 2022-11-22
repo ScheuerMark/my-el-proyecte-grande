@@ -1,4 +1,4 @@
-import React, { Component, useRef } from 'react';
+import React from 'react';
 import question from '../../question.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { postLogin } from '../ApiRequest';
