@@ -24,11 +24,11 @@ public class ApiAccountController : ControllerBase
     }
 
     [HttpGet("LoggedIn")]
-    [Authorize] 
-    public async Task<CurrentUser> LoggedInUser()
+    [AllowAnonymous]
+    public async Task<AppUser> LoggedInUser()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-        return new CurrentUser(){ UserName = user.UserName};
+        return user;
     }
 
     [HttpPost("Login")]
@@ -44,5 +44,12 @@ public class ApiAccountController : ControllerBase
                 return StatusCode(200);
         }
         return StatusCode(401, "Login Failed: Invalid Email or password");
+    }
+
+    [HttpGet("Logout")]
+    public async Task<IActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+        return StatusCode(200);
     }
 }
