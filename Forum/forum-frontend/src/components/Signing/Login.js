@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import question from '../../question.jpg'
 import { Link, useNavigate } from 'react-router-dom';
-import { postLogin } from '../ApiRequest';
+import { getLoggedInUser, postLogin } from '../ApiRequest';
+import { UserContext } from '../../App';
 import {useFormik} from 'formik';
 
 
@@ -22,7 +23,9 @@ const validate = values => {
 }
 
 export function Login() {
-    const navigate = useNavigate();
+    const userContext = useContext(UserContext);
+
+  const navigate = useNavigate();
     const formik = useFormik({
     initialValues: {
       email: '',
@@ -34,7 +37,7 @@ export function Login() {
         email: values.email,
         password: values.password
       }).then(x => {
-        if (x === true){
+        if (x === true){userContext.refreshUser();
           navigate("/");
         }
       })
