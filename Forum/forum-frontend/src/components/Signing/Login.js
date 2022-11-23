@@ -1,30 +1,49 @@
-import React, { Component, useContext, useRef } from 'react';
+import React, { useContext } from 'react';
 import question from '../../question.jpg'
 import { Link, useNavigate } from 'react-router-dom';
 import { getLoggedInUser, postLogin } from '../ApiRequest';
 import { UserContext } from '../../App';
+import {useFormik} from 'formik';
+
+
+const validate = values => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  } else if (values.password.length < 8) {
+    errors.password = 'Must be 8 characters or more';
+  }
+  
+  return errors;
+}
 
 export function Login() {
-  const userContext = useContext(UserContext);
+    const userContext = useContext(UserContext);
 
-  const email = useRef(null);
-  const password = useRef(null);
   const navigate = useNavigate();
-
-  function submitForm(event) {
-    event.preventDefault();
-    postLogin({
-      email: email.current.value,
-      password: password.current.value
-    }).then(x => {
-      if (x === true){
-        userContext.refreshUser();
-        navigate("/");
-      }
-    });
-
-  }
-
+    const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+      validate,
+    onSubmit: values => {
+      postLogin({
+        email: values.email,
+        password: values.password
+      }).then(x => {
+        if (x === true){userContext.refreshUser();
+          navigate("/");
+        }
+      })
+    },
+  });
+  
     return (
       <section className="vh-70">
         <div className="container py-5 h-100">
@@ -39,17 +58,25 @@ export function Login() {
                   </div>
                   <div className="col-md-6 col-lg-7 d-flex align-items-center">
                     <div className="card-body p-4 p-lg-5 text-black">
-                      <form onSubmit={submitForm}>
+                      <form onSubmit={formik.handleSubmit}>
                         <h3 className="fw-normal mb-3 pb-3" >Sign into your account</h3>
 
                         <div className="form-outline mb-4">
-                          <input type="email" id="form2Example17" className="form-control form-control-lg" ref={email}/>
-                          <label className="form-label" htmlFor="form2Example17">Email address</label>
+                          <input type="email" id="email" className="form-control form-control-lg" 
+                                 onChange={formik.handleChange}
+                                 onBlur={formik.handleBlur}
+                                  value={formik.values.email}/>
+                          <label className="form-label" htmlFor="email">Email address</label>
+                          {formik.touched.email && formik.errors.email ? (<div>{formik.errors.email}</div>) : null}
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="password" id="form2Example27" className="form-control form-control-lg" ref={password}/>
-                          <label className="form-label" htmlFor="form2Example27">Password</label>
+                          <input type="password" id="password" className="form-control form-control-lg" 
+                                 onChange={formik.handleChange}
+                                 onBlur={formik.handleBlur}
+                          value={formik.values.password}/>
+                          <label className="form-label" htmlFor="password">Password</label>
+                          {formik.touched.password && formik.errors.password ? (<div>{formik.errors.password}</div>) : null}
                         </div>
 
                         <div className="pt-1 mb-4">
