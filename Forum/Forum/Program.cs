@@ -16,6 +16,12 @@ builder.Services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Authentic
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SqlService>();
 
+builder.Services.Configure<IdentityOptions>(opts =>
+    {
+        opts.User.AllowedUserNameCharacters = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 -._@+";
+    }
+);
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
