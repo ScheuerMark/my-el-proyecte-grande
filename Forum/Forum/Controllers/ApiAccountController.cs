@@ -2,6 +2,10 @@ using Forum.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Forum.Controllers;
 
@@ -23,6 +27,14 @@ public class ApiAccountController : ControllerBase
         _passwordHasher = passwordHash;
     }
 
+    [HttpGet("LoggedIn")]
+    [AllowAnonymous]
+    public async Task<AppUser> LoggedInUser()
+    {
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+        return user;
+    }
+
     [HttpPost("Login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(Login login)
@@ -37,7 +49,7 @@ public class ApiAccountController : ControllerBase
         }
         return StatusCode(401, "Login Failed: Invalid Email or password");
     }
-    
+
     [HttpGet("Logout")]
     public async Task<IActionResult> Logout()
     {
