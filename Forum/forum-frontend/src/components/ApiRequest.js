@@ -74,10 +74,31 @@ export function getTopics(){
         .then((response) => response.json());
 }
 
+export function getTopicById(topicId) {
+    return fetch(`/api/Home/Topics/${topicId}`)
+        .then((response) => response.json());
+}
+
 //#endregion
 
 //#region /*===  Post  ===*/
 
+//#endregion
+
+//#region Update
+export function updateTopic(body, topicId){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Home/Topics/${topicId}`
+
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
 //#endregion
 
 //#endregion
@@ -92,6 +113,11 @@ export function getTopics(){
 export function getComments(postId){
     return fetch(`/api/Home/PostDetails/${postId}`)
     .then((response) => response.json());
+}
+
+export function getCommentById(commentId){
+    return fetch(`/api/Home/Comment/${commentId}`)
+        .then((response) => response.json());
 }
 
 //#endregion
@@ -135,11 +161,30 @@ export function updateComment(body, commentId){
 /*=====================================================*/
 
 //#region /*===  GET  ===*/
+export function getLoggedInUser() {
+    return fetch(`/api/Account/LoggedIn`)
+    .then((response) =>response)       
+}
 
+export function getLogout() {
+    return fetch(`/api/Account/Logout`)
+    .then((response) =>response.ok)       
+}
 //#endregion
 
 //#region /*===  Post  ===*/
-
+export function postLogin(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Account/Login`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
 //#endregion
 
 //#endregion
@@ -150,7 +195,10 @@ export function updateComment(body, commentId){
 /*=====================================================*/
 
 //#region /*===  GET  ===*/
-
+export function getAllUser(){
+    return fetch(`/api/Admin`)
+    .then((response) => response.json());
+}
 //#endregion
 
 //#region /*===  Post  ===*/
@@ -186,63 +234,17 @@ export function getSearched(searchPhrase){
 
 
 
-export function updateTopic(body, topicId){
-    let formData = {
-        method: 'PUT',
-        body: JSON.stringify(body),
-        headers: new Headers({
-            'Content-Type': 'application/json; charset=UTF-8'
-        })
-    }
-    let url = `/api/Home/Topics/${topicId}`
-
-    return fetch(url, formData)
-        .then((response) => response.ok);
-}
-
-export function getCommentById(commentId){
-    return fetch(`/api/Home/Comment/${commentId}`)
-        .then((response) => response.json());
-}
-
-export function getTopicById(topicId) {
-    return fetch(`/api/Home/Topics/${topicId}`)
-        .then((response) => response.json());
-}
-
-export function postLogin(body){
-    let formData = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: new Headers({
-            'Content-Type': 'application/json; charset=UTF-8'
-        })
-    }
-    let url = `/api/Account/Login`
-    return fetch(url, formData)
-        .then((response) => response.ok);
-}
-
-export function getLoggedInUser() {
-        return fetch(`/api/Account/LoggedIn`)
-        .then((response) =>response)       
-}
-
-export function getLogout() {
-    return fetch(`/api/Account/Logout`)
-    .then((response) =>response.ok)       
-}
-
-export function getAllUser(){
-    return fetch(`/api/Admin`)
-    .then((response) => response.json());
-}
 
 
-/*=====================================================*/
-/*                       Post                          */
-/*=====================================================*/
 
-/*===  GET  ===*/
 
-/*===  Post  ===*/
+
+
+
+
+
+
+
+
+
+
