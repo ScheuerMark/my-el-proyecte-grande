@@ -1,3 +1,4 @@
+using System.Xml;
 using Forum.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +46,6 @@ public class ApiAdminController : ControllerBase
     public async Task<AppUser> Update(string id)
     {
         AppUser user = await _userManager.FindByIdAsync(id);
-        Console.WriteLine(user);
         return user;
         // status code 204 (no content) in case user is not found.
     }
@@ -77,10 +77,10 @@ public class ApiAdminController : ControllerBase
         // status code 204 (no content) in case user is not found.
     }
     
-    [HttpPost("Delete/{id}")]
-    public async Task<AppUser> Delete(string id)
+    [HttpPost("Delete")]
+    public async Task<AppUser> Delete(UserId userId)
     {
-        AppUser user = await _userManager.FindByIdAsync(id);
+        AppUser user = await _userManager.FindByIdAsync(userId.Id);
         if (user != null)
         {
             IdentityResult result = await _userManager.DeleteAsync(user);
