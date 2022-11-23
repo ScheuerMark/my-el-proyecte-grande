@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import question from '../../question.jpg'
 import { Formik, Field, Form, ErrorMessage} from 'formik';
 import {postRegister} from "../ApiRequest";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+
 
 const validate = values => {
   const errors = {};
@@ -48,7 +51,8 @@ export function Register() {
                     initialValues={{
                   email: '',
                   password: '',
-                  confirmPassword: ''
+                  confirmPassword: '', 
+                      showPassword: false
                 }}
                 validate={validate}
                 onSubmit= {values => {
@@ -62,7 +66,7 @@ export function Register() {
                 })
               }}
                 >
-                  {({ errors, touched}) => (
+                  {({ errors, touched, values}) => (
                       <Form>
                         <h3 className="fw-normal mb-3 pb-3" >Register an account</h3>
 
@@ -73,7 +77,7 @@ export function Register() {
                         </div>
 
                         <div className="form-outline mb-4">
-                          <Field name={"password"} type={"password"} className="form-control form-control-lg"/>
+                          <Field name={"password"} type={values.showPassword ? 'text' : 'password'} className="form-control form-control-lg"/>
                           <label htmlFor={"password"}>Password</label><br/>
                           <ErrorMessage name={"password"} render={msg => <div className={"text-danger"}>{msg}</div>}/>
                         </div>
