@@ -4,6 +4,7 @@ import TopicDetails from "./components/TopicDetails/TopicDetails";
 import Register from "./components/Signing/Register";
 import Login from "./components/Signing/Login";
 import { Search } from "./components/Layout/Search";
+import { AdminPage } from "./components/AdminPage/AdminPage";
 
 const AppRoutes = [
   {
@@ -29,6 +30,10 @@ const AppRoutes = [
   {
     path: '/Search/:searchPhrase',
     element: <Search />
+  },
+  {
+    path: '/Admin',
+    element: <AdminPage />
   },
   
 ];

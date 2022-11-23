@@ -1,9 +1,12 @@
-import React, { Component, useRef } from 'react';
+import React, { Component, useContext, useRef } from 'react';
 import question from '../../question.jpg'
 import { Link, useNavigate } from 'react-router-dom';
-import { postLogin } from '../ApiRequest';
+import { getLoggedInUser, postLogin } from '../ApiRequest';
+import { UserContext } from '../../App';
 
 export function Login() {
+  const userContext = useContext(UserContext);
+
   const email = useRef(null);
   const password = useRef(null);
   const navigate = useNavigate();
@@ -15,6 +18,7 @@ export function Login() {
       password: password.current.value
     }).then(x => {
       if (x === true){
+        userContext.refreshUser();
         navigate("/");
       }
     });
