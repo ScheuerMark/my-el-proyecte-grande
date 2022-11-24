@@ -15,15 +15,14 @@ namespace Forum.Controllers
     {
         private readonly ILogger<ApiHomeController> _logger;
 
-        public SqlService SqlService { get; set; }
-        
         private UserManager<AppUser> _userManager;
+        public SqlService SqlService { get; set; }
 
-        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService, UserManager<AppUser> userManager)
+        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService, UserManager<AppUser> userMgr)
         {
             _logger = logger;
+            _userManager = userMgr;
             SqlService = sqlService;
-            _userManager = userManager;
         }
 
         [HttpGet("Posts/{topicName}")]
@@ -84,7 +83,8 @@ namespace Forum.Controllers
         [HttpPost("PostDetails/{id}")]
         public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {
-            await SqlService.AddComment(id, comment);
+            AppUser user = _userManager.GetUserAsync(HttpContext.User).Result;
+            await SqlService.AddComment(id, comment, user);
 
             return StatusCode(200);
         }
@@ -173,6 +173,7 @@ namespace Forum.Controllers
         {
             return SqlService.GetTopicById(topicId).Result;
         }
+
 
     }
 }

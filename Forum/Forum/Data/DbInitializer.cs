@@ -1,19 +1,34 @@
 ﻿using Forum.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Forum.Data
 {
     public class DbInitializer
     {
-        public static void Initialize(ForumContext context)
+        public static void Initialize(ForumContext context, AppIdentityDbContext identityDbContext, UserManager<AppUser> userMgr, RoleManager<IdentityRole> roleMgr)
         {
 
             context.Database.EnsureCreated();
+            identityDbContext.Database.EnsureCreated();
 
-            if (context.Posts.Any() || context.Topics.Any() || context.Comments.Any())
+            if (context.Posts.Any() || context.Topics.Any() || context.Comments.Any() || identityDbContext.Users.Any())
             {
                 return;
             }
+
+            AppUser admin = new AppUser
+            {
+                UserName = "Admin",
+                Email = "Admin@admin.com"
+            };
+
+            IdentityResult result = userMgr.CreateAsync(admin, "Admin123!").Result;
+
+            IdentityResult result2 = roleMgr.CreateAsync(new IdentityRole("Admin")).Result;
+            IdentityResult result4 = roleMgr.CreateAsync(new IdentityRole("User")).Result;
+
+            IdentityResult result3 = userMgr.AddToRoleAsync(admin, "Admin").Result;
 
             List<Topic> topics = new List<Topic>()
             {
@@ -22,31 +37,29 @@ namespace Forum.Data
                     Title = "Accident",
                     Description =
                         "This topic is thought to share your thought regarding accidents happened with the child. Share your experiences and doubts.",
-                    Posts = new HashSet<Post>()
+                    Posts = new HashSet<Post>(),
+                    User = admin
                 },
                 new Topic()
                 {
                     Title = "Wandering",
                     Description = "Let's talk about a bit how to spend the time in the nature with your family.",
-                    Posts = new HashSet<Post>()
+                    Posts = new HashSet<Post>(),
+                    User = admin
                 },
                 new Topic()
                 {
                     Title = "Play around",
                     Description = "This topic is about toys, games and everything which makes for the kids fun.",
-                    Posts = new HashSet<Post>()
+                    Posts = new HashSet<Post>(),
+                    User = admin
                 },
                 new Topic()
                 {
                     Title = "Eating habits",
                     Description = "Everything about meal and eating habits",
-                    Posts = new HashSet<Post>()
-                },
-                new Topic()
-                {
-                    Title = "test",
-                    Description = "Everything about meal and eating habits",
-                    Posts = new HashSet<Post>()
+                    Posts = new HashSet<Post>(),
+                    User = admin
                 }
             };
 
@@ -58,7 +71,8 @@ namespace Forum.Data
                     Message =
                         "My son took a AAA battery into his mouth and now it got stuck in his throat. What can I do?",
                     Comments = new HashSet<Comment>(),
-                    Followers = new HashSet<AppUser>()
+                    Followers = new HashSet<AppUser>(),
+                    User = admin
                 },
                 new Post()
                 {
@@ -66,7 +80,8 @@ namespace Forum.Data
                     Message =
                         "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
                     Comments = new HashSet<Comment>(),
-                    Followers = new HashSet<AppUser>()
+                    Followers = new HashSet<AppUser>(),
+                    User = admin
                 }
             };
 
@@ -76,20 +91,23 @@ namespace Forum.Data
                 {
                     Message = "It is better to go to the hospital",
                     Like = 3,
-                    DisLike = 0
+                    DisLike = 0,
+                    User = admin
                 },
                 new Comment()
                 {
                     Message = "It seems quite bad. Maybe it is time to stay home.",
                     Like = 0,
-                    DisLike = 0
+                    DisLike = 0,
+                    User = admin
                 },
                 new Comment()
                 {
                     Message =
                         "Well, visiting some caves is always a good idea even if it is reining inside the cave you will not recognize it.",
                     Like = 0,
-                    DisLike = 0
+                    DisLike = 0,
+                    User = admin
                 },
             };
 
@@ -108,15 +126,12 @@ namespace Forum.Data
                 context.Comments.Add(comment);
             }
 
-            
-            context.SaveChanges();
 
             foreach (var post in posts)
             {
                 context.Posts.Add(post);
             }
 
-            context.SaveChanges();
 
             foreach (var topic in topics)
             {
@@ -124,6 +139,7 @@ namespace Forum.Data
             }
 
             context.SaveChanges();
+            identityDbContext.SaveChanges();
         }
     }
 }

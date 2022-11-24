@@ -44,13 +44,14 @@ namespace Forum.Services
         public async Task<List<Comment>> GetCommentsByPostId(int postId)
         {
             return _context.Posts.Include(x => x.Comments)
+                .ThenInclude(y=>y.User)
                 .Where(x => x.Id.Equals(postId))
                 .FirstOrDefaultAsync().Result.Comments.ToList();
         }
 
         public Task<Post?> GetPostByPostId(int id)
         {
-            return _context.Posts.Include(x=>x.Comments)
+            return _context.Posts.Include(x=>x.Comments).ThenInclude(y=>y.User)
                 .Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
         }
 
@@ -70,10 +71,11 @@ namespace Forum.Services
         }
 
 
-        public async Task AddComment(int id, Comment comment)
+        public async Task AddComment(int id, Comment comment, AppUser user)
         {
             comment.Like = 0;
             comment.DisLike = 0;
+            comment.User = user;
 
             _context.Comments.Add(comment);
 

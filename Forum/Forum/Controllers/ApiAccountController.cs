@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Forum.Models.IdentityHelper;
 
 namespace Forum.Controllers;
 
@@ -124,6 +125,26 @@ public class ApiAccountController : ControllerBase
         return user;
         // status code 204 (no content) in case user is not found.
     }
+
+    [HttpGet("Access")]
+    [Authorize]
+    public async Task<ActionAccess> Access()
+    {
+        var roles = await _userManager.GetRolesAsync(await _userManager.GetUserAsync(HttpContext.User));
+        ActionAccess access = new ActionAccess();
+
+        access.Access["AddTopic"] = roles.Contains("Admin");
+        access.Access["DeleteTopic"] = roles.Contains("Admin");
+
+        access.Access["AddPost"] = new[] { "Admin", "User" }.Any(c => roles.Contains(c));
+        access.Access["AddComment"] = new[] { "Admin", "User" }.Any(c => roles.Contains(c));
+        access.Access["DeletePost"] = new[] { "Admin", "User" }.Any(c => roles.Contains(c));
+        access.Access["DeleteComment"] = new[] { "Admin", "User" }.Any(c => roles.Contains(c));
+
+        return access;
+    }
+
+
 
 
 
