@@ -1,10 +1,12 @@
 using System.ComponentModel.DataAnnotations;
 using Forum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers;
 
+[Authorize(Roles = "admin")]
 [Route("api/Role/")]
 [ApiController]
 public class ApiRoleController : ControllerBase
@@ -17,7 +19,7 @@ public class ApiRoleController : ControllerBase
         _roleManager = roleMgr;
         _userManager = userManager;
     }
- 
+    
     [HttpGet("")]
     public List<IdentityRole> Index() => _roleManager.Roles.ToList();
 
@@ -57,5 +59,27 @@ public class ApiRoleController : ControllerBase
             Members = members,
             NonMembers = nonMembers
         };
+    }
+    
+    [HttpPost("Update")]
+    public async Task<RoleEdit> Update(RoleModification model)
+    {
+        foreach (string userId in model.AddIds ?? new string[] { })
+        {
+            AppUser user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await _userManager.AddToRoleAsync(user, model.RoleName);
+            }
+        }
+        foreach (string userId in model.DeleteIds ?? new string[] { })
+        {
+            AppUser user = await _userManager.FindByIdAsync(userId);
+            if (user != null)
+            {
+                await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+            }
+        }
+        return await Update(model.RoleId);
     }
 }

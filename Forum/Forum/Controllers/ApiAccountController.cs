@@ -26,15 +26,25 @@ public class ApiAccountController : ControllerBase
         signInManager = signinMgr;
         _passwordHasher = passwordHash;
     }
-
-    [HttpGet("LoggedIn")]
+    
     [AllowAnonymous]
-    public async Task<AppUser> LoggedInUser()
+    [HttpPost("Registration")]
+    public async Task<IActionResult> Create(User user)
     {
-        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-        return user;
-    }
+        AppUser appUser = new AppUser
+        {
+            UserName = user.Name,
+            Email = user.Email
+        };
 
+        IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
+
+        if (result.Succeeded)
+            return StatusCode(201, result.Succeeded);
+
+        return StatusCode(500, result.Errors);
+    }
+    
     [HttpPost("Login")]
     [AllowAnonymous]
     public async Task<IActionResult> Login(Login login)
@@ -49,29 +59,37 @@ public class ApiAccountController : ControllerBase
         }
         return StatusCode(401, "Login Failed: Invalid Email or password");
     }
-
+    
     [HttpGet("Logout")]
     public async Task<IActionResult> Logout()
     {
         await signInManager.SignOutAsync();
         return StatusCode(200);
     }
-
-    [HttpGet("Update/{id}")]
-    public async Task<AppUser> Update(string id)
+    
+    [HttpGet("LoggedIn")]
+    [AllowAnonymous]
+    public async Task<AppUser> LoggedInUser()
     {
-        AppUser user = await _userManager.FindByIdAsync(id);
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+        return user;
+    }
+
+    [HttpGet("Update")]
+    public async Task<AppUser> Update()
+    {
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+        user = await _userManager.FindByIdAsync(user.Id);
         return user;
         // status code 204 (no content) in case user is not found.
     }
  
     [HttpPost("Update")]
-    public async Task<AppUser> Update(Update update)
+    public async Task<AppUser> Update(Login userData)
     {
-        string id = update.id;
-        string email = update.email;
-        string password = update.password;
-        AppUser user = await _userManager.FindByIdAsync(id);
+        string email = userData.Email;
+        string password = userData.Password;
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
         
         if (user != null)
         {
@@ -93,10 +111,10 @@ public class ApiAccountController : ControllerBase
     }
     
     [HttpPost("Delete")]
-    [Authorize(Roles = "Admin")]
-    public async Task<AppUser> Delete(UserId userId)
+    [Authorize]
+    public async Task<AppUser> Delete()
     {
-        AppUser user = await _userManager.FindByIdAsync(userId.Id);
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
         if (user != null)
         {
             IdentityResult result = await _userManager.DeleteAsync(user);
