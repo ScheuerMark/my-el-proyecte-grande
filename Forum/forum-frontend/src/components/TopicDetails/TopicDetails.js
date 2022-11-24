@@ -36,7 +36,7 @@ class TopicDetails extends Component {
 	                <div className="row">
 		                <h1 className="text-center">{this.props.params.title}</h1>
 		                <div className="col-12">
-                            {this.state.posts.map((element, index) => <Post key={index} post={element}/> )}
+                            {this.state.posts.map((element, index) => <Post key={index} post={element} componentDidUpdate={this.componentDidUpdate}/> )}
 		                </div>
 	                </div>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">
