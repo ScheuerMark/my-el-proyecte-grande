@@ -173,5 +173,22 @@ namespace Forum.Services
         {
             return _context.Topics.Where(x=>x.Id.Equals(topicId)).FirstOrDefaultAsync();
         }
+        
+        public async Task<List<Post>> GetPostsByTopicId(int topicId)
+        {
+            return _context.Topics.Include(x => x.Posts)
+                .ThenInclude(x=>x.Comments)
+                .Where(x => x.Id.Equals(topicId))
+                .FirstOrDefaultAsync().Result.Posts.ToList();
+        }
+
+        public async Task DeleteTopicById(int topicId)
+        {
+            var posts = await GetPostsByTopicId(topicId);
+            foreach (var post in posts)
+            {
+                DeletePostById(post.Id);
+            }
+        }
     }
 }

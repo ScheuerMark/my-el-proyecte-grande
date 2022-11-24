@@ -4,6 +4,7 @@ using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
@@ -15,11 +16,14 @@ namespace Forum.Controllers
         private readonly ILogger<ApiHomeController> _logger;
 
         public SqlService SqlService { get; set; }
+        
+        private UserManager<AppUser> _userManager;
 
-        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService)
+        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService, UserManager<AppUser> userManager)
         {
             _logger = logger;
             SqlService = sqlService;
+            _userManager = userManager;
         }
 
         [HttpGet("Posts/{topicName}")]
@@ -69,6 +73,8 @@ namespace Forum.Controllers
         [HttpPost("Posts/{topicName}")]
         public async Task<ActionResult> AddPost(string topicName, Post post)
         {
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            post.User = user;
             await SqlService.AddPost(topicName, post);
 
             return StatusCode(200);
@@ -120,6 +126,12 @@ namespace Forum.Controllers
         public async Task DeletePostById(int postId)
         {
             await SqlService.DeletePostById(postId);
+        }
+        
+        [HttpDelete("DeleteTopic/{topicId}")]
+        public async Task DeleteTopicById(int topicId)
+        {
+            await SqlService.DeleteTopicById(topicId);
         }
 
         [Authorize]

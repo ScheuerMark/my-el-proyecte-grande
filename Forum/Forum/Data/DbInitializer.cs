@@ -41,6 +41,12 @@ namespace Forum.Data
                     Title = "Eating habits",
                     Description = "Everything about meal and eating habits",
                     Posts = new HashSet<Post>()
+                },
+                new Topic()
+                {
+                    Title = "test",
+                    Description = "Everything about meal and eating habits",
+                    Posts = new HashSet<Post>()
                 }
             };
 
@@ -61,7 +67,7 @@ namespace Forum.Data
                         "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
                     Comments = new HashSet<Comment>(),
                     Followers = new HashSet<AppUser>()
-                },
+                }
             };
 
             List<Comment> comments = new List<Comment>()
@@ -90,9 +96,12 @@ namespace Forum.Data
             posts[0].Comments.Add(comments[0]);
             posts[1].Comments.Add(comments[1]);
             posts[1].Comments.Add(comments[2]);
+            posts[1].Comments.Add(comments[0]);
+            posts[1].Comments.Add(comments[1]);
 
             topics[0].Posts.Add(posts[0]);
             topics[1].Posts.Add(posts[1]);
+            topics[4].Posts.Add(posts[1]);
 
             foreach (var comment in comments)
             {
