@@ -1,10 +1,12 @@
 using System.Xml;
 using Forum.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers;
 
+// [Authorize(Roles = "admin")]
 [Route("api/Admin/")]
 [ApiController]
 public class ApiAdminController : ControllerBase
@@ -17,23 +19,6 @@ public class ApiAdminController : ControllerBase
     {
         _userManager = usrMgr;
         _passwordHasher = passwordHash;
-    }
-    
-    [HttpPost("Registration")]
-    public async Task<IActionResult> Create(User user)
-    {
-        AppUser appUser = new AppUser
-        {
-            UserName = user.Name,
-            Email = user.Email
-        };
-
-        IdentityResult result = await _userManager.CreateAsync(appUser, user.Password);
-
-        if (result.Succeeded)
-            return StatusCode(201);
-
-        return StatusCode(500, result.Errors);
     }
     
     [HttpGet("")]
@@ -49,7 +34,7 @@ public class ApiAdminController : ControllerBase
         return user;
         // status code 204 (no content) in case user is not found.
     }
- 
+    
     [HttpPost("Update")]
     public async Task<AppUser> Update(Update update)
     {
