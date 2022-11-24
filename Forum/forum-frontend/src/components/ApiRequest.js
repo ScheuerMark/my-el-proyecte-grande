@@ -157,7 +157,7 @@ export function updateComment(body, commentId){
 
 //#region User
 /*=====================================================*/
-/*                       User                          */
+/*                       Account                       */
 /*=====================================================*/
 
 //#region /*===  GET  ===*/
@@ -185,6 +185,19 @@ export function postLogin(body){
     return fetch(url, formData)
         .then((response) => response.ok);
 }
+
+export function postRegister(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Account/Registration`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
 //#endregion
 
 //#endregion
@@ -202,6 +215,27 @@ export function getAllUser(){
 //#endregion
 
 //#region /*===  Post  ===*/
+
+export function deleteUser(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Admin/Delete`
+    let result=null;
+    try {
+        result = fetch(url, formData)
+        .then((response) => response.ok)
+        .catch((err) => console.log(err))
+
+    }catch(err){
+        console.log(err);
+    }
+    return result;
+}
 
 //#endregion
 
@@ -251,15 +285,3 @@ export function getSearched(searchPhrase){
 
 /*===  Post  ===*/
 
-export function postRegister(body){
-    let formData = {
-        method: 'POST',
-        body: JSON.stringify(body),
-        headers: new Headers({
-            'Content-Type': 'application/json; charset=UTF-8'
-        })
-    }
-    let url = `/api/Admin/Registration`
-    return fetch(url, formData)
-        .then((response) => response.ok);
-}
