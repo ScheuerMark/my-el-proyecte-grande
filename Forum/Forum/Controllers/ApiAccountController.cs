@@ -111,6 +111,7 @@ public class ApiAccountController : ControllerBase
     }
     
     [HttpPost("Delete")]
+    [Authorize]
     public async Task<AppUser> Delete()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
@@ -124,4 +125,7 @@ public class ApiAccountController : ControllerBase
         return user;
         // status code 204 (no content) in case user is not found.
     }
+
+
+
 }

@@ -63,6 +63,7 @@ public class ApiAdminController : ControllerBase
     }
     
     [HttpPost("Delete")]
+    [Authorize(Roles = "Admin")]
     public async Task<AppUser> Delete(UserId userId)
     {
         AppUser user = await _userManager.FindByIdAsync(userId.Id);

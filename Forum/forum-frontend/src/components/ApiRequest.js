@@ -203,6 +203,27 @@ export function getAllUser(){
 
 //#region /*===  Post  ===*/
 
+export function deleteUser(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Account/Delete`
+    let result=null;
+    try {
+        result = fetch(url, formData)
+        .then((response) => response.ok)
+        .catch((err) => console.log(err))
+
+    }catch(err){
+        console.log(err);
+    }
+    return result;
+}
+
 //#endregion
 
 //#endregion
