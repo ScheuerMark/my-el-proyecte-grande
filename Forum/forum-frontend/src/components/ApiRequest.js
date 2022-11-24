@@ -226,6 +226,11 @@ export function getAllUser(){
     return fetch(`/api/Admin`)
     .then((response) => response.json());
 }
+
+export function getAllRole(){
+    return fetch(`/api/Role`)
+    .then((response) => response.json());
+}
 //#endregion
 
 //#region /*===  Post  ===*/

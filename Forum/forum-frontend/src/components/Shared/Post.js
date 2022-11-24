@@ -1,13 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleUp, faCommentDots } from '@fortawesome/free-solid-svg-icons';
+import { faAngleDown, faAngleUp, faCommentDots, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './Post.css'
+import { fetchPosts, getPostByDateDesc } from '../ApiRequest';
 
-const Post = ({post}) => {
+const Post = ({post, update, title}) => {
   const commentIcon = <FontAwesomeIcon icon={faCommentDots} />;
   const collapsedIcon = <FontAwesomeIcon className='text-collapsed' icon={faAngleDown} />;
   const expandedIcon = <FontAwesomeIcon  className='text-expanded' icon={faAngleUp} />;
+  const trash = <FontAwesomeIcon icon={faTrash} />;
+
+  function deletePost(post, update, title){
+    fetch(`/api/Home/DeletePost/${post.id}`, {
+        method: 'DELETE'
+    }).then((response) => response.ok).then(x=> {
+      if(title !== null){
+        fetchPosts(title).then(data => update(data));
+      }else{
+        getPostByDateDesc().then(data => update(data));
+      }
+    });
+  }
 
   return (
     <div className="card">
@@ -17,7 +31,7 @@ const Post = ({post}) => {
           <button className="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target={`#id${post.id}`} aria-expanded="false" aria-controls={`id${post.id}`}>
                     {collapsedIcon}
                     {expandedIcon}
-          </button>
+          </button> <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
             </span>
       </div>
       <div className="collapse" id={`id${post.id}`}>

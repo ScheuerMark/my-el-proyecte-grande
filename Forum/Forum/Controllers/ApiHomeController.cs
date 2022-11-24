@@ -2,7 +2,9 @@
 using Forum.Data;
 using Forum.Models;
 using Forum.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
@@ -13,11 +15,13 @@ namespace Forum.Controllers
     {
         private readonly ILogger<ApiHomeController> _logger;
 
+        private UserManager<AppUser> _userManager;
         public SqlService SqlService { get; set; }
 
-        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService)
+        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService, UserManager<AppUser> userMgr)
         {
             _logger = logger;
+            _userManager = userMgr;
             SqlService = sqlService;
         }
 
@@ -64,6 +68,7 @@ namespace Forum.Controllers
             return SqlService.GetPostByPostId(id).Result;
         }
 
+        [Authorize]
         [HttpPost("Posts/{topicName}")]
         public async Task<ActionResult> AddPost(string topicName, Post post)
         {
@@ -72,14 +77,17 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
+        [Authorize]
         [HttpPost("PostDetails/{id}")]
         public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {
-            await SqlService.AddComment(id, comment);
+            AppUser user = _userManager.GetUserAsync(HttpContext.User).Result;
+            await SqlService.AddComment(id, comment, user);
 
             return StatusCode(200);
         }
 
+        [Authorize]
         [HttpPut("Like/{commentId}")]
         public async Task<ActionResult> LikeComment(int commentId)
         {
@@ -88,6 +96,7 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
+        [Authorize]
         [HttpPut("DisLike/{commentId}")]
         public async Task<ActionResult> DisLikeComment(int commentId)
         {
@@ -102,19 +111,22 @@ namespace Forum.Controllers
         {
             return SqlService.GetPostsBySearchPhrase(searchPhrase).Result;
         }
-        
+
+        [Authorize]
         [HttpDelete("DeleteComment/{commentId}")]
         public async Task DeleteCommentById(int commentId)
         {
             await SqlService.DeleteCommentById(commentId);
         }
-        
+
+        [Authorize]
         [HttpDelete("DeletePost/{postId}")]
         public async Task DeletePostById(int postId)
         {
             await SqlService.DeletePostById(postId);
         }
 
+        [Authorize]
         [HttpPut("PostDetails/{id}")]
         public async Task<ActionResult> UpdatePost(int id, Post post)
         {
@@ -122,7 +134,8 @@ namespace Forum.Controllers
 
             return StatusCode(200);
         }
-        
+
+        [Authorize]
         [HttpPut("Comments/{id}")]
         public async Task<ActionResult> UpdateComment(int id, Comment comment)
         {
@@ -131,6 +144,7 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
+        [Authorize]
         [HttpPut("Topics/{id}")]
         public async Task<ActionResult> UpdateTopic(int id, Topic topic)
         {
@@ -151,6 +165,7 @@ namespace Forum.Controllers
         {
             return SqlService.GetTopicById(topicId).Result;
         }
+
 
     }
 }

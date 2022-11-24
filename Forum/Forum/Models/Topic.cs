@@ -12,5 +12,7 @@ public class Topic
     
     public HashSet<Post> Posts { get; set; }=new HashSet<Post>();
 
+    public AppUser User { get; set; }
+
     public int NumberOfPosts => Posts.Count;
 }
