@@ -157,7 +157,7 @@ export function updateComment(body, commentId){
 
 //#region User
 /*=====================================================*/
-/*                       User                          */
+/*                       Account                       */
 /*=====================================================*/
 
 //#region /*===  GET  ===*/
@@ -216,6 +216,27 @@ export function getAllUser(){
 
 //#region /*===  Post  ===*/
 
+export function deleteUser(body){
+    let formData = {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Admin/Delete`
+    let result=null;
+    try {
+        result = fetch(url, formData)
+        .then((response) => response.ok)
+        .catch((err) => console.log(err))
+
+    }catch(err){
+        console.log(err);
+    }
+    return result;
+}
+
 //#endregion
 
 //#endregion
@@ -238,4 +259,13 @@ export function getSearched(searchPhrase){
 
 //#endregion
 
+
+
+
+
+
+
+
+
+/*===  Post  ===*/
 

@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { getAllUser } from '../ApiRequest';
+import { deleteUser, getAllUser } from '../ApiRequest';
 import './AdminPage.css';
 
 
 export function AdminPage () {
     const [users, setUsers] = useState(null);
+    const [roles, setRoles] = useState(null);
 
     useEffect(()=>{
         getAllUser().then(x=> setUsers(x))
     },[])
+
+    function handelDelete(userId){
+      deleteUser({id:userId}).then(y=> getAllUser().then(x=> setUsers(x)))
+    }
 
     return (
         <>
@@ -35,7 +40,7 @@ export function AdminPage () {
         <td>{}</td>
         <td>
         <button type="button" class="btn btn-secondary me-1 btn-sm">Add Role</button>
-        <button type="button" class="btn btn-secondary btn-sm">Delete</button>
+        <button type="button" class="btn btn-secondary btn-sm" onClick={()=>{handelDelete(user.id)}} >Delete</button>
         </td>
       </tr>
         )  
@@ -57,16 +62,14 @@ export function AdminPage () {
     </tr>
     </thead>
     <tbody>
-    {users?.map((user, index) => {
+    {roles?.map((role, index) => {
     return (
         <tr key={index}>
-        <td>{user.userName}</td>
-        <td>{user.email}</td>
-        <td>{}</td>
-        <td>
-        <button type="button" class="btn btn-secondary me-1 btn-sm">Add Role</button>
-        <button type="button" class="btn btn-secondary btn-sm">Delete</button>
-        </td>
+        <td>{role.name}</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
         )  
     })}

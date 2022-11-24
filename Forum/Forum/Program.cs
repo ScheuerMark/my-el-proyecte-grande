@@ -1,6 +1,7 @@
 using Forum.Data;
 using Forum.Models;
 using Forum.Services;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,10 +12,47 @@ builder.Services.AddDbContext<ForumContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]));
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();
-builder.Services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Authenticate/Login");
+builder.Services.ConfigureApplicationCookie(opts =>
+{
+    opts.LoginPath = new PathString("/Account/Login");
+    opts.LogoutPath = new PathString("/Account/Logout");
+
+    opts.Events.OnRedirectToAccessDenied = context =>
+    {
+        if (context.Request.Path.StartsWithSegments("/api")
+            && context.Response.StatusCode == StatusCodes.Status200OK)
+        {
+            context.Response.Clear();
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        }
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
+    opts.Events.OnRedirectToLogin = context =>
+    {
+        if (context.Request.Path.StartsWithSegments("/api")
+            && context.Response.StatusCode == StatusCodes.Status200OK)
+        {
+            context.Response.Clear();
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.CompletedTask;
+        }
+        context.Response.Redirect(context.RedirectUri);
+        return Task.CompletedTask;
+    };
+});
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<SqlService>();
+
+builder.Services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
+    builder =>
+    {
+        builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+    }));
 
 builder.Services.Configure<IdentityOptions>(opts =>
     {
@@ -36,6 +74,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseCors("AllowAnyOrigin");
 
 app.UseAuthentication();
 app.UseAuthorization();
