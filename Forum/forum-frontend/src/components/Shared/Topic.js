@@ -5,7 +5,7 @@ import { faCommentAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import {EditModalTopic} from "../EditModals";
 
 const Topic = ({topic}) => {
-    const [topicState, setTopicState] = useState(topic)
+  const [topicState, setTopicState] = useState(topic)
   const commentIcon = <FontAwesomeIcon icon={faCommentAlt} />;
   const edit = <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"
                        data-bs-target={`#editTopicModal${topicState.id}`}><FontAwesomeIcon icon={faEdit} /></button>;
