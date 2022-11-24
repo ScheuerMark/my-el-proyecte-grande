@@ -200,6 +200,20 @@ export function postRegister(body){
 }
 //#endregion
 
+//#region /*=== Update ===*/
+export function updateUser(body){
+    let formData = {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: new Headers({
+            'Content-Type': 'application/json; charset=UTF-8'
+        })
+    }
+    let url = `/api/Account/Update`
+    return fetch(url, formData)
+        .then((response) => response.ok);
+}
+
 //#endregion
 
 //#region Admin
