@@ -26,7 +26,7 @@ function Home() {
                 </div>
                 <div className="col-xl-6 d-xl-block d-none">
                     <h1>Recent posts</h1>
-                    {posts.map((post, index) => <Post key={index} post={post} />)}
+                    {posts.map((post, index) => <Post key={index} post={post} update={setPosts} title={null}/>)}
                 </div>
             </div>		
         </div>

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers;
 
-[Authorize(Roles = "Admin")]
+// [Authorize(Roles = "Admin")]
 [Route("api/Role/")]
 [ApiController]
 public class ApiRoleController : ControllerBase
