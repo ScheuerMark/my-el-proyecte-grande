@@ -3,12 +3,16 @@ import { Link, useNavigate } from 'react-router-dom';
 import question from '../../question.jpg'
 import { Formik, Field, Form, ErrorMessage} from 'formik';
 import {postRegister} from "../ApiRequest";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEyeSlash, faEye } from '@fortawesome/free-solid-svg-icons';
+
+import { Password } from './Password'; 
 
 
 const validate = values => {
   const errors = {};
+  
+  if (!values.name) {
+    errors.name = 'Required';
+  }
   
   if (!values.email) {
     errors.email = 'Required';
@@ -18,14 +22,14 @@ const validate = values => {
   
   if (!values.password) {
     errors.password = 'Required';
-  } else if (values.password.length < 8) {
-    errors.password = 'Must be 8 characters or more';
-  }
+  }  else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[?!+@&#_-]).{6,}$/i.test(values.password)){
+    errors.password = "Must be 6 characters or more and must contain: a number, an UPPERCASE letter and a special character";
+  } 
   
   if (!values.confirmPassword) {
     errors.confirmPassword = 'Required';
   } else if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = 'The two passwords are not matching'
+    errors.confirmPassword = 'The two passwords are not matching';
   }
 
   return errors;
@@ -42,21 +46,22 @@ export function Register() {
           <div className="row g-0">
             <div className="col-md-6 col-lg-5 d-none d-md-block">
             <img src={question}
-                alt="login form" class="img-fluid w-100 h-100" style={{borderRadius: "1rem 0 0 1rem", objectFit: "cover"}} />
+                alt="login form" className="img-fluid w-100 h-100" style={{borderRadius: "1rem 0 0 1rem", objectFit: "cover"}} />
             <a style={{position: "absolute", bottom: "8px", left: "16px", color: "black"}} href="http://www.freepik.com">Designed by starline / Freepik</a>
             </div>
             <div className="col-md-6 col-lg-7 d-flex align-items-center">
               <div className="card-body p-4 p-lg-5 text-black">
                 <Formik
                     initialValues={{
-                  email: '',
-                  password: '',
-                  confirmPassword: '', 
-                      showPassword: false
+                      name: '',
+                      email: '',
+                      password: '',
+                      confirmPassword: ''
                 }}
                 validate={validate}
                 onSubmit= {values => {
                 postRegister({
+                  name: values.name,
                   email: values.email,
                   password: values.password
                 }).then(x => {
@@ -66,9 +71,15 @@ export function Register() {
                 })
               }}
                 >
-                  {({ errors, touched, values}) => (
+                  {({ errors, touched }) => (
                       <Form>
                         <h3 className="fw-normal mb-3 pb-3" >Register an account</h3>
+
+                        <div className="form-outline mb-4">
+                          <Field name={"name"} type={"text"} className="form-control form-control-lg" />
+                          <label htmlFor={"name"}>Username</label><br/>
+                          <ErrorMessage name={"name"} render={msg => <div className={"text-danger"}>{msg}</div>}/>
+                        </div>
 
                         <div className="form-outline mb-4">
                           <Field name={"email"} type={"email"} className="form-control form-control-lg" />
@@ -77,13 +88,13 @@ export function Register() {
                         </div>
 
                         <div className="form-outline mb-4">
-                          <Field name={"password"} type={values.showPassword ? 'text' : 'password'} className="form-control form-control-lg"/>
+                          <Field name={"password"} component={Password} />
                           <label htmlFor={"password"}>Password</label><br/>
                           <ErrorMessage name={"password"} render={msg => <div className={"text-danger"}>{msg}</div>}/>
                         </div>
 
                         <div className="form-outline mb-4">
-                          <Field name={"confirmPassword"} type={"password"} className="form-control form-control-lg"/>
+                          <Field name={"confirmPassword"} component={Password}/>
                           <label htmlFor={"confirmPassword"}>Confirm password</label><br/>
                           <ErrorMessage name={"confirmPassword"} render={msg => <div className={"text-danger"}>{msg}</div>} />
                         </div>

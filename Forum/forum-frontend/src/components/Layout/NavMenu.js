@@ -84,7 +84,7 @@ export const NavMenu = () => {
                                 <li className={`nav-item dropdown-menu-right ms-md-auto  dropdown ${userContext.user === null? "d-none": ""}`}>
                                     <a className="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" role="button"><FontAwesomeIcon icon={faUser}/></a>
                                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-                                    <li><Link className="dropdown-item" role="button" to="/">Profile</Link></li>
+                                    <li><Link className="dropdown-item" role="button" to="/Profile">Profile</Link></li>
                                     <li><Link className="dropdown-item" role="button" onClick={()=>{getLogout().then(x=> userContext.refreshUser())}}>Logout</Link></li>
                                     <li><Link className="dropdown-item" role="button" to="/Admin">AdminPage</Link></li>
                                     </ul>

@@ -1,4 +1,4 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Comment } from './Comment';
 import { CommentForm } from '../CommentForm';
 import Highlight from 'react-highlight-words';

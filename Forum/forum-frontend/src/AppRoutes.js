@@ -5,6 +5,7 @@ import Register from "./components/Signing/Register";
 import Login from "./components/Signing/Login";
 import { Search } from "./components/Layout/Search";
 import { AdminPage } from "./components/AdminPage/AdminPage";
+import {ProfilePage} from "./components/Signing/ProfilePage";
 
 const AppRoutes = [
   {
@@ -34,6 +35,10 @@ const AppRoutes = [
   {
     path: '/Admin',
     element: <AdminPage />
+  },
+  {
+    path: '/Profile',
+    element: <ProfilePage />
   },
   
 ];
