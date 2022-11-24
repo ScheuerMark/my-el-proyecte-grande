@@ -111,7 +111,6 @@ public class ApiAccountController : ControllerBase
     }
     
     [HttpPost("Delete")]
-    [Authorize]
     public async Task<AppUser> Delete()
     {
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);

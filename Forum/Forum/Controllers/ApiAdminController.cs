@@ -8,6 +8,7 @@ namespace Forum.Controllers;
 
 // [Authorize(Roles = "admin")]
 [Route("api/Admin/")]
+[Authorize(Roles = "Admin")]
 [ApiController]
 public class ApiAdminController : ControllerBase
 {
@@ -63,7 +64,6 @@ public class ApiAdminController : ControllerBase
     }
     
     [HttpPost("Delete")]
-    [Authorize(Roles = "Admin")]
     public async Task<AppUser> Delete(UserId userId)
     {
         AppUser user = await _userManager.FindByIdAsync(userId.Id);
