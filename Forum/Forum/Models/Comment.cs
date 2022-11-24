@@ -8,5 +8,6 @@ public class Comment
     public string Message { get; set; }
     public int Like { get; set; }
     public int DisLike { get; set; }
+    public AppUser User { get; set; }
     public DateTime DateTime { get; set; }
 }

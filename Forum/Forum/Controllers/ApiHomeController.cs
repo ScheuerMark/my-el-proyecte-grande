@@ -4,6 +4,7 @@ using Forum.Models;
 using Forum.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Forum.Controllers
@@ -14,11 +15,13 @@ namespace Forum.Controllers
     {
         private readonly ILogger<ApiHomeController> _logger;
 
+        private UserManager<AppUser> _userManager;
         public SqlService SqlService { get; set; }
 
-        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService)
+        public ApiHomeController(ILogger<ApiHomeController> logger, SqlService sqlService, UserManager<AppUser> userMgr)
         {
             _logger = logger;
+            _userManager = userMgr;
             SqlService = sqlService;
         }
 
@@ -78,7 +81,8 @@ namespace Forum.Controllers
         [HttpPost("PostDetails/{id}")]
         public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {
-            await SqlService.AddComment(id, comment);
+            AppUser user = _userManager.GetUserAsync(HttpContext.User).Result;
+            await SqlService.AddComment(id, comment, user);
 
             return StatusCode(200);
         }
@@ -161,6 +165,7 @@ namespace Forum.Controllers
         {
             return SqlService.GetTopicById(topicId).Result;
         }
+
 
     }
 }

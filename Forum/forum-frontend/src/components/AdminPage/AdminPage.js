@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { deleteUser, getAllUser } from '../ApiRequest';
+import { deleteUser, getAllRole, getAllUser } from '../ApiRequest';
 import './AdminPage.css';
 
 
@@ -9,7 +9,8 @@ export function AdminPage () {
     const [roles, setRoles] = useState(null);
 
     useEffect(()=>{
-        getAllUser().then(x=> setUsers(x))
+        getAllUser().then(x=> setUsers(x));
+        getAllRole().then(x=> setRoles(x));
     },[])
 
     function handelDelete(userId){

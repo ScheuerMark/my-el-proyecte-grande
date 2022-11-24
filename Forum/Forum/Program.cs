@@ -98,7 +98,11 @@ void CreateDbIfNotExists(IHost host)
         try
         {
             var context = services.GetRequiredService<ForumContext>();
-            DbInitializer.Initialize(context);
+            var IdbContext = services.GetRequiredService<AppIdentityDbContext>();
+            DbInitializer.Initialize(context,
+            IdbContext, 
+            services.GetRequiredService<UserManager<AppUser>>(),
+            services.GetRequiredService<RoleManager<IdentityRole>>());
         }
         catch (Exception ex)
         {
