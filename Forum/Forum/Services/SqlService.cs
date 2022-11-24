@@ -189,8 +189,12 @@ namespace Forum.Services
             var posts = await GetPostsByTopicId(topicId);
             foreach (var post in posts)
             {
-                DeletePostById(post.Id);
+                 await DeletePostById(post.Id);
             }
+
+            var topicsToDelete = await GetTopicById(topicId);
+            _context.Topics.Remove(topicsToDelete);
+            await _context.SaveChangesAsync();
         }
     }
 }

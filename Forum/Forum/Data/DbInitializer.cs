@@ -114,12 +114,9 @@ namespace Forum.Data
             posts[0].Comments.Add(comments[0]);
             posts[1].Comments.Add(comments[1]);
             posts[1].Comments.Add(comments[2]);
-            posts[1].Comments.Add(comments[0]);
-            posts[1].Comments.Add(comments[1]);
 
             topics[0].Posts.Add(posts[0]);
             topics[1].Posts.Add(posts[1]);
-            topics[4].Posts.Add(posts[1]);
 
             foreach (var comment in comments)
             {

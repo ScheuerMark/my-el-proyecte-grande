@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCommentAlt, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import {EditModalTopic} from "../EditModals";
+import { getTopics } from '../ApiRequest';
 
-const Topic = ({topic}) => {
+const Topic = ({topic, update}) => {
   const [topicState, setTopicState] = useState(topic)
   const commentIcon = <FontAwesomeIcon icon={faCommentAlt} />;
   const edit = <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"
@@ -12,7 +13,9 @@ const Topic = ({topic}) => {
   const trash = <FontAwesomeIcon icon={faTrash} />;
 
   function deleteTopic(){
-    console.log("works");
+    fetch(`/api/Home/DeleteTopic/${topic.id}`, {
+        method: 'DELETE'
+    }).then((response) => response.ok).then(x=> getTopics().then(data => update(data)));
   }
 
   return (

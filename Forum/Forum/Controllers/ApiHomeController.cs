@@ -128,6 +128,7 @@ namespace Forum.Controllers
             await SqlService.DeletePostById(postId);
         }
         
+        // [Authorize]
         [HttpDelete("DeleteTopic/{topicId}")]
         public async Task DeleteTopicById(int topicId)
         {
