@@ -72,6 +72,8 @@ namespace Forum.Controllers
         [HttpPost("Posts/{topicName}")]
         public async Task<ActionResult> AddPost(string topicName, Post post)
         {
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            post.User = user;
             await SqlService.AddPost(topicName, post);
 
             return StatusCode(200);
@@ -124,6 +126,13 @@ namespace Forum.Controllers
         public async Task DeletePostById(int postId)
         {
             await SqlService.DeletePostById(postId);
+        }
+        
+        // [Authorize]
+        [HttpDelete("DeleteTopic/{topicId}")]
+        public async Task DeleteTopicById(int topicId)
+        {
+            await SqlService.DeleteTopicById(topicId);
         }
 
         [Authorize]

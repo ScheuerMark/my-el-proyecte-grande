@@ -60,7 +60,6 @@ namespace Forum.Data
                     Description = "Everything about meal and eating habits",
                     Posts = new HashSet<Post>(),
                     User = admin
-
                 }
             };
 
@@ -83,7 +82,7 @@ namespace Forum.Data
                     Comments = new HashSet<Comment>(),
                     Followers = new HashSet<AppUser>(),
                     User = admin
-                },
+                }
             };
 
             List<Comment> comments = new List<Comment>()
