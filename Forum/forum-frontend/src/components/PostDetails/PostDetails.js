@@ -19,6 +19,7 @@ export function PostDetails (props) {
     useEffect(()=>{
         getComments(params.id).then(data => {
             setPost(data);
+            console.log(data);
         });
     },[])
 
