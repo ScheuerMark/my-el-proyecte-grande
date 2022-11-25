@@ -79,7 +79,7 @@ namespace Forum.Controllers
             return StatusCode(200);
         }
 
-        [Authorize]
+        
         [HttpPost("PostDetails/{id}")]
         public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {

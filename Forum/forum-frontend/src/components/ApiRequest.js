@@ -7,17 +7,41 @@
 //#region /*===  GET  ===*/
 
 export function fetchPosts(title){
-    return fetch(`/api/Home/Posts/${title}`)
+    return fetch(`/api/Home/Posts/${title}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json())
 }
 
 export function getPostByDateDesc(){
-    return fetch('api/Home/Posts/Date/Desc')
+    return fetch('api/Home/Posts/Date/Desc',{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json());
 }
 
 export function getPostById(postId){
-    return fetch(`/api/Home/PostDetails/${postId}`)
+    return fetch(`/api/Home/PostDetails/${postId}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json());
 }
 
@@ -28,6 +52,7 @@ export function getPostById(postId){
 export function postPost(body, topicTitle){
     let formData = {
         method: 'POST',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -43,6 +68,7 @@ export function postPost(body, topicTitle){
 export function updatePost(body, postId){
     let formData = {
         method: 'PUT',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -65,17 +91,41 @@ export function updatePost(body, postId){
 //#region /*===  GET  ===*/
 
 export function getTopicTitles(){
-    return fetch('/api/Home/Topics/Titles')
+    return fetch('/api/Home/Topics/Titles',{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) => response.json());
 }
 
 export function getTopics(){
-    return fetch('api/Home/Topics')
+    return fetch('api/Home/Topics',{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json());
 }
 
 export function getTopicById(topicId) {
-    return fetch(`/api/Home/Topics/${topicId}`)
+    return fetch(`/api/Home/Topics/${topicId}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json());
 }
 
@@ -89,6 +139,7 @@ export function getTopicById(topicId) {
 export function updateTopic(body, topicId){
     let formData = {
         method: 'PUT',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -111,12 +162,28 @@ export function updateTopic(body, topicId){
 //#region /*===  GET  ===*/
 
 export function getComments(postId){
-    return fetch(`/api/Home/PostDetails/${postId}`)
+    return fetch(`/api/Home/PostDetails/${postId}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) => response.json());
 }
 
 export function getCommentById(commentId){
-    return fetch(`/api/Home/Comment/${commentId}`)
+    return fetch(`/api/Home/Comment/${commentId}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
         .then((response) => response.json());
 }
 
@@ -127,6 +194,7 @@ export function getCommentById(commentId){
 export function postComment(body, postId){
     let formData = {
         method: 'POST',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -142,6 +210,7 @@ export function postComment(body, postId){
 export function updateComment(body, commentId){
     let formData = {
         method: 'PUT',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -162,12 +231,41 @@ export function updateComment(body, commentId){
 
 //#region /*===  GET  ===*/
 export function getLoggedInUser() {
-    return fetch(`/api/Account/LoggedIn`)
+    return fetch(`/api/Account/LoggedIn`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) =>response)       
 }
 
+export function getRoles() {
+    return fetch(`/api/Account/Roles`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
+    .then((response) =>response.json())       
+}
+
 export function getLogout() {
-    return fetch(`/api/Account/Logout`)
+    return fetch(`/api/Account/Logout`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) =>response.ok)       
 }
 //#endregion
@@ -176,6 +274,7 @@ export function getLogout() {
 export function postLogin(body){
     let formData = {
         method: 'POST',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -199,11 +298,13 @@ export function postRegister(body){
         .then((response) => response.ok);
 }
 //#endregion
+//#endregion
 
 //#region /*=== Update ===*/
 export function updateUser(body){
     let formData = {
         method: 'PUT',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -223,12 +324,28 @@ export function updateUser(body){
 
 //#region /*===  GET  ===*/
 export function getAllUser(){
-    return fetch(`/api/Admin`)
+    return fetch(`/api/Admin`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) => response.json());
 }
 
 export function getAllRole(){
-    return fetch(`/api/Role`)
+    return fetch(`/api/Role`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) => response.json());
 }
 //#endregion
@@ -238,6 +355,7 @@ export function getAllRole(){
 export function deleteUser(body){
     let formData = {
         method: 'POST',
+        credentials: 'same-origin',
         body: JSON.stringify(body),
         headers: new Headers({
             'Content-Type': 'application/json; charset=UTF-8'
@@ -268,7 +386,15 @@ export function deleteUser(body){
 //#region /*===  GET  ===*/
 
 export function getSearched(searchPhrase){
-    return fetch(`/api/Home/Search/${searchPhrase}`)
+    return fetch(`/api/Home/Search/${searchPhrase}`,{
+        method: "GET",
+        headers: {
+            'Accept':  'application/json',
+           'Content-Type': 'application/json',
+           'Cache': 'no-cache'
+        },
+        credentials: 'same-origin'
+    })
     .then((response) => response.json());
 }
 
@@ -277,14 +403,8 @@ export function getSearched(searchPhrase){
 //#region /*===  Post  ===*/
 
 //#endregion
+//#endregion
 
 
 
-
-
-
-
-
-
-/*===  Post  ===*/
 

@@ -69,7 +69,7 @@ function Post (props){
                 <div className="card-header">
                     <h5 className="d-inline-flex">{props.data.title}</h5>
                     <span className="float-end  fst-italic">
-                    {userContext.user?.id === props.data?.user?.id ?
+                    {userContext.user?.id === props.data?.user?.id || userContext.roles?.includes("Admin") ?
                      (
                     <>
                         <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"

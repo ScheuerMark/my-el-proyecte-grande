@@ -21,6 +21,7 @@ namespace Forum.Services
         {
             return _context.Topics.Include(x => x.Posts)
                 .ThenInclude(x=>x.Comments)
+                .Include(x=>x.Posts).ThenInclude(x=>x.User)
                 .Where(x => x.Title.Equals(topicName))
                 .FirstOrDefaultAsync().Result.Posts.ToList();
         }

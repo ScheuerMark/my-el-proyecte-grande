@@ -76,6 +76,15 @@ public class ApiAccountController : ControllerBase
         return user;
     }
 
+    [HttpGet("Roles")]
+    [Authorize]
+    public async Task<List<string>> RolesForLoggedInUser()
+    {
+        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+
+        return _userManager.GetRolesAsync(user).Result.ToList();
+    }
+
     [HttpGet("Update")]
     public async Task<AppUser> Update()
     {

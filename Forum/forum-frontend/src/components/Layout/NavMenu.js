@@ -86,7 +86,9 @@ export const NavMenu = () => {
                                     <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
                                     <li><Link className="dropdown-item" role="button" to="/Profile">Profile</Link></li>
                                     <li><Link className="dropdown-item" role="button" onClick={()=>{getLogout().then(x=> userContext.refreshUser())}}>Logout</Link></li>
+                                    {userContext.roles?.includes("Admin") ? (
                                     <li><Link className="dropdown-item" role="button" to="/Admin">AdminPage</Link></li>
+                                    ) : ""}
                                     </ul>
                                 </li>
                             </ul>                      

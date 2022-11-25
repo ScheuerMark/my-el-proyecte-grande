@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleUp, faCommentDots, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './Post.css'
 import { fetchPosts, getPostByDateDesc } from '../ApiRequest';
+import { UserContext } from '../../App';
 
 const Post = ({post, update, title}) => {
   const commentIcon = <FontAwesomeIcon icon={faCommentDots} />;
   const collapsedIcon = <FontAwesomeIcon className='text-collapsed' icon={faAngleDown} />;
   const expandedIcon = <FontAwesomeIcon  className='text-expanded' icon={faAngleUp} />;
   const trash = <FontAwesomeIcon icon={faTrash} />;
+
+  const userContext = useContext(UserContext);
 
   function deletePost(post, update, title){
     fetch(`/api/Home/DeletePost/${post.id}`, {
@@ -23,6 +26,10 @@ const Post = ({post, update, title}) => {
     });
   }
 
+  useEffect(()=>{
+    console.log(userContext)
+},[userContext])
+
   return (
     <div className="card">
       <div className="card-header">
@@ -30,8 +37,8 @@ const Post = ({post, update, title}) => {
         <span className="float-end post-count fst-italic">{post.numberOfComments} {commentIcon}
           <button className="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target={`#id${post.id}`} aria-expanded="false" aria-controls={`id${post.id}`}>
                     {collapsedIcon}
-                    {expandedIcon}
-          </button> <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link>
+                    {expandedIcon}</button>
+                    {userContext.user?.id === post?.user?.id || userContext.roles?.includes("Admin") ?  <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link> : "" }
             </span>
       </div>
       <div className="collapse" id={`id${post.id}`}>

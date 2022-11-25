@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './Home.css';
 import Post from '../Shared/Post';
 import Topic from '../Shared/Topic';
 import { getTopics, getPostByDateDesc } from '../ApiRequest';
+import { UserContext } from '../../App';
 
 function Home() {
     let [topics, setTopics] = useState([]);
     let [posts, setPosts] = useState([]);
+
+    const userContext = useContext(UserContext);
 
     useEffect(()=>{
         getTopics().then(data => {
@@ -15,7 +18,11 @@ function Home() {
         getPostByDateDesc().then(data => {
             setPosts(data);
         });
+        
     }, [])
+    useEffect(()=>{
+        console.log(userContext);
+    },[userContext])
 
     return (
         <div>

@@ -5,7 +5,7 @@ import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout/Layout';
 import { faSun, faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { getLoggedInUser } from './components/ApiRequest';
+import { getLoggedInUser, getRoles } from './components/ApiRequest';
 
 
 export const ThemeContext = createContext(null)
@@ -13,10 +13,20 @@ export const UserContext = createContext(null)
 
 function App() {
   const [user, setUser] = useState("loading");
+  const [roles, setRoles] = useState("loading");
   const refreshUser = () => {
     getLoggedInUser().then(x=>{
       //If status code 204 no user logged in
-      x.status===200 ? x.json().then(user=> setUser(user)) : setUser(null);     
+      if(x.status===200){
+        x.json().then(user=> 
+          {
+            setUser(user);
+            getRoles().then(role=> setRoles(role));
+          })
+      }else{
+        setUser(null);
+        setRoles(null);
+      }   
     }).catch((error) => setUser(null))
   }
   
@@ -32,11 +42,11 @@ function App() {
     setIcon((curr)=> (curr.props.icon.iconName === "sun" ? <FontAwesomeIcon icon={faMoon}/> : <FontAwesomeIcon icon={faSun}/>));
   }
 
-  if(user === "loading")
+  if(user === "loading" || roles === "loading" )
     return null;
   return (
     <ThemeContext.Provider value={{theme, toggleTheme, icon}}>
-    <UserContext.Provider value={{user, refreshUser}}>
+    <UserContext.Provider value={{user, refreshUser, roles}}>
       <div className="App" id={theme}>   
       <BrowserRouter>
         <Routes>
