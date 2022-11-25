@@ -20,7 +20,7 @@ public class Post
     
     public Comment? Solution { get; set; }
 
-    public AppUser User { get; set; }
+    public AppUser? User { get; set; }
 
     public int NumberOfComments => Comments.Count;
 
