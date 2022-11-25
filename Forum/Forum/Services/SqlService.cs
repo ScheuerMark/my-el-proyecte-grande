@@ -5,15 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Forum.Services
 {
     public class SqlService
     {
         private ForumContext _context;
-        public SqlService(ForumContext context)
+        private AppIdentityDbContext _context2;
+
+        private UserManager<AppUser> _userManager;
+        public SqlService(ForumContext context, AppIdentityDbContext context2)
         {
             _context = context;
+            _context2 = context2;
+
         }
 
 
@@ -76,6 +82,8 @@ namespace Forum.Services
         {
             comment.Like = 0;
             comment.DisLike = 0;
+            //var User = await _context2.Users.FirstOrDefaultAsync(x => x.Id.Equals(user.Id));
+            _context.Attach(user);
             comment.User = user;
 
             _context.Comments.Add(comment);

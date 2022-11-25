@@ -43,7 +43,7 @@ builder.Services.ConfigureApplicationCookie(opts =>
     };
 });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers();
 builder.Services.AddTransient<SqlService>();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
