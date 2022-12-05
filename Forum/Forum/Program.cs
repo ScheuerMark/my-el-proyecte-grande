@@ -44,7 +44,9 @@ builder.Services.ConfigureApplicationCookie(opts =>
 });
 
 builder.Services.AddControllers();
-builder.Services.AddTransient<SqlService>();
+builder.Services.AddTransient<TopicService>();
+builder.Services.AddTransient<PostService>();
+builder.Services.AddTransient<CommentService>();
 
 builder.Services.AddCors(o => o.AddPolicy("AllowAnyOrigin",
     builder =>
