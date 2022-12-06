@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forum", "Forum\Forum.csproj
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "Forum-Frontend", "Forum-Frontend\Forum-Frontend.esproj", "{80D45961-7F13-4A45-971E-5AB1953F7867}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{84C1A70B-6AF2-4467-AA3C-A13FBED1EF6C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.Build.0 = Release|Any CPU
 		{80D45961-7F13-4A45-971E-5AB1953F7867}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{84C1A70B-6AF2-4467-AA3C-A13FBED1EF6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84C1A70B-6AF2-4467-AA3C-A13FBED1EF6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84C1A70B-6AF2-4467-AA3C-A13FBED1EF6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84C1A70B-6AF2-4467-AA3C-A13FBED1EF6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

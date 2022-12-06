@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  forum:
+    image: ${DOCKER_REGISTRY-}forum
+    ports:
+      - "7021:443"
+    build:
+      context: .
+      dockerfile: ./Forum/Dockerfile
+  forum-frontend:
+    image: ${DOCKER_REGISTRY-}forum-frontend
+    ports:
+      - "3000:3000"
+    build:
+      context: ./forum-frontend/
+      dockerfile: Dockerfile
