@@ -38,7 +38,7 @@ const Post = ({post, update, title}) => {
           <button className="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target={`#id${post.id}`} aria-expanded="false" aria-controls={`id${post.id}`}>
                     {collapsedIcon}
                     {expandedIcon}</button>
-                    {userContext.user?.id === post?.user?.id || userContext.roles?.includes("Admin") ?  <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link> : "" }
+                    {(post?.user?.id != null && userContext.user?.id === post?.user?.id) || userContext.roles?.includes("Admin") ?  <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link> : "" }
             </span>
       </div>
       <div className="collapse" id={`id${post.id}`}>
