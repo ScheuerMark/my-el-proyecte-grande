@@ -19,7 +19,7 @@ export function PostDetailsView({post, setPost, searchPhrase=null}){
             <br/>
         </div> 
         <div className="col-xl-9 col-lg-11">
-            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={index} comment={element} setPost={setPost} post={post} />)}
+            {post.comments.map((element, index) => <Comment searchPhrase={searchPhrase} key={element.id} comment={element} setPost={setPost} post={post} />)}
         </div>
         </div>   
     );
@@ -27,7 +27,7 @@ export function PostDetailsView({post, setPost, searchPhrase=null}){
 
 function Post (props){
     const trash = <FontAwesomeIcon icon={faTrash} />;
-    const [date,setDate] = useState(new Date(props.data.dateTime).toLocaleString());
+    const [date,setDate] = useState(props.data.dateTime != null ? new Date(props.data.dateTime).toLocaleString() : "");
     let button;
     const navigate = useNavigate();
     const userContext = useContext(UserContext);
@@ -88,8 +88,8 @@ function Post (props){
                 <div className="card-body row">
                     <div className="col-xl-9 col-lg-12">
                         <p className="card-text">
-                        <Highlight searchWords={[props.searchPhrase]}
-                        textToHighlight={`${props.data.message}`}>                       
+                        <Highlight searchWords={[props?.searchPhrase]}
+                        textToHighlight={`${ props?.data.message != undefined ? props?.data.message : ""}`}>                       
                         </Highlight>
                         </p>
                     </div>
