@@ -44,6 +44,7 @@ public abstract class TestBase
         {
                 new Topic()
                 {
+                    Id=1,
                     Title = "Accident",
                     Description =
                         "This topic is thought to share your thought regarding accidents happened with the child. Share your experiences and doubts.",
@@ -52,6 +53,7 @@ public abstract class TestBase
                 },
                 new Topic()
                 {
+                    Id=2,
                     Title = "Wandering",
                     Description = "Let's talk about a bit how to spend the time in the nature with your family.",
                     Posts = new HashSet<Post>(),
@@ -59,6 +61,7 @@ public abstract class TestBase
                 },
                 new Topic()
                 {
+                    Id=3,
                     Title = "Play around",
                     Description = "This topic is about toys, games and everything which makes for the kids fun.",
                     Posts = new HashSet<Post>(),
@@ -66,6 +69,7 @@ public abstract class TestBase
                 },
                 new Topic()
                 {
+                    Id=4,
                     Title = "Eating habits",
                     Description = "Everything about meal and eating habits",
                     Posts = new HashSet<Post>(),
