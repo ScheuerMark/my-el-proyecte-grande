@@ -7,7 +7,7 @@
 //#region /*===  GET  ===*/
 
 export function fetchPosts(title){
-    return fetch(`https://localhost:7021/api/Home/Posts/${title}`,{
+    return fetch(`/api/Home/Posts/${title}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -20,7 +20,7 @@ export function fetchPosts(title){
 }
 
 export function getPostByDateDesc(){
-    return fetch('https://localhost:7021/api/Home/Posts/Date/Desc',{
+    return fetch('/api/Home/Posts/Date/Desc',{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -33,7 +33,7 @@ export function getPostByDateDesc(){
 }
 
 export function getPostById(postId){
-    return fetch(`https://localhost:7021/api/Home/PostDetails/${postId}`,{
+    return fetch(`/api/Home/PostDetails/${postId}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -58,7 +58,7 @@ export function postPost(body, topicTitle){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Home/Posts/${topicTitle}`
+    let url = `/api/Home/Posts/${topicTitle}`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -74,7 +74,7 @@ export function updatePost(body, postId){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Home/PostDetails/${postId}`
+    let url = `/api/Home/PostDetails/${postId}`
     
     return fetch(url, formData)
         .then((response) => response.ok);
@@ -91,7 +91,7 @@ export function updatePost(body, postId){
 //#region /*===  GET  ===*/
 
 export function getTopicTitles(){
-    return fetch('https://localhost:7021/api/Home/Topics/Titles',{
+    return fetch('/api/Home/Topics/Titles',{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -104,7 +104,7 @@ export function getTopicTitles(){
 }
 
 export function getTopics(){
-    return fetch('https://localhost:7021/api/Home/Topics',{
+    return fetch('/api/Home/Topics',{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -117,7 +117,7 @@ export function getTopics(){
 }
 
 export function getTopicById(topicId) {
-    return fetch(`https://localhost:7021/api/Home/Topics/${topicId}`,{
+    return fetch(`/api/Home/Topics/${topicId}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -145,7 +145,7 @@ export function updateTopic(body, topicId){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Home/Topics/${topicId}`
+    let url = `/api/Home/Topics/${topicId}`
 
     return fetch(url, formData)
         .then((response) => response.ok);
@@ -162,7 +162,7 @@ export function updateTopic(body, topicId){
 //#region /*===  GET  ===*/
 
 export function getComments(postId){
-    return fetch(`https://localhost:7021/api/Home/PostDetails/${postId}`,{
+    return fetch(`/api/Home/PostDetails/${postId}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -175,7 +175,7 @@ export function getComments(postId){
 }
 
 export function getCommentById(commentId){
-    return fetch(`https://localhost:7021/api/Home/Comment/${commentId}`,{
+    return fetch(`/api/Home/Comment/${commentId}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -200,7 +200,7 @@ export function postComment(body, postId){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Home/PostDetails/${postId}`
+    let url = `/api/Home/PostDetails/${postId}`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -216,7 +216,7 @@ export function updateComment(body, commentId){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Home/Comments/${commentId}`
+    let url = `/api/Home/Comments/${commentId}`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -231,7 +231,7 @@ export function updateComment(body, commentId){
 
 //#region /*===  GET  ===*/
 export function getLoggedInUser() {
-    return fetch(`https://localhost:7021/api/Account/LoggedIn`,{
+    return fetch(`/api/Account/LoggedIn`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -244,7 +244,7 @@ export function getLoggedInUser() {
 }
 
 export function getRoles() {
-    return fetch(`https://localhost:7021/api/Account/Roles`,{
+    return fetch(`/api/Account/Roles`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -257,7 +257,7 @@ export function getRoles() {
 }
 
 export function getLogout() {
-    return fetch(`https://localhost:7021/api/Account/Logout`,{
+    return fetch(`/api/Account/Logout`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -280,7 +280,7 @@ export function postLogin(body){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Account/Login`
+    let url = `/api/Account/Login`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -293,7 +293,7 @@ export function postRegister(body){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Account/Registration`
+    let url = `/api/Account/Registration`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -310,7 +310,7 @@ export function updateUser(body){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Account/Update`
+    let url = `/api/Account/Update`
     return fetch(url, formData)
         .then((response) => response.ok);
 }
@@ -324,7 +324,7 @@ export function updateUser(body){
 
 //#region /*===  GET  ===*/
 export function getAllUser(){
-    return fetch(`https://localhost:7021/api/Admin`,{
+    return fetch(`/api/Admin`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -337,7 +337,7 @@ export function getAllUser(){
 }
 
 export function getAllRole(){
-    return fetch(`https://localhost:7021/api/Role`,{
+    return fetch(`/api/Role`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',
@@ -361,7 +361,7 @@ export function deleteUser(body){
             'Content-Type': 'application/json; charset=UTF-8'
         })
     }
-    let url = `https://localhost:7021/api/Admin/Delete`
+    let url = `/api/Admin/Delete`
     let result=null;
     try {
         result = fetch(url, formData)
@@ -386,7 +386,7 @@ export function deleteUser(body){
 //#region /*===  GET  ===*/
 
 export function getSearched(searchPhrase){
-    return fetch(`https://localhost:7021/api/Home/Search/${searchPhrase}`,{
+    return fetch(`/api/Home/Search/${searchPhrase}`,{
         method: "GET",
         headers: {
             'Accept':  'application/json',

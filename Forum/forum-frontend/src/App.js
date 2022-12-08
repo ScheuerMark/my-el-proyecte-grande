@@ -17,6 +17,7 @@ function App() {
   const refreshUser = () => {
     getLoggedInUser().then(x=>{
       //If status code 204 no user logged in
+      console.log(x.status);
       if(x.status===200){
         x.json().then(user=> 
           {
