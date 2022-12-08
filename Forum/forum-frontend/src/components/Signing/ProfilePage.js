@@ -4,25 +4,20 @@ import {getLoggedInUser, updateUser} from "../ApiRequest";
 import { Link, useNavigate } from 'react-router-dom';
 import {Password} from "./Password";
 import {UserContext} from "../../App";
+import NotAllowed from "../Shared/NotAllowed";
 
 const validate = values => {
     const errors = {};
 
-   if (!values.email) {
-        errors.email = 'Required';
-    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i.test(values.email)) {
+   if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/i.test(values.email)) {
         errors.email = 'Invalid email address';
     }
 
-    if (!values.password) {
-        errors.password = 'Required';
-    }  else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[?!+@&#_-]).{6,}$/i.test(values.password)){
+    if (values.password && !/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[?!+@&#_-]).{6,}$/i.test(values.password)){
         errors.password = "Must be 6 characters or more and must contain: a number, an UPPERCASE letter and a special character";
     }
 
-    if (!values.confirmPassword) {
-        errors.confirmPassword = 'Required';
-    } else if (values.confirmPassword !== values.password) {
+    if (values.confirmPassword !== values.password) {
         errors.confirmPassword = 'The two passwords are not matching';
     }
 
@@ -40,6 +35,12 @@ export function ProfilePage() {
     
     function handleClick() {
         setFormState(!formState);
+    }
+    
+    if (user == null){
+        return(
+           <NotAllowed/>
+        )
     }
     
     return (
@@ -66,7 +67,8 @@ export function ProfilePage() {
                                                     password: values.password
                                                 }).then(x => {
                                                     if (x === true){
-                                                        navigate("/");
+                                                        navigate("/Profile");
+                                                        setFormState(!formState);
                                                     }
                                                 })
                                             }}
