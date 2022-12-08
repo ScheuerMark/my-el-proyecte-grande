@@ -46,9 +46,9 @@ export function Comment({comment,searchPhrase, post, setPost}) {
 return (
     <div className="card">
         <div className="card-header">
-            <h5 className="d-inline">{commentState.user.userName}</h5>
+            <h5 className="d-inline">{commentState?.user?.userName}</h5>
             <span className="float-end  fst-italic">
-            {userContext.user?.id === commentState.user?.id ?
+            {userContext.user?.id === commentState.user?.id || userContext.roles?.includes("Admin") ?
             (
                 <>
                 <button type="button" className="btn btn-primary-outline" data-bs-toggle="modal"

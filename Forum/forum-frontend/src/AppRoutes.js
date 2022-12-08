@@ -1,6 +1,6 @@
 import Home from "./components/Home/Home";
 import { PostDetails } from "./components/PostDetails/PostDetails";
-import TopicDetails from "./components/TopicDetails/TopicDetails";
+import { TopicDetails } from "./components/TopicDetails/TopicDetails";
 import Register from "./components/Signing/Register";
 import Login from "./components/Signing/Login";
 import { Search } from "./components/Layout/Search";
