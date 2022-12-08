@@ -25,7 +25,7 @@ public class PostService: Service
             .OrderBy(x=>x.DateTime).ToListAsync();
     }
     
-    public Task<Post?> GetPostByPostId(int id)
+    public virtual Task<Post?> GetPostByPostId(int id)
     {
         return _context.Posts.Include(x=>x.Comments).ThenInclude(y=>y.User)
             .Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
