@@ -77,6 +77,7 @@ public abstract class TestBase
             {
                 new Post()
                 {
+                    Id = 1,
                     Title = "Battery in throat",
                     Message =
                         "My son took a AAA battery into his mouth and now it got stuck in his throat. What can I do?",
@@ -86,6 +87,7 @@ public abstract class TestBase
                 },
                 new Post()
                 {
+                    Id = 2,
                     Title = "Rainy weather",
                     Message =
                         "This weekend is it is going to be cloudy with plenty of rains. Any idea what to do? Where to go?",
