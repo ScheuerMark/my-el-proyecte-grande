@@ -94,22 +94,27 @@ public class ApiAccountController : ControllerBase
         // status code 204 (no content) in case user is not found.
     }
  
-    [HttpPost("Update")]
-    public async Task<AppUser> Update(Login userData)
+    [HttpPut("Update")]
+    public async Task<AppUser> Update(UpdateUser userData)
     {
-        string email = userData.Email;
-        string password = userData.Password;
+        string name = userData.name;
+        string email = userData.email;
+        string password = userData.password;
         AppUser user = await _userManager.GetUserAsync(HttpContext.User);
         
         if (user != null)
         {
+            if (!string.IsNullOrEmpty(name))
+            {
+                user.UserName = name;
+            }
             if (!string.IsNullOrEmpty(email))
                 user.Email = email;
 
             if (!string.IsNullOrEmpty(password))
                 user.PasswordHash = _passwordHasher.HashPassword(user, password);
 
-            if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
+            if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(email) || !string.IsNullOrEmpty(password))
             {
                 IdentityResult result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
