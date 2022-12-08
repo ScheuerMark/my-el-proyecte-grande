@@ -10,7 +10,7 @@ public class CommentService: Service
     {
     }
     
-    public async Task<List<Comment>> GetCommentsByPostId(int postId)
+    virtual public async Task<List<Comment>> GetCommentsByPostId(int postId)
     {
         return _context.Posts.Include(x => x.Comments)
             .ThenInclude(y=>y.User)
