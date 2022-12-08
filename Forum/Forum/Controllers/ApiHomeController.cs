@@ -80,6 +80,7 @@ namespace Forum.Controllers
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
             post.User = user;
+            post.DateTime = DateTime.Now;
             await _postService.AddPost(topicName, post,_topicService);
 
             return StatusCode(200);
@@ -90,6 +91,7 @@ namespace Forum.Controllers
         public async Task<ActionResult> AddCommentToPost(int id, Comment comment)
         {
             AppUser user = _userManager.GetUserAsync(HttpContext.User).Result;
+            comment.DateTime = DateTime.Now;
             await _commentService.AddComment(id, comment, user, _postService);
 
             return StatusCode(200);

@@ -34,11 +34,12 @@ const Post = ({post, update, title}) => {
     <div className="card">
       <div className="card-header">
         <h5 className="w-75 d-inline-flex"><Link className=" w-100 text-black text-decoration-none" to={`/PostDetail/${post.id}`}>{post.title}</Link></h5>
-        <span className="float-end post-count fst-italic">{post.numberOfComments} {commentIcon}
+        
+        <span className="float-end post-count fst-italic">{post.numberOfComments} {commentIcon}    
           <button className="btn-sm btn-outline-dark text-toogle" type="button" data-bs-toggle="collapse" data-bs-target={`#id${post.id}`} aria-expanded="false" aria-controls={`id${post.id}`}>
                     {collapsedIcon}
                     {expandedIcon}</button>
-                    {(post?.user?.id != null && userContext.user?.id === post?.user?.id) || userContext.roles?.includes("Admin") ?  <Link onClick={()=>deletePost(post, update, title)} class="align-middle text-decoration-none text-black me-3">{trash}</Link> : "" }
+                    
             </span>
       </div>
       <div className="collapse" id={`id${post.id}`}>
@@ -47,7 +48,9 @@ const Post = ({post, update, title}) => {
               <p className="card-text">{post.message}</p>
             </div>
             <div className="col-3 d-flex flex-column">
+            {(post?.user?.id != null && userContext.user?.id === post?.user?.id) || userContext.roles?.includes("Admin") ?  <Link onClick={()=>deletePost(post, update, title)} class="ms-auto float-end text-decoration-none text-black me-3">{trash}</Link> : "" }
               <Link className="fst-italic mt-auto text-black ms-auto" to={`/PostDetail/${post.id}`}>view comments</Link>
+              
             </div>
           </div>
       </div>

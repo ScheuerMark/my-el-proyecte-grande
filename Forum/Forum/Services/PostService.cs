@@ -27,13 +27,24 @@ public class PostService: Service
     
     public Task<Post?> GetPostByPostId(int id)
     {
-        return _context.Posts.Include(x=>x.Comments).ThenInclude(y=>y.User)
+        return _context.Posts.Include(x=>x.User).Include(x=>x.Comments).ThenInclude(y=>y.User)
             .Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
     }
     
     public async Task AddPost(string topicName, Post post, TopicService topicService)
     {
-        _context.Attach(post.User);
+
+        try
+        {
+            _context.Add(post.User);
+            await _context.SaveChangesAsync();
+        }
+        catch (Exception e)
+        {
+            _context.Attach(post.User);
+        }
+
+
         _context.Posts.Add(post);
         
         topicService.GetTopicByTitle(topicName).Result.Posts.Add(post);
@@ -56,6 +67,7 @@ public class PostService: Service
                 Comments = x.Comments.Where(comment => comment.Message.Contains(searchPhrase)).ToHashSet(),
                 Followers = x.Followers,
                 Solution = x.Solution,
+                User = x.User
             })
             .ToListAsync();
     }
