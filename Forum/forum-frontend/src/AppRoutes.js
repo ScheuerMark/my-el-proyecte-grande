@@ -6,6 +6,7 @@ import Login from "./components/Signing/Login";
 import { Search } from "./components/Layout/Search";
 import { AdminPage } from "./components/AdminPage/AdminPage";
 import {ProfilePage} from "./components/Signing/ProfilePage";
+import NotAllowed from "./components/Shared/NotAllowed";
 
 const AppRoutes = [
   {
@@ -40,6 +41,10 @@ const AppRoutes = [
     path: '/Profile',
     element: <ProfilePage />
   },
+  {
+    path: '/NotAllowed',
+    element: <NotAllowed />
+  }
   
 ];
 
