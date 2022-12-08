@@ -282,7 +282,7 @@ export function postLogin(body){
     }
     let url = `/api/Account/Login`
     return fetch(url, formData)
-        .then((response) => response.ok);
+        .then((response) => response.text());
 }
 
 export function postRegister(body){
@@ -295,7 +295,7 @@ export function postRegister(body){
     }
     let url = `/api/Account/Registration`
     return fetch(url, formData)
-        .then((response) => response.ok);
+        .then((response) => response.json());
 }
 //#endregion
 //#endregion

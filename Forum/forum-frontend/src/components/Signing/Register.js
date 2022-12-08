@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import question from '../../question.jpg'
 import { Formik, Field, Form, ErrorMessage} from 'formik';
@@ -37,6 +37,8 @@ const validate = values => {
 
 export function Register() {
   const navigate = useNavigate();
+  const [isError, setError] = useState(false);
+  const [errorMessage, setMessage] = useState("");
       return (
 <section className="vh-70">
   <div className="container py-5 h-100">
@@ -65,8 +67,12 @@ export function Register() {
                   email: values.email,
                   password: values.password
                 }).then(x => {
-                  if (x === true){
-                    navigate("/");
+                  if (x.length === 0){
+                    navigate("/Login");
+                  } else {
+                    
+                    setError(true);
+                    setMessage(x[0].description);
                   }
                 })
               }}
@@ -98,6 +104,8 @@ export function Register() {
                           <label htmlFor={"confirmPassword"}>Confirm password</label><br/>
                           <ErrorMessage name={"confirmPassword"} render={msg => <div className={"text-danger"}>{msg}</div>} />
                         </div>
+
+                        {isError && <div className={"text-danger"}><p>{errorMessage}</p></div> }
 
                         <div className="pt-1 mb-4">
                           <button className="btn btn-dark btn-lg w-100" type="submit">Register</button>
