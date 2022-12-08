@@ -9,7 +9,7 @@ class TopicDetails extends Component {
     constructor(props) { 
         super(props);
         this.state = {
-            posts: [],
+            posts: [{id: "-1"},{id: "-2"},{id: "-3"}],
         }
         
         this.updatePosts = this.updatePosts.bind(this)
@@ -21,6 +21,7 @@ class TopicDetails extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps.params.title!==this.props.params.title){
+            this.updatePosts([{id: "-1"},{id: "-2"},{id: "-3"}])
             fetchPosts(this.props.params.title).then(data => this.updatePosts(data));
         }
     }
@@ -36,7 +37,7 @@ class TopicDetails extends Component {
 	                <div className="row">
 		                <h1 className="text-center">{this.props.params.title}</h1>
 		                <div className="col-12">
-                            {this.state.posts.map((element, index) => <Post key={index} post={element} update={this.updatePosts} title={this.props.params.title}/>)}
+                            {this.state.posts.map((element, index) => <Post key={element.id} post={element} update={this.updatePosts} title={this.props.params.title}/>)}
 		                </div>
 	                </div>
                     <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postModal">

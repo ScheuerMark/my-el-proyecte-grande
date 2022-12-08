@@ -16,7 +16,7 @@ public class PostService: Service
             .ThenInclude(x=>x.Comments)
             .Include(x=>x.Posts).ThenInclude(x=>x.User)
             .Where(x => x.Title.Equals(topicName))
-            .FirstOrDefaultAsync().Result.Posts.ToList();
+            .FirstOrDefaultAsync().Result?.Posts.ToList();
     }
     
     public Task<List<Post>> GetAllPostAscByDate()
@@ -25,7 +25,7 @@ public class PostService: Service
             .OrderBy(x=>x.DateTime).ToListAsync();
     }
     
-    public Task<Post?> GetPostByPostId(int id)
+    public virtual Task<Post?> GetPostByPostId(int id)
     {
         return _context.Posts.Include(x=>x.Comments).ThenInclude(y=>y.User)
             .Where(x => x.Id.Equals(id)).FirstOrDefaultAsync();
@@ -73,7 +73,7 @@ public class PostService: Service
         return _context.Topics.Include(x => x.Posts)
             .ThenInclude(x=>x.Comments)
             .Where(x => x.Id.Equals(topicId))
-            .FirstOrDefaultAsync().Result.Posts.ToList();
+            .FirstOrDefaultAsync().Result?.Posts.ToList();
     }
     
     public async Task DeletePostById(int id, CommentService commentService)
@@ -91,4 +91,6 @@ public class PostService: Service
             await _context.SaveChangesAsync();
         }
     }
+
+
 }
