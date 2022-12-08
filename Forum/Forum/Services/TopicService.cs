@@ -9,7 +9,8 @@ public class TopicService: Service
     public TopicService(ForumContext context) : base(context)
     {
     }
-    
+
+
     public Task<List<Topic>> GetAllTopics()
     {
         return _context.Topics.Include(x=>x.Posts).ToListAsync();
@@ -20,7 +21,7 @@ public class TopicService: Service
         return _context.Topics.Select(x => x.Title).ToListAsync();
     }
     
-    public Task<Topic?> GetTopicByTitle(string title)
+    virtual public Task<Topic?> GetTopicByTitle(string title)
     {
         return _context.Topics.Where(x => x.Title.Equals(title)).FirstOrDefaultAsync();
     }
