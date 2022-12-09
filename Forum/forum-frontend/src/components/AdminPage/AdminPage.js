@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { deleteUser, getAllRole, getAllUser } from '../ApiRequest';
 import './AdminPage.css';
+import { UserContext } from '../../App';
+import NotAllowed from "../Shared/NotAllowed";
 
 
 export function AdminPage () {
     const [users, setUsers] = useState(null);
     const [roles, setRoles] = useState(null);
+    const userContext = useContext(UserContext);
 
     useEffect(()=>{
         getAllUser().then(x=> setUsers(x));
@@ -15,6 +18,10 @@ export function AdminPage () {
 
     function handelDelete(userId){
       deleteUser({id:userId}).then(y=> getAllUser().then(x=> setUsers(x)))
+    }
+    
+    if (!userContext.roles?.includes("Admin")){
+        return <NotAllowed/>;
     }
 
     return (

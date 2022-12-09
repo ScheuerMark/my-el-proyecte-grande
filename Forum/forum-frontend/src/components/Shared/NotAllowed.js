@@ -21,8 +21,8 @@ return(
                             </div>
                             <div className="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div className="card-body p-4 p-lg-5 text-black">
-                                    <h3 className="fw-normal mb-3 pb-3" >You are not supposed to be here...</h3>
-                                    <Link role="button" to={"/"}>Let's get back to the start...</Link>
+                                    <h3 className="fw-normal mb-3 pb-3" >Something went wrong, You are not supposed to be here.</h3>
+                                    <Link className="fw-normal mb-3 pb-3" role="button" to={"/"}>Let's get back to the start...</Link>
                                 </div>
                             </div>
                         </div>
