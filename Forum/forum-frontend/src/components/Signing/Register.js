@@ -67,7 +67,7 @@ export function Register() {
                   email: values.email,
                   password: values.password
                 }).then(x => {
-                  if (x.length === 0){
+                  if (x === true){
                     navigate("/Login");
                   } else {
                     
